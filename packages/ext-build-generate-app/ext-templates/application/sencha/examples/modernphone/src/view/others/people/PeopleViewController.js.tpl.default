@@ -1,0 +1,6 @@
+
+Ext.define('{appName}.view.people.PeopleViewController', {
+	extend: 'Ext.app.ViewController',
+	alias: 'controller.peopleviewcontroller',
+
+});

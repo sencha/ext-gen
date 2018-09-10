@@ -1,0 +1,4 @@
+.bottomview { 
+	color: $color; 
+	background-color: darken($base-color, 20%);
+}

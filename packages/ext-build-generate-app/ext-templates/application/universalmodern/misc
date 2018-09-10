@@ -1,0 +1,127 @@
+cd cordova
+cordova plugin add cordova-plugin-camera
+
+
+chrome://inspect
+
+
+			itemTpl: [ `
+				<div class="testview" style="width: 100%;border: 0px solid green;">
+					<table style="width: 100%;border: 0px solid green;" >
+						<tr>
+							<td rowspan="2" width="70px">
+								<span class="action action-\u007Btype} \u007Btype}"></span>
+								<div class="picture" style="background-image: url(\u007Brecipient.picture})"></div>
+							</td>
+							<td style="font-size: 16px;">
+								<div style="line-height: 20px;" class="xitem-title">\u007Bdesc}</div>
+								<div style="line-height: 20px;" class="xitem-caption">\u007Bdoctor}</div>
+							</td>
+							<td width="25%" >
+								<div style="font-size: 12px;" class="apptdate">\u007Bcreated:date("Y/m/d")}</div>
+								<div style="font-size: 12px;"class="appttime">\u007Bcreated:date("H:i")}</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				`
+			]
+
+
+
+
+	//lazyFill:true,
+	// constructor: function (config) {
+	// 	Ext.mixin.Observable.capture(this, function(evname) {console.log(evname, arguments);})
+	// 	this.clearFilter(true)
+	// 	this.callParent([config]);
+	// },
+
+
+//	listeners: {
+//		beforesort: function() { console.log('beforesort')},
+//		sort: function() { console.log('sort')},
+//		beforeload:function(store){
+//			console.log(store.isLoading())
+//			if(store.isLoading()){
+//				return false;
+//			}
+//		}
+//	}
+
+
+
+	"bootstrap": {
+		"base": "$\u007bapp.dir}/generatedfiles",
+		<tpl if="universal == true">
+		"manifest": "$\u007bbuild.id}.json",
+		</tpl>
+		"microloader": "bootstrap.js",
+		"css": "bootstrap.css"
+	},
+
+
+
+
+		"resources": [
+		{	"path": "resources","output": "shared" }
+//		{ "path": "resources/${build.id}" }
+	],
+
+	"output": {
+		"base": "${workspace.build.dir}/${build.environment}/${app.name}",
+		"page": "index.html",
+		"manifest": "generatedFiles/${build.id}.json",
+		"js": "generatedFiles/${build.id}/app.js",
+		"appCache": {
+			"enable": false
+		},
+		"resources": {
+			"path": "resources/${build.id}",
+			"shared": "resources"
+		}
+	},
+
+	"builds": {
+		"classicdesktop": {
+			"toolkit": "classic",
+			"theme": "theme-triton"
+		},
+		"moderndesktop": {
+			"toolkit": "modern",
+			"theme": "theme-material"
+		},
+		"modernphone": {
+			"toolkit": "modern",
+			"theme": "theme-material",
+			"packager": "cordova",
+			"cordova" : {
+				"config": {
+					// replace the line below and add the platforms you wish to build for
+					"platforms": "android ios", //ios
+					"verbose": false,
+					"id": "com.foo.MyApp",
+					"name": "MyApp"
+				},
+				"js": [
+					{
+						"path": "cordova.js",
+						"remote": true,
+						"priority": 1000
+					}
+				],
+				"microloader": "${app.config.dir}/Microloader.js",
+				"output": {
+					"base": "${app.cordova.config.path}/www",
+					"page": "index.html",
+					"manifest": "/generatedFiles/$\u007Bbuild.id}.json",
+					"appCache": {
+						"enable": false
+					}
+				},
+				"cache": {
+					"enable": false
+				}
+			}
+		}
+	},

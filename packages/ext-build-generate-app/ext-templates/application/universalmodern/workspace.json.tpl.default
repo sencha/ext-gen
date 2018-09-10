@@ -1,0 +1,13 @@
+{
+  "apps": [],
+  "frameworks": {
+    "ext": "{sdkval}"
+  },
+  "build": {
+    "dir": "$\u007Bworkspace.dir}/build"
+  },
+  "packages": {
+    "dir": "{packages}",
+    "extract": "$\u007Bworkspace.dir}/packages/remote"
+  }
+}

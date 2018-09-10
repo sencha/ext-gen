@@ -1,0 +1,19 @@
+Ext.define('{appName}.view.main.nav.NavView', {
+	extend: 'Ext.Panel',
+	xtype: 'navview',
+	controller: "navviewcontroller",
+	cls: 'navview',
+	layout: 'fit',
+	tbar: {xtype: 'topview', height: 50},
+	items: [ 
+		{
+			xtype: 'menuview', 
+			reference: 'menuview', 
+			bind: {width: '\u007Bmenuview_width}'}, 
+			listeners: { 
+				selectionchange: "onMenuViewSelectionChange"
+			}
+		}
+	],
+	bbar: {xtype: 'bottomview', bind: {height: '\u007Bbottomview_height}'}}
+});

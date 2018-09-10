@@ -1,0 +1,6 @@
+Ext.define('{appName}.model.Personnel', {
+	extend: '{appName}.model.Base',
+	fields: [
+		'name', 'email', 'phone'
+	]
+});

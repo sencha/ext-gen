@@ -1,0 +1,12 @@
+Ext.define('{appName}.view.users.UsersViewModel', {
+	extend: 'Ext.app.ViewModel',
+	alias: 'viewmodel.usersviewmodel',
+	data: {
+		name: '{appName}'
+	},
+	stores: {
+		users: {
+			type: 'users'
+		}
+	}
+});

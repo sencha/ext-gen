@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "profile": {
+      "type": [ "string" ]
+    },
+    "environment": {
+      "type": [ "string" ]
+    },
+    "verbose": {
+      "type": [ "string" ]
+    },
+    "files": {
+      "type": [ "string", "array" ]
+    },
+    "dirs": {
+      "type": [ "string", "array" ]
+    }
+  },
+  "additionalProperties": false
+}

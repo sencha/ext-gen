@@ -1,0 +1,31 @@
+@include button-ui(
+	$ui: 'menubutton',
+	$icon-font-size: 18px,
+	$background-color: $base-color,
+	$color: white,
+	$icon-color: $base-color,
+	$border-color: transparent
+);
+
+.menuview {
+	background-color: $base-color; 
+	font-size: 18px;
+	color: 'white';
+	border-color: green;
+	border-style: solid;
+	border-width: 0px;
+}
+
+.menubuttons {
+	background-color: $base-color; 
+	font-size: 18px;
+	color: 'white';
+}
+
+.menubutton {
+	background-color: green;
+	height: 60px; 
+	font-size: 18px;
+	color: white;
+}
+

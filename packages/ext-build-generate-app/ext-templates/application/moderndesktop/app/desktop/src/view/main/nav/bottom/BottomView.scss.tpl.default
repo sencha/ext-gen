@@ -1,0 +1,22 @@
+.bottomview { 
+	border-left: 0; 
+	border-top: 0;
+	padding: 0; 
+	color: $nav-color; 
+	background-color: $nav-background-color ;
+}
+
+@include button-ui(
+	$ui: 'bottomviewbutton',
+	$background-color: transparent,
+	$color: $nav-color,
+	$border-color: transparent,
+	$icon-font-size: 34px,
+	$icon-horizontal-spacing: 20px,
+	$font-size: 20px,
+	$line-height: 30px
+);
+
+.bottomview .x-toolbar-body-el {
+	padding: 6px 5px 2px 1px;
+}

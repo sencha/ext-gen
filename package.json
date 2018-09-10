@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "increment": "lerna publish --skip-git --skip-npm --force-publish",
+    "clean": "lerna clean",
+    "install:clean": "npm cache clear --force && lerna clean && npm install",
+    "kitchensink": "cd packages/reactor-kitchensink && npm start",
+    "boilerplate": "cd packages/reactor-boilerplate && npm start"
+  },
+  "devDependencies": {
+    "lerna": "2.11.0"
+  }
+}

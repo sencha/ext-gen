@@ -1,0 +1,14 @@
+Ext.define('{appName}.view.main.MainView', {
+	extend: 'Ext.Container',
+	xtype: 'mainview',
+	controller: {type: 'mainviewcontroller'},
+	viewModel: {type: 'mainviewmodel'},
+	layout: 'fit',
+	items: [
+		{ xtype: 'navview',    reference: 'navview',    docked: 'left',   bind: {width:  '\u007Bnavview_width}'}, listeners: { select: "onMenuViewSelectionChange"} },
+		{ xtype: 'headerview', reference: 'headerview', docked: 'top',    bind: {height: '\u007Bheaderview_height}'} },
+		{ xtype: 'footerview', reference: 'footerview', docked: 'bottom', bind: {height: '\u007Bfooterview_height}'} },
+		{ xtype: 'centerview', reference: 'centerview' },
+		{ xtype: 'detailview', reference: 'detailview', docked: 'right',  bind: {width:  '\u007Bdetailview_width}'}  },
+	]
+});

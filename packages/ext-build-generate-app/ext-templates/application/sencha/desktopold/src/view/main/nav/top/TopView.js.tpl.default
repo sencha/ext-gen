@@ -1,0 +1,24 @@
+Ext.define('{appName}.view.main.nav.top.TopView', {
+	extend: 'Ext.Toolbar',
+	xtype: 'topview',
+	cls: 'topview',
+	items: [
+		{
+			xtype: 'container', 
+			cls: 'topviewtext',
+			reference: 'topviewtext',
+			bind: { 
+				html: '\u007Bname}',
+				hidden: '\u007BnavCollapsed}' 
+			}
+		},
+		'->',
+		{
+			xtype: 'button',
+			ui: 'topviewbutton-toolbar',
+			reference: 'navtoggle',
+			handler: 'onTopViewNavToggle',
+			iconCls: 'x-fa fa-navicon'
+		}
+	]
+});

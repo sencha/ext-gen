@@ -1,0 +1,33 @@
+function or mixin 'extjs-button-toolbar-small-ui' had no parameter named $xglyph-color : 
+
+
+params were : $ui, $border-radius, $border-width, $border-color, $border-color-over, 
+$border-color-focus, $border-color-pressed, $border-color-focus-over, 
+$border-color-focus-pressed, $border-color-disabled, 
+$padding, $text-padding, 
+$background-color, $background-color-over, $background-color-focus, 
+$background-color-pressed, $background-color-focus-over, $background-color-focus-pressed, 
+$background-color-disabled, $background-gradient, $background-gradient-over, 
+$background-gradient-focus, $background-gradient-pressed, $background-gradient-focus-over,
+$background-gradient-focus-pressed, $background-gradient-disabled, 
+$color, $color-over, $color-focus, $color-pressed, $color-focus-over, 
+$color-focus-pressed, $color-disabled, $inner-border-width, $inner-border-width-over, 
+$inner-border-width-focus, $inner-border-width-pressed, $inner-border-width-focus-over, 
+$inner-border-width-focus-pressed, $inner-border-width-disabled, $inner-border-color, 
+$inner-border-color-over, $inner-border-color-focus, $inner-border-color-pressed, 
+$inner-border-color-focus-over, $inner-border-color-focus-pressed, 
+$inner-border-color-disabled, $body-outline-width-focus, $body-outline-style-focus, 
+$body-outline-color-focus, $font-size, $font-size-over, $font-size-focus, 
+$font-size-pressed, $font-size-focus-over, $font-size-focus-pressed, $font-size-disabled, 
+$font-weight, $font-weight-over, $font-weight-focus, $font-weight-pressed, 
+$font-weight-focus-over, $font-weight-focus-pressed, $font-weight-disabled, 
+$font-family, $font-family-over, $font-family-focus, $font-family-pressed, 
+$font-family-focus-over, $font-family-focus-pressed, $font-family-disabled, 
+$line-height, $icon-size, 
+
+$glyph-font-size, $icon-spacing, $glyph-color, 
+$glyph-opacity, $arrow-width, $arrow-height, $arrow-glyph, $arrow-glyph-color,
+
+$split-width, $split-height, $split-line-width, $split-line-color, 
+$include-ui-menu-arrows, $include-ui-split-arrows, $include-split-noline-arrows, 
+$include-split-over-arrows, $opacity-disabled, $inner-opacity-disabled

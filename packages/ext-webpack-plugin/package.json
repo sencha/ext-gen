@@ -1,0 +1,52 @@
+{
+  "name": "@sencha/ext-webpack-plugin",
+  "version": "1.0.0-nightly.197",
+  "description": "A webpack plugin for new Ext JS applications",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "bundleDependencies": [],
+  "dependencies": {
+    "@sencha/ext-build": "~1.0.0",
+    "react": "^16.4.1",
+    "react-hot-loader": "^4.3.3",
+    "lodash.uniq": "^4.5.0",
+    "schema-utils": "^0.4.5",
+    "chalk": "^2.4.1",
+    "recursive-readdir-sync": "^1.0.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-plugin-transform-object-rest-spread": " ^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "sourceMaps": "inline",
+    "plugins": [
+      "transform-object-rest-spread",
+      "add-module-exports"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/extjs-reactor"
+  },
+  "keywords": [
+    "webpack",
+    "webpack-plugin",
+    "EXT JS",
+    "Sencha"
+  ],
+  "author": "Sencha, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sencha"
+  },
+  "homepage": "https://github.com/sencha/extjs-reactor/tree/master/packages/ext-webpack-plugin"
+}
