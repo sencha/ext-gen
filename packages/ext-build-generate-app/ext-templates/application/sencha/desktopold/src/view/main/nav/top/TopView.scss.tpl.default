@@ -1,0 +1,12 @@
+.topview { 
+	color: $color; 
+	background-color: darken($base-color, 20%);
+}
+
+@include extjs-button-toolbar-small-ui(
+  $ui: 'topviewbutton',
+	$background-color: transparent,
+	$color: $color,
+	$glyph-color: $color,
+  $border-color: transparent
+);

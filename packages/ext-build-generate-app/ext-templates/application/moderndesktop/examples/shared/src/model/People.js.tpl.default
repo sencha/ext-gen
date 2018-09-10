@@ -1,0 +1,3 @@
+Ext.define('{appName}.model.People', {
+	extend: '{appName}.model.Base',
+});

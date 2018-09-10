@@ -1,0 +1,6 @@
+.detailview { 
+	border-left: 0; 
+	border-top: 0; 
+	color: black; 
+	background-color: white 
+	}

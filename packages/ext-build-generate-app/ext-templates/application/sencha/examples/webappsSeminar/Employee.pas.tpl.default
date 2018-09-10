@@ -1,0 +1,28 @@
+procedure TEmployeeResource1.Get(const AContext: TEndpointContext; const ARequest: TEndpointRequest; const AResponse: TEndpointResponse);
+var
+  empDataObj: TJSONObject;
+  data: TDataSet;
+  emplArray: TJSONArray;
+  emplObj: TJSONObject;
+  aField: TField;
+  count: Integer;
+begin
+  data := EmployeeTable;
+  data.Open;
+  empDataObj := TJSONObject.Create;
+  emplArray := TJSONArray.Create;
+  count := 0;
+  while (not data.Eof) do
+  begin
+    emplObj := TJSONObject.Create;
+    for aField in data.Fields do
+    begin
+      emplObj.AddPair(LowerCase(aField.FieldName),aField.AsString);
+    end;
+    emplArray.Add(emplObj);
+    data.Next;
+    inc (count);
+  end;
+  empDataObj.AddPair('employee', emplArray);
+  AResponse.Body.SetValue(empDataObj, True)
+end;

@@ -1,0 +1,16 @@
+Ext.define('{appName}.model.UsersModel', {
+	extend: '{appName}.model.Base',
+	fields: [
+		'username', 
+		'_id', 
+		{
+			name: 'creator',
+			mapping: '_meta.creator'
+		},
+		{
+			name: 'created',
+			mapping: '_meta.created'
+		},
+		'description'
+	]
+});

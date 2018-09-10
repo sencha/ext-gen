@@ -1,0 +1,92 @@
+// $deep-blue: #32404e;
+// $b01:#88a8c3;
+// $b02: red;
+// $b03: #085878;
+//$muted-blue: #4bacd6;
+////$Sencha-blue: #094158;
+
+$Sencha: #24bcf8;
+
+//$HKHA: #f7101d;
+
+//$base_color: lighten($Sencha-blue,25%);
+// $color: white;
+// //$base_foreground_color: red;
+
+//$panel-navigation-background-color: darken($base_color,25%);
+//$base-app-color: darken($base_color,0%);
+
+//$panel_header_background_color: $base-app-color;
+
+//.x-titlebar {
+//	background-color: $base-app-color !important;
+//} 
+
+//http://www.0to255.com/064158
+//https://www.w3schools.com/colors/colors_converter.asp
+//https://codepen.io/baudoin/pen/HdliD
+
+
+// $xenable-font-awesome: dynamic(true);
+
+// $auth-background-image: dynamic(url('/resources/images/glowing-cube.jpg'));
+// $auth-background-image: dynamic(url('/resources/images/starfish.jpg'));
+
+// // Defining Colors
+
+// $deep-blue: #32404e;
+
+// $dark_chocolate : #5D4446;
+
+// $white_chocolate: #A99386;
+// $milk_chocolate :       #523027;
+// $caramel_chocolate:       #9C6D51;
+// $silver_spoons: #a79c8e;
+// $strawberry_chocolate: #f1bbba;
+// $strawberry_mousse: #EB9F9F;
+
+// // ***** Sencha Sass Variable Below *****
+
+// // Global Colors
+// //$base_color : $dark_chocolate; 
+// //$base_foreground_color : $white_chocolate; 
+// $neutral_color : $white_chocolate;
+// $body_background_color : lighten($caramel_chocolate,50%);
+
+// // Window Colors
+// $window_body_background_color : $white_chocolate;
+// $window_header_background_color: $dark_chocolate;
+
+// // Panel Colors
+// $panel_body_background_color : lighten($base_color,45%);
+// $panel_header_background_color: $dark_chocolate;
+
+// // Grid Colors
+// $grid-row-cell-focus-color: $strawberry_mousse;
+// $grid-row-cell-selected-background-color: $strawberry_chocolate;
+// $grid-row-cell-focus-background-color: lighten($strawberry_chocolate, 15%);
+
+// // Buttons
+// $button-default-base-color : $milk_chocolate;
+// $button_toolbar_color : $milk_chocolate;
+
+// // Progress Bars
+// $progress_bar_background_color: $strawberry_mousse; 
+
+// // Toolbar
+// $toolbar-background-color: lighten($white_chocolate,30%);
+
+// // Tab Panel
+// $tab_base_color: $milk_chocolate;
+// $tab_color: lighten($white_chocolate,25%);
+// $tab_font_size: 18px;
+
+// // ***** Fonts  **********
+
+// // Importing Google Fonts
+// @import url(http://fonts.googleapis.com/css?family=Chewy);
+
+// $chewy: 'Chewy', cursive;;
+// $font-family: $chewy;
+// $font-size: 14px;
+// $color: $white_chocolate;

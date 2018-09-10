@@ -1,0 +1,30 @@
+$enable-font-awesome: dynamic(true);
+
+body.launching {
+	//@include background-size(cover);
+	background-color: $base-color;
+	color: white;
+	//background-image: url('images/Vertical.png');
+	//background-repeat: no-repeat;
+	//background-position: center;
+
+	&::before {
+			@include animation(rotate-animation 1s linear infinite);
+			@include transform-origin(50% 50%);
+			@include background-size(cover);
+			//background-image: url(images/loading.png);
+			background-position: center;
+			content: '';
+			position: absolute;
+			margin-top: -15px;
+			margin-left: -15px;
+			top: 50%;
+			left: 50%;
+			width: 41px;
+			height: 41px;
+	}
+}
+
+.x-ios-native:not(.x-phone.x-landscape) {
+	padding-top: 0px !important;
+}

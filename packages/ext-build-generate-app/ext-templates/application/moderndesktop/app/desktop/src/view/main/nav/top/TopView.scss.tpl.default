@@ -1,0 +1,26 @@
+.topview { 
+	border-left: 0; 
+	border-top: 0; 
+	padding: 0 0 0 0;
+	color: $nav-color; 
+	background-color: $nav-background-color ;
+}
+
+.topviewtext { 
+	font-size: 28px; 
+	padding: 0 0 0 15px;
+	line-height: 50px;
+}
+
+@include button-ui(
+	$ui: 'topviewbutton',
+	$icon-font-size: 18px,
+	$background-color: transparent,
+	$color: $nav-color,
+	$icon-color: $nav-color,
+	$border-color: transparent
+);
+
+.topview .x-toolbar-body-el {
+	padding: 6px 5px 2px 1px;
+}

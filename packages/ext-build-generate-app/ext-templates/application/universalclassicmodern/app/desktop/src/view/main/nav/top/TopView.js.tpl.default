@@ -1,0 +1,19 @@
+Ext.define('{appName}.view.main.nav.top.TopView', {
+  extend: 'Ext.container.Container',
+  xtype: 'topview',
+  cls: 'topview',
+  items: [
+    {
+      xtype: 'component', 
+      data: { src:'resources/desktop/5.jpg', caption:'Welcome John Smith', imgStyle: 'imgBig', height: '150px' },
+      reference: 'topPic',
+      id: 'topPic',
+      tpl: new Ext.XTemplate(`
+        <div style="height:\u007Bheight};text-align:center;padding:15px 5px 15px 5px;">
+          <div class="imgAll \u007BimgStyle}" style="background-image: url(\u007Bsrc});"></div>
+          <br><span >\u007Bcaption}</span>
+        </div>
+      `)
+    }
+  ]
+});

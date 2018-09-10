@@ -1,0 +1,11 @@
+	.picture {
+		margin-left: 10px;
+		z-index: 0;
+		@include border-radius(40px);
+		@include background-size(cover);
+		background-color: $neutral-color;
+		background-repeat: no-repeat;
+		background-position: center;
+		height: 72px;
+		width: 72px;
+	}
