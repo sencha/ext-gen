@@ -1,0 +1,13 @@
+{
+  "apps": [],
+  "frameworks": {
+    "ext": "node_modules/@sencha/ext"
+  },
+  "build": {
+    "dir": "${workspace.dir}/build"
+  },
+  "packages": {
+    "dir": "${workspace.dir}/packages",
+    "extract": "${workspace.dir}/packages/remote"
+  }
+}

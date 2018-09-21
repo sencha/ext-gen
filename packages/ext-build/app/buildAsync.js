@@ -11,6 +11,26 @@ else {
 
 var app = `${chalk.green(prefix)} ext-build-async:`;
 
+// export async function emit() {
+//   console.log('before')
+//   let promise = executeAsync(s)
+//   await promise
+//   console.log('after')
+// }
+
+
+// export async function executeAsync() {
+//   await new Promise((resolve, reject) => {
+//     setTimeout(function(){
+//       console.log('done!')
+//       resolve(0)
+//     },5000)
+//   })
+// }
+
+
+
+
 class buildAsync {
   constructor(options) {
     this.profile = options.parms[2]
@@ -18,10 +38,12 @@ class buildAsync {
     this.verbose = options.parms[4]
   }
 
-  executeAsync() {
+  async executeAsync() {
     var me = this
-    return new Promise(async function(resolve, reject) {
+    console.log('in executeAsync')
+    await Promise(function(resolve, reject) {
       var parms = ['app','build', me.profile, me.environment]
+      console.log(parms)
       if (me.verbose == 'yes') {
         console.log(`${app} passing to 'sencha app build ${me.profile} ${me.environment}'`)
       }
