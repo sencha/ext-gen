@@ -1,15 +1,15 @@
 #! /usr/bin/env node
 const npmScope = '@sencha'
+const appUpgrade = require('./appUpgrade.js')
+require('./XTemplate/js')
+const util = require('./util.js')
 const path = require('path');
 const fs = require('fs-extra');
 const { kebabCase } = require('lodash')
-const util = require('./util.js')
-const appUpgrade = require('./appUpgrade.js')
-require('./XTemplate/js')
 const commandLineArgs = require('command-line-args')
-var List = require('prompt-list')
-var Input = require('prompt-input')
-var Confirm = require('prompt-confirm')
+const List = require('prompt-list')
+const Input = require('prompt-input')
+const Confirm = require('prompt-confirm')
 
 function boldGreen (s) {
   var boldgreencolor = `\x1b[32m\x1b[1m`
@@ -21,7 +21,6 @@ function boldRed (s) {
   var endMarker = `\x1b[0m`
   return (`${boldredcolor}${s}${endMarker}`)
 }
-
 function getPrefix () {
   var prefix
   if (require('os').platform() == 'darwin') {
@@ -89,16 +88,14 @@ function stepStart() {
   
   let mainDefinitions = [{ name: 'command', defaultOption: true }]
   const mainCommandArgs = commandLineArgs(mainDefinitions, { stopAtFirstUnknown: true })
-//  console.log('')
-//  console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
+//  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
   var mainCommand = mainCommandArgs.command
 //  console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
   switch(mainCommand) {
     case undefined:
       let argv = mainCommandArgs._unknown || []
       if (argv.length == 0 ){
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`)
-//        console.log(`\n\nShortHelp`)
+//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nShortHelp`)
         stepShortHelp()
         break;
       }
@@ -107,9 +104,8 @@ function stepStart() {
       }
       else {
         cmdLine = commandLineArgs(optionDefinitions, { argv: argv, stopAtFirstUnknown: true })
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`)
-//        console.log(`\n\nstep00`)
-        step00()
+//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nstep00`)
+        stepCheckCmdLine()
       }
       break;
     case 'app':
@@ -127,9 +123,8 @@ function stepStart() {
       let appSubArgs = appCommandArgs._unknown || []
 //      console.log(`appSubArgs: ${JSON.stringify(appSubArgs)}`)
       if (appSubArgs.length == 0) {
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`)
-//        console.log(`\n\nstep00`)
-        step00()
+//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nstep00`)
+        stepCheckCmdLine()
       }
       else {
         var command = cmdLine.command
@@ -150,7 +145,7 @@ function stepStart() {
         }
 //        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`)
 //        console.log(`\n\nstep00`)
-        step00()
+        stepCheckCmdLine()
       }
       break;
     case 'upgrade':
@@ -168,7 +163,7 @@ async function upgrade()
   console.log('Upgrade done . Please run npm install and then npm run all');
 }
 
-function step00() {
+function stepCheckCmdLine() {
 //  console.log('step00')
 //  console.log(`cmdLine: ${JSON.stringify(cmdLine)}, length: ${Object.keys(cmdLine).length}, process.argv.length: ${process.argv.length}`)
 
@@ -277,7 +272,7 @@ function step03() {
 function step04() {
   new List({
     message: 'What Ext JS template would you like to use?',
-    choices: ['classicdesktop', 'moderndesktop', 'universalclassicmodern', 'universalmodern'],
+    choices: ['classicdesktop', 'classicdesktoplogin', 'moderndesktop', 'universalclassicmodern', 'universalmodern'],
     default: 'classicdesktop'
   }).run().then(answer => {
     answers['classic'] = false
