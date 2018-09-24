@@ -1,0 +1,5 @@
+git tag -a v1.0.0 30d6a8a -m "ExtGen v1.0.0"
+
+git push upstream --tags
+
+git remote add upstream https://github.com/sencha/ext-gen.git
