@@ -11,7 +11,7 @@ module.exports = async function (env) {
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
   if (buildprofile == 'all') { buildprofile = '' }
 
-  portfinder.basePort = (env && env.port) || 1962; 
+  portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
 
   const nodeEnv = env && env.prod ? 'production' : 'development'
@@ -25,8 +25,8 @@ module.exports = async function (env) {
     new ExtWebpackPlugin({
       framework: 'extjs',
       port: port,
-      profile: buildprofile, 
-      environment: buildenvironment, 
+      profile: buildprofile,
+      environment: buildenvironment,
       verbose: buildverbose
     }),
   ]
@@ -38,7 +38,7 @@ module.exports = async function (env) {
 
   return {
     mode: 'development',
-    cache: true, //??
+    cache: true,
     devtool: isProd ? 'source-map' : 'cheap-module-source-map',
     context: sourcePath,
     entry: {
@@ -48,7 +48,7 @@ module.exports = async function (env) {
       ]
     },
     output: {
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, './'),
       filename: '[name].js'
     },
     module: {

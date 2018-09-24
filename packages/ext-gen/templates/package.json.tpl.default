@@ -17,11 +17,11 @@
     "phone-v": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=yes",
     "all": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=no",
     "all-v": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=yes",
-    "build-desktop-testing": "ext-build app build desktop testing",
-    "build-desktop-production": "ext-build app build desktop production",
-    "build-phone-testing": "ext-build app build phone testing",
-    "build-phone-production": "ext-build app build phone production",
-    "createview": "cross-env-shell ext-build generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
+    "build-desktop-testing": "npx sencha app build desktop testing",
+    "build-desktop-production": "npx sencha app build desktop production",
+    "build-phone-testing": "npx sencha app build phone testing",
+    "build-phone-production": "npx sencha app build phone production",
+    "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
   },
   "extbuild": {
     "defaultprofile": "desktop",
@@ -35,7 +35,7 @@
 </tpl>    "@sencha/ext": "^6.6.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~1.0.0",
+    "@sencha/ext-webpack-plugin": "~1.0.1",
     "command-line-args": "^5.0.2",
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.17",
