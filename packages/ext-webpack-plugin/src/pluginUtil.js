@@ -5,17 +5,16 @@ export function log(s) {
   process.stdout.write('\n')
 }
 
-export function logv(verbose, s) {
-  if (verbose == 'yes') {
+export function logv(options, s) {
+  if (options.verbose == 'yes') {
     require('readline').cursorTo(process.stdout, 0)
     process.stdout.clearLine()
-    process.stdout.write('-v-' + s)
+    process.stdout.write(`-verbose: ${s}`)
     process.stdout.write('\n')
   }
 }
 
 export function _constructor(options) {
-  //var app = ''
   var framework = ''
   var thisVars = {}
   var thisOptions = {}
@@ -23,7 +22,17 @@ export function _constructor(options) {
   const fs = require('fs')
   const validateOptions = require('schema-utils')
   validateOptions(require('../options.json'), options, '')
-  if (options.framework == undefined || options.framework == 'extjs') 
+  if (options.framework == undefined) 
+    {
+      thisVars.pluginErrors = []
+      thisVars.pluginErrors.push('webpack config: framework parameter on ext-webpack-plugin is not defined - values: react, angular, extjs')
+      var data = {}
+      data.plugin = {}
+      data.plugin.vars = thisVars
+      console.log(data)
+      return data
+    }
+  if (options.framework == 'extjs') 
     {
       framework = 'extjs'
       pluginName = `ext-webpack-plugin`
@@ -35,22 +44,20 @@ export function _constructor(options) {
     }
   thisVars = require(`./${framework}Util`).getDefaultVars()
   thisVars.framework = framework
-  thisVars.app = require('./pluginUtil')._getApp(pluginName)
-  logv(options.verbose, ` pluginName - ${pluginName}`)
-  logv(options.verbose, ` thisVars.app - ${thisVars.app}`)
+  thisVars.app = require('./pluginUtil')._getApp()
+  logv(options, `pluginName - ${pluginName}`)
+  logv(options, `thisVars.app - ${thisVars.app}`)
   const rc = (fs.existsSync(`.ext-${thisVars.framework}rc`) && JSON.parse(fs.readFileSync(`.ext-${thisVars.framework}rc`, 'utf-8')) || {})
-  //const _getVersions = require('./pluginUtil')._getVersions
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
   if (thisOptions.environment == 'production') 
     {thisVars.production = true}
   else 
     {thisVars.production = false}
   log(require('./pluginUtil')._getVersions(thisVars.app, pluginName, thisVars.framework))
-  logv(thisOptions.verbose, thisVars.app + 'production: ' + thisVars.production)
+  log(thisVars.app + 'Building for ' + thisOptions.environment)
 
   var data = {}
   data.plugin = {}
-
   data.plugin.app = thisVars.app
   data.plugin.framework = thisVars.framework
   data.plugin.vars = thisVars
@@ -58,13 +65,13 @@ export function _constructor(options) {
   return data
 }
 
-export function _getApp(pluginName) {
+export function _getApp() {
   var chalk = require('chalk')
   var prefix = ``
   const platform = require('os').platform()
   if (platform == 'darwin') { prefix = `ℹ ｢ext｣:` }
   else { prefix = `i [ext]:` }
-  return `${chalk.green(prefix)} ${pluginName}: `
+  return `${chalk.green(prefix)} `
 }
 
 export function _getVersions(app, pluginName, frameworkName) {
@@ -96,37 +103,76 @@ export function _getVersions(app, pluginName, frameworkName) {
     frameworkInfo = ', ' + frameworkName + ' v' + v.frameworkVersion
   }
 
-  return app + 'v' + v.pluginVersion + ', Ext JS v' + v.extVersion + ', Sencha Cmd v' + v.cmdVersion + ', Webpack v' + v.webpackVersion + frameworkInfo
+  return app + 'ext-webpack-plugin v' + v.pluginVersion + ', Ext JS v' + v.extVersion + ', Sencha Cmd v' + v.cmdVersion + ', webpack v' + v.webpackVersion + frameworkInfo
+}
+
+export function _compile(compilation, vars, options) {
+  if (vars.pluginErrors.length > 0) {
+    compilation.errors.push( new Error(vars.pluginErrors.join("")) )
+    return
+  }
+  const log = require('./pluginUtil').log
+  const logv = require('./pluginUtil').logv
+  if (vars.production) {
+    logv(options,`ext-compilation-production`)
+    compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
+      if (module.resource && module.resource.match(/\.(j|t)sx?$/) && !module.resource.match(/node_modules/) && !module.resource.match('/ext-react/dist/')) {
+        vars.deps = [ 
+          ...(vars.deps || []), 
+          ...require(`./${vars.framework}Util`).extractFromSource(module._source._value) 
+        ]
+      }
+    })
+  }
+  else {
+    logv(options, `ext-compilation`)
+  }
+  if (vars.pluginErrors.length == 0) {
+    compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
+      //const logv = require('./pluginUtil').logv
+      logv(options,'FUNCTION ext-html-generation')
+    
+      const path = require('path')
+      var publicPath = ''
+      if (compilation.outputOptions.publicPath != undefined) {
+        publicPath = compilation.outputOptions.publicPath
+      }
+      var jsPath = path.join(publicPath,vars.extPath + '/ext.js')
+      var cssPath = path.join(publicPath,vars.extPath + '/ext.css')
+      data.assets.js.unshift(jsPath)
+      data.assets.css.unshift(cssPath)
+      log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
+
+    })
+  }
 }
 
 export async function emit(compiler, compilation, vars, options, callback) {
   var app = vars.app
   var framework = vars.framework
   const log = require('./pluginUtil').log
-  log(app + 'ext-emit')
+  const logv = require('./pluginUtil').logv
+  logv(options,'FUNCTION ext-emit')
   const path = require('path')
   const _buildExtBundle = require('./pluginUtil')._buildExtBundle
-
-  let outputPath = path.join(compiler.outputPath, vars.output)
+  let outputPath = path.join(compiler.outputPath,vars.extPath)
   if (compiler.outputPath === '/' && compiler.options.devServer) {
     outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
   }
-  if(options.verbose == 'yes') {log('-v-' + app + 'outputPath: ' + outputPath)}
-  if(options.verbose == 'yes') {log('-v-' + app + 'framework: ' + framework)}
-
+  logv(options,'outputPath: ' + outputPath)
+  logv(options,'framework: ' + framework)
   if (framework != 'extjs') {
-    require(`./pluginUtil`)._prepareForBuild(app, vars, options, outputPath, compilation)
+    require(`./pluginUtil`)._prepareForBuild(app, vars, options, outputPath)
   }
   else {
     require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
   }
   if (vars.rebuild == true) {
     var parms = ['app', 'build', options.profile, options.environment]
-    var cmdErrors = []
-    await _buildExtBundle(app, compilation, cmdErrors, outputPath, parms, options)
-    if (vars.browserCount == 0 && cmdErrors.length == 0) {
+    await _buildExtBundle(app, compilation, outputPath, parms, options)
+    if (vars.browserCount == 0 && compilation.errors.length == 0) {
       var url = 'http://localhost:' + options.port
-      log(app + `ext-${framework}-emit - open browser at ${url}`)
+      log(app + `Opening browser at ${url}`)
       vars.browserCount++
       const opn = require('opn')
       opn(url)
@@ -138,7 +184,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
   }
 }
 
-export function _prepareForBuild(app, vars, options, output, compilation) {
+export function _prepareForBuild(app, vars, options, output) {
   const log = require('./pluginUtil').log
   const rimraf = require('rimraf')
   const mkdirp = require('mkdirp')
@@ -163,25 +209,32 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     fs.writeFileSync(path.join(output, 'app.json'), createAppJson( theme, packages, toolkit ), 'utf8')
     fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(), 'utf8')
 
-    if (fs.existsSync(path.join(process.cwd(), options.output + '/packages/'))) {
-      var fromPackages = path.join(process.cwd(), options.output + '/packages/')
-      var toPackages = path.join(output, 'packages/')
-      fsx.copySync(fromPackages, toPackages)
-      log(app + 'copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
-    }
-
     if (fs.existsSync(path.join(process.cwd(), 'resources/'))) {
       var fromResources = path.join(process.cwd(), 'resources/')
       var toResources = path.join(output, '../resources')
       fsx.copySync(fromResources, toResources)
-      log(app + 'copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+      log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
     }
 
-    if (fs.existsSync(path.join(process.cwd(), options.output + '/overrides/'))) {
-      var fromOverrides = path.join(process.cwd(), options.output + '/overrides/')
+    if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
+      var fromResources = path.join(process.cwd(), 'resources/')
+      var toResources = path.join(output, 'resources')
+      fsx.copySync(fromResources, toResources)
+      log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+    }
+
+    if (fs.existsSync(path.join(process.cwd(),vars.extPath + '/packages/'))) {
+      var fromPackages = path.join(process.cwd(),vars.extPath + '/packages/')
+      var toPackages = path.join(output, 'packages/')
+      fsx.copySync(fromPackages, toPackages)
+      log(app + 'Copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
+    }
+
+    if (fs.existsSync(path.join(process.cwd(),vars.extPath + '/overrides/'))) {
+      var fromOverrides = path.join(process.cwd(),vars.extPath + '/overrides/')
       var toOverrides = path.join(output, 'overrides/')
       fsx.copySync(fromOverrides, toOverrides)
-      log(app + 'copying ' + fromOverrides.replace(process.cwd(), '') + ' to: ' + toOverrides.replace(process.cwd(), ''))
+      log(app + 'Copying ' + fromOverrides.replace(process.cwd(), '') + ' to: ' + toOverrides.replace(process.cwd(), ''))
     }
   }
   vars.firstTime = false
@@ -198,7 +251,7 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     const manifest = path.join(output, 'manifest.js')
     fs.writeFileSync(manifest, js, 'utf8')
     vars.rebuild = true
-    log(app + 'building ExtReact bundle at: ' + output.replace(process.cwd(), ''))
+    log(app + 'Building Ext bundle at: ' + output.replace(process.cwd(), ''))
   }
   else {
     vars.rebuild = false
@@ -206,57 +259,54 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
   }
 }
 
-
-
-export function _buildExtBundle(app, compilation, cmdErrors, output, parms, options) {
+export function _buildExtBundle(app, compilation, outputPath, parms, options) {
   const logv = require('./pluginUtil').logv
-  logv(options.verbose, app + 'FUNCTION _buildExtBundle')
+  logv(options,'FUNCTION _buildExtBundle')
 
   let sencha; try { sencha = require('@sencha/cmd') } catch (e) { sencha = 'sencha' }
 
   return new Promise((resolve, reject) => {
    const onBuildDone = () => {
-    logv(options.verbose, app + 'onBuildDone')
-    if (cmdErrors.length) {
-      reject(new Error(cmdErrors.join("")))
-    } else {
-      resolve()
-    }
+    logv(options,'onBuildDone')
+    resolve()
    }
 
-   var opts = { cwd: output, silent: true, stdio: 'pipe', encoding: 'utf-8'}
-   executeAsync(app, sencha, parms, opts, compilation, cmdErrors, options).then (
+   var opts = { cwd: outputPath, silent: true, stdio: 'pipe', encoding: 'utf-8'}
+
+   executeAsync(app, sencha, parms, opts, compilation, options).then (
      function() { onBuildDone() }, 
-     function(reason) { resolve(reason) }
+     function(reason) { reject(reason) }
    )
  })
 }
 
-export async function executeAsync (app, command, parms, opts, compilation, cmdErrors, options) {
-  const DEFAULT_SUBSTRS = ['[INF] Loading', '[LOG] Fashion build complete', '[ERR]', '[WRN]', '[INF] Processing', "[INF] Server", "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
+export async function executeAsync (app, command, parms, opts, compilation, options) {
+  //const DEFAULT_SUBSTRS = ['[INF] Loading', '[INF] Processing', '[LOG] Fashion build complete', '[ERR]', '[WRN]', "[INF] Server", "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
+  const DEFAULT_SUBSTRS = ['[INF] Loading', '[INF] Append', '[INF] Processing', '[INF] Processing Build', '[LOG] Fashion build complete', '[ERR]', '[WRN]', "[INF] Server", "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
   var substrings = DEFAULT_SUBSTRS 
   var chalk = require('chalk')
   const crossSpawn = require('cross-spawn')
   const log = require('./pluginUtil').log
-  logv(options.verbose, app + 'FUNCTION executeAsync')
+  logv(options, 'FUNCTION executeAsync')
   await new Promise((resolve, reject) => {
-    logv(options.verbose, `${app} command - ${command}`)
-    logv(options.verbose, `${app} parms - ${parms}`)
-    logv(options.verbose, `${app} opts - ${JSON.stringify(opts)}`)
+    logv(options,`command - ${command}`)
+    logv(options, `parms - ${parms}`)
+    logv(options, `opts - ${JSON.stringify(opts)}`)
     let child = crossSpawn(command, parms, opts)
     child.on('close', (code, signal) => {
-      //log(`-v-${app}`) 
+      logv(options, `on close`) 
       if(code === 0) { resolve(0) }
-      else { compilation.errors.push( new Error(cmdErrors.join("")) ); reject(0) }
+      else { compilation.errors.push( new Error(code) ); resolve(0) }
     })
     child.on('error', (error) => { 
-      //log(`-v-${app}0`) 
-      cmdErrors.push(error)
-      reject(error) 
+      logv(options, `on error`) 
+      compilation.errors.push(error)
+      resolve(0)
     })
     child.stdout.on('data', (data) => {
-      //log(`-v-${app}1`) 
+      logv(options, `on data`) 
       var str = data.toString().replace(/\r?\n|\r/g, " ").trim()
+      logv(options, `${str}`)
       if (data && data.toString().match(/Waiting for changes\.\.\./)) {
         resolve(0)
       }
@@ -264,9 +314,9 @@ export async function executeAsync (app, command, parms, opts, compilation, cmdE
         if (substrings.some(function(v) { return data.indexOf(v) >= 0; })) { 
           str = str.replace("[INF]", "")
           str = str.replace("[LOG]", "")
-          str = str.replace(process.cwd(), '')
+          str = str.replace(process.cwd(), '').trim()
           if (str.includes("[ERR]")) {
-            cmdErrors.push(app + str.replace(/^\[ERR\] /gi, ''));
+            compilation.errors.push(app + str.replace(/^\[ERR\] /gi, ''));
             str = str.replace("[ERR]", `${chalk.red("[ERR]")}`)
           }
           log(`${app}${str}`) 
@@ -274,7 +324,7 @@ export async function executeAsync (app, command, parms, opts, compilation, cmdE
       }
     })
     child.stderr.on('data', (data) => {
-      //log(`-v-${app}4`) 
+      logv(options, `error on close`) 
       var str = data.toString().replace(/\r?\n|\r/g, " ").trim()
       var strJavaOpts = "Picked up _JAVA_OPTIONS";
       var includes = str.includes(strJavaOpts)
