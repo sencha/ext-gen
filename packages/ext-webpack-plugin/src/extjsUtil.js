@@ -5,7 +5,7 @@ export function getDefaultOptions() {
     port: 1962,
     profile: 'desktop', 
     environment: 'development', 
-    verbose: 'no',
+    verbose: 'no'
 
   }
 }
@@ -15,7 +15,8 @@ export function getDefaultVars() {
     firstTime : true,
     browserCount : 0,
     cwd: process.cwd(),
-    output: '.',
+    extPath: '.',
+    pluginErrors: [],
     lastNumFiles: 0,
     lastMilliseconds: 0,
     lastMillisecondsAppJson: 0,
@@ -25,10 +26,8 @@ export function getDefaultVars() {
 }
 
 export function _afterCompile(compilation, vars, options) {
-  var app = vars.app
-  const log = require('./pluginUtil').log
-  log(app + 'ext-after-compile')
-  if(options.verbose == 'yes') {log('-v-' + app + 'verbose')}
+  const logv = require('./pluginUtil').logv
+  logv(options,'FUNCTION ext-after-compile')
   const path = require('path')
   let { files, dirs } = vars
   const { cwd } = vars
@@ -52,7 +51,7 @@ export function _afterCompile(compilation, vars, options) {
 
 
 function _getFileAndContextDeps(compilation, files, dirs, cwd) {
-  const log = require('./pluginUtil').log
+  //const log = require('./pluginUtil').log
   const uniq = require('lodash.uniq')
   const isGlob = require('is-glob')
 
@@ -80,14 +79,15 @@ function _getFileAndContextDeps(compilation, files, dirs, cwd) {
 
 export function _prepareForBuild(app, vars, options, output, compilation) {
   const log = require('./pluginUtil').log
-  if(options.verbose == 'yes') {log('-v-' + app + '_prepareForBuild')}
+  const logv = require('./pluginUtil').logv
+  logv(options,'_prepareForBuild')
   const fs = require('fs')
   const recursiveReadSync = require('recursive-readdir-sync')
   var watchedFiles=[]
   try {watchedFiles = recursiveReadSync('./app').concat(recursiveReadSync('./packages'))}
   catch(err) {if(err.errno === 34){console.log('Path does not exist');} else {throw err;}}
   var currentNumFiles = watchedFiles.length
-  if (options.verbose == 'yes') {log('-v-' + app + 'watchedFiles: ' + currentNumFiles)}
+  logv(options,'watchedFiles: ' + currentNumFiles)
   var doBuild = false
   for (var file in watchedFiles) {
     if (vars.lastMilliseconds < fs.statSync(watchedFiles[file]).mtimeMs) {
@@ -97,7 +97,7 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
   if (vars.lastMilliseconds < fs.statSync('./app.json').mtimeMs) {
     doBuild=true
   }
-  if(options.verbose == 'yes') {log('-v-' + app + 'doBuild: ' + doBuild)}
+  logv(options,'doBuild: ' + doBuild)
 
   vars.lastMilliseconds = (new Date).getTime()
   var filesource = 'this file enables client reload'
@@ -106,13 +106,13 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     size: function() {return filesource.length}
   }
 
-  if(options.verbose == 'yes') {log('-v-' + app + 'currentNumFiles: ' + currentNumFiles)}
-  if(options.verbose == 'yes') {log('-v-' + app + 'vars.lastNumFiles: ' + vars.lastNumFiles)}
-  if(options.verbose == 'yes') {log('-v-' + app + 'doBuild: ' + doBuild)}
+  //if(options.verbose == 'yes') {log('-v-' + app + 'currentNumFiles: ' + currentNumFiles)}
+  //if(options.verbose == 'yes') {log('-v-' + app + 'vars.lastNumFiles: ' + vars.lastNumFiles)}
+  //if(options.verbose == 'yes') {log('-v-' + app + 'doBuild: ' + doBuild)}
 
   if (currentNumFiles != vars.lastNumFiles || doBuild) {
     vars.rebuild = true
-    log(app + 'building ExtReact bundle at: ' + output.replace(process.cwd(), ''))
+    log(app + 'building Ext bundle at: ' + output.replace(process.cwd(), ''))
   }
   else {
     vars.rebuild = false
