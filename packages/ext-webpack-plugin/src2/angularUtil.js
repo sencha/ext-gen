@@ -1,32 +1,9 @@
 "use strict"
 
-export function getValidateOptions() {
-  return {
-    "type": "object",
-    "properties": {
-      "framework":   {"type": [ "string" ]},
-      "port":        {"type": [ "integer" ]},
-      "emit":        {"type": [ "boolean" ]},
-      "browser":     {"type": [ "boolean" ]},
-      "profile":     {"type": [ "string" ]},
-      "environment": {"type": [ "string" ]},
-      "verbose":     {"type": [ "string" ]},
-      "theme":       {"type": [ "string" ]},
-      "toolkit":     {"type": [ "string" ]},
-      "packages":    {"type": [ "string", "array" ]}
-    },
-    "additionalProperties": false
-    // "errorMessage": {
-    //   "option": "should be {Boolean} (https:/github.com/org/repo#anchor)"
-    // }
-  }
-}
-
 export function getDefaultOptions() {
   return {
     port: 1962,
     emit: true,
-    browser: true,
     profile: '', 
     environment: 'development', 
     verbose: 'no',
@@ -41,7 +18,7 @@ export function getDefaultVars() {
     firstCompile: true,
     browserCount : 0,
     manifest: null,
-    extPath: 'ext-react',
+    extPath: 'ext-angular',
     pluginErrors: [],
     deps: [],
     rebuild: true
@@ -60,6 +37,7 @@ export function extractFromSource(js) {
   var parse = require("babylon").parse
   var traverse = require("ast-traverse")
   const statements = []
+  return statements  //temporary until angular parse is written
   
   const ast = parse(js, {
     plugins: [
