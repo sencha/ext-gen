@@ -98,7 +98,6 @@ export function _compilation(compiler, compilation, vars, options) {
 //**********
 export async function emit(compiler, compilation, vars, options, callback) {
   try {
-    a=0
     var app = vars.app
     var framework = vars.framework
     const log = require('./pluginUtil').log
