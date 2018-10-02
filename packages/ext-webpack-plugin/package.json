@@ -11,26 +11,27 @@
     "react-hot-loader": "^4.3.11"
   },
   "dependencies": {
-    "@babel/generator": "^7.0.0",
+    "@babel/generator": "^7.1.2",
     "@babel/polyfill": "^7.0.0",
     "@sencha/cmd": "~6.6.0",
-    "react": "^16.5.0",
-    "react-hot-loader": "^4.3.6",
+    "react": "^16.5.2",
+    "react-hot-loader": "^4.3.11",
     "lodash.uniq": "^4.5.0",
     "schema-utils": "^1.0.0",
     "chalk": "^2.4.1",
-    "opn": "^5.3.0",
+    "fs-extra":"^7.0.0",
+    "opn": "^5.4.0",
     "recursive-readdir-sync": "^1.0.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-transform-async-to-generator": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
     "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "babel-plugin-add-module-exports": "^0.2.1"
+    "@babel/preset-env": "^7.1.0",
+    "babel-plugin-add-module-exports": "^1.0.0"
   },
   "babel": {
     "presets": [
