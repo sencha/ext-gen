@@ -72,7 +72,7 @@ export function extractFromSource(module, options, compilation) {
     return statements
   }
   catch(e) {
-    require('./pluginUtil').logv(options,e)
+    console.log(e)
     compilation.errors.push('extractFromSource: ' + e)
     return []
   }
