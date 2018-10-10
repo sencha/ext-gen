@@ -123,18 +123,29 @@ export async function emit(compiler, compilation, vars, options, callback) {
     logv(options,'framework: ' + framework)
     if (options.emit == true) {
       if (framework != 'extjs') {
-        _prepareForBuild(app, vars, options, outputPath)
+        _prepareForBuild(app, vars, options, outputPath, compilation)
       }
       else {
         require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
       }
+
+      var command = ''
+      if (options.watch == 'yes') {
+        command = 'watch'
+      }
+      else {
+        command = 'build'
+      }
+
       if (vars.rebuild == true) {
         var parms = []
         if (options.profile == undefined || options.profile == '' || options.profile == null) {
-          parms = ['app', 'build', options.environment]
+          parms = ['app', command, options.environment]
         }
-        else {
-          parms = ['app', 'build', options.profile, options.environment]
+        else { //mjg
+          //parms = ['app', command, options.profile, options.environment, '--web-server', false]
+          parms = ['app', command, options.profile, options.environment]
+
         }
         await _buildExtBundle(app, compilation, outputPath, parms, options)
 
@@ -144,7 +155,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
         //jsChunk.files.push(path.join('build', 'ext-angular',  'ext.css'));
         //jsChunk.id = -2; // this forces html-webpack-plugin to include ext.js first
 
-        if(options.browser == true) {
+        if(options.browser == true && options.watch == 'yes') {
           if (vars.browserCount == 0 && compilation.errors.length == 0) {
             var url = 'http://localhost:' + options.port
             log(app + `Opening browser at ${url}`)
@@ -158,11 +169,14 @@ export async function emit(compiler, compilation, vars, options, callback) {
         }
         callback()
       }
+      else {
+        callback()
+      }
     }
     else {
       log(`${vars.app}FUNCTION emit not run`)
       if(options.browser == true) {
-        if (vars.browserCount == 0 && compilation.errors.length == 0) {
+        if (vars.browserCount == 0 && options.watch == 'yes') {
           var url = 'http://localhost:' + options.port
           log(app + `Opening browser at ${url}`)
           vars.browserCount++
@@ -184,7 +198,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
 }
 
 //**********
-export function _prepareForBuild(app, vars, options, output) {
+export function _prepareForBuild(app, vars, options, output, compilation) {
   try {
     logv(options,'FUNCTION _prepareForBuild')
     const rimraf = require('rimraf')
@@ -212,7 +226,7 @@ export function _prepareForBuild(app, vars, options, output) {
       fs.writeFileSync(path.join(output, 'jsdom-environment.js'), createJSDOMEnvironment(options), 'utf8')
       fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options), 'utf8')
 
-      if (fs.existsSync(path.join(process.cwd(), 'resources/'))) {
+      if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
         var toResources = path.join(output, '../resources')
         fsx.copySync(fromResources, toResources)
@@ -224,20 +238,6 @@ export function _prepareForBuild(app, vars, options, output) {
         var toResources = path.join(output, 'resources')
         fsx.copySync(fromResources, toResources)
         log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
-      }
-
-      if (fs.existsSync(path.join(process.cwd(),vars.extPath + '/packages/'))) {
-        var fromPackages = path.join(process.cwd(),vars.extPath + '/packages/')
-        var toPackages = path.join(output, 'packages/')
-        fsx.copySync(fromPackages, toPackages)
-        log(app + 'Copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
-      }
-
-      if (fs.existsSync(path.join(process.cwd(),vars.extPath + '/overrides/'))) {
-        var fromOverrides = path.join(process.cwd(),vars.extPath + '/overrides/')
-        var toOverrides = path.join(output, 'overrides/')
-        fsx.copySync(fromOverrides, toOverrides)
-        log(app + 'Copying ' + fromOverrides.replace(process.cwd(), '') + ' to: ' + toOverrides.replace(process.cwd(), ''))
       }
     }
     vars.firstTime = false
@@ -258,13 +258,12 @@ export function _prepareForBuild(app, vars, options, output) {
     }
     else {
       vars.rebuild = false
-      log(app + 'ExtReact rebuild NOT needed')
+      log(app + 'Ext rebuild NOT needed')
     }
   }
   catch(e) {
     require('./pluginUtil').logv(options,e)
     compilation.errors.push('_prepareForBuild: ' + e)
-    callback()
   }
 }
 
@@ -331,7 +330,7 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
       child.stdout.on('data', (data) => {
         var str = data.toString().replace(/\r?\n|\r/g, " ").trim()
         logv(options, `${str}`)
-        if (data && data.toString().match(/Waiting for changes\.\.\./)) {
+        if (data && data.toString().match(/waiting for changes\.\.\./)) {
           resolve(0)
         }
         else {
@@ -414,10 +413,15 @@ export function _getVersions(app, pluginName, frameworkName) {
   var extPkg = (fs.existsSync(extPath+'/package.json') && JSON.parse(fs.readFileSync(extPath+'/package.json', 'utf-8')) || {});
   v.extVersion = extPkg.sencha.version
 
-  //var cmdPath = path.resolve(process.cwd(),`node_modules/@sencha/${pluginName}/node_modules/@sencha/cmd`)
   var cmdPath = path.resolve(process.cwd(),`node_modules/@sencha/cmd`)
   var cmdPkg = (fs.existsSync(cmdPath+'/package.json') && JSON.parse(fs.readFileSync(cmdPath+'/package.json', 'utf-8')) || {});
   v.cmdVersion = cmdPkg.version_full
+
+  if (v.cmdVersion == undefined) {
+    var cmdPath = path.resolve(process.cwd(),`node_modules/@sencha/${pluginName}/node_modules/@sencha/cmd`)
+    var cmdPkg = (fs.existsSync(cmdPath+'/package.json') && JSON.parse(fs.readFileSync(cmdPath+'/package.json', 'utf-8')) || {});
+    v.cmdVersion = cmdPkg.version_full
+  }
 
   var frameworkInfo = ''
    if (frameworkName != undefined && frameworkName != 'extjs') {
