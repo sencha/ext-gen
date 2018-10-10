@@ -17,6 +17,41 @@ function boldRed (s) {
   return (`${boldredcolor}${s}${endMarker}`)
 }
 
+function red(s) {
+  var boldredcolor = `\x1b[31m\x1b[1m`
+  var endMarker = `\x1b[0m`
+  return (`${boldredcolor}${s}${endMarker}`)
+}
+
+exports.run = (parm, cwd, result) => {
+  var all = parm.split(' ')
+  var command = all[0]
+  var args = all.slice(1)
+  console.log(args)
+  console.log(args.toString())
+  if (cwd == undefined || cwd == null) {cwd = process.cwd()}
+  return promise = new Promise((resolve, reject) => {
+    let options = {cwd: cwd, stdio: 'pipe', encoding: 'utf-8'}
+    console.log(red(command + ' ' + args.toString().replace(/,/g, ' ')) + ' in ' + cwd)
+    var child 
+    //child = require('child_process').spawn(command, args, options)
+    child = require('cross-spawn')(command, args, options)
+    child.on('close', (code, signal) => {resolve({code, signal})})
+    child.on('error', (error) => {reject(error)})
+    child.stdout.on('data', (data) => {
+      console.log(data.toString())
+    })
+  })
+  .then(((state) => {
+    //console.log('then')
+  }))
+  .catch((error) => {
+    throw new Error(error)
+  })
+}
+
+
+
 exports.spawnPromise = (command, args, options, substrings) => {
   let child
   let promise = new Promise((resolve, reject) => {
@@ -26,7 +61,7 @@ exports.spawnPromise = (command, args, options, substrings) => {
       options
     )
     child.on('close', (code, signal) => {
-      resolve({ code, signal});
+      resolve({code, signal});
     })
     child.on('error', (error) => {
       reject(error);

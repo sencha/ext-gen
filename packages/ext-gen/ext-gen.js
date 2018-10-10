@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+let run = require('./util').run
 const npmScope = '@sencha'
 const appUpgrade = require('./appUpgrade.js')
 require('./XTemplate/js')
@@ -10,6 +11,7 @@ const commandLineArgs = require('command-line-args')
 const List = require('prompt-list')
 const Input = require('prompt-input')
 const Confirm = require('prompt-confirm')
+global.isCommunity = true
 
 function boldGreen (s) {
   var boldgreencolor = `\x1b[32m\x1b[1m`
@@ -74,7 +76,14 @@ const optionDefinitions = [
 var version = ''
 var config = {}
 var cmdLine = {}
-stepStart()
+var globalError = 0
+
+main()
+async function main() {
+  //await run (`npm view @sencha/ext version`)
+  //await run (`npm --registry https://npm.sencha.com whoami`)
+  stepStart()
+}
 
 function stepStart() {
   var nodeDir = path.resolve(__dirname)
@@ -83,7 +92,15 @@ function stepStart() {
   var data = fs.readFileSync(nodeDir + '/config.json')
   config = JSON.parse(data)
 
-  console.log(boldGreen(`\nSencha ExtGen v${version} - The Ext JS code generator`))
+  var edition = ''
+  if (global.isCommunity) {
+    edition = `Community`
+  }
+  else {
+    edition = `Professional`
+  }
+  console.log(boldGreen(`\nSencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`))
+
   console.log('')
   
   let mainDefinitions = [{ name: 'command', defaultOption: true }]
@@ -270,9 +287,18 @@ function step03() {
 }
 
 function step04() {
+  var choices = []
+  console.log('isCommunity: ' + global.isCommunity)
+  if (global.isCommunity) {
+    choices = ['moderndesktop', 'universalmodern']
+  }
+  else {
+    choices = ['classicdesktop', 'classicdesktoplogin', 'moderndesktop', 'universalclassicmodern', 'universalmodern']
+  }
+
   new List({
     message: 'What Ext JS template would you like to use?',
-    choices: ['classicdesktop', 'classicdesktoplogin', 'moderndesktop', 'universalclassicmodern', 'universalmodern'],
+    choices: choices,
     default: 'classicdesktop'
   }).run().then(answer => {
     answers['classic'] = false

@@ -3,3 +3,11 @@ git tag -a v1.0.0 30d6a8a -m "ExtGen v1.0.0"
 git push upstream --tags
 
 git remote add upstream https://github.com/sencha/ext-gen.git
+
+
+
+Testing:
+//rm ~/.npmrc - flush creds
+1. npm login --registry=https://www.myget.org/F/sencha-community-sandbox/npm/ --scope=@sencha
+2. (for managers) npm publish  --registry=https://www.myget.org/F/sencha-community-sandbox/npm/
+3. npm install -g @sencha/ext-react - testing  (works well for me)
