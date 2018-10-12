@@ -30,8 +30,8 @@ else {
   classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
 ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`  
 }
-
-console.log (`Welcome to ${boldGreen('Sencha ExtGen')} v${version} ${edition} Edition - The Ext JS code generator
+var welcome = boldGreen(`Welcome to Sencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`)
+console.log (`${welcome}
 
 ${boldGreen('Quick Start:')} 
 ext-gen app MyAppName
