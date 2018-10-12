@@ -74,6 +74,7 @@ const optionDefinitions = [
 ]
 
 var version = ''
+var edition = ''
 var _resolved = ''
 
 var config = {}
@@ -94,7 +95,6 @@ function stepStart() {
   _resolved = pkg._resolved
   //"_resolved": "http://npm.sencha.com/@sencha%2fext-gen/-/ext-gen-1.0.1.tgz",
   //console.log('\n\n****\n\n' + _resolved + '\n\n****\n\n')
-  var edition = ''
   if (-1 == _resolved.indexOf('community')) {
     global.isCommunity = false
     edition = `Professional`
@@ -108,7 +108,6 @@ function stepStart() {
   config = JSON.parse(data)
 
   console.log(boldGreen(`\nSencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`))
-
   console.log('')
   
   let mainDefinitions = [{ name: 'command', defaultOption: true }]
@@ -666,6 +665,22 @@ function stepHelpGeneral() {
 
 function stepHelpApp() {
 
+  var classic = ``
+  if (global.isCommunity) {
+    classic = ``
+  }
+  else {
+    classic = `${boldGreen('Classic Templates:')}
+
+    ${boldGreen('classicdesktop (default)')}
+    This template contains 1 profile, configured to use the classic toolkit of Ext JS for a desktop application
+    
+    ${boldGreen('universalclassicmodern')}
+    This template contains 2 profiles, 1 for desktop (using the classic toolkit), and 1 for mobile (using the modern toolkit)
+    
+    ${boldGreen('classic themes:')} theme-classic, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite\n`
+  }
+
   var message = `${boldGreen('Quick Start:')} ext-gen -a
 
 ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme') (-n 'name') (-f 'folder')
@@ -674,37 +689,31 @@ ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme'
 -d --defaults      show defaults for package.json
 -i --interactive   run in interactive mode (question prompts will display)
 -t --template      name for Ext JS template used for generate
--c --classictheme  theme name for Ext JS classic toolkit
+-c --classictheme  theme name for Ext JS classic toolkit (not in community edition)
 -m --moderntheme   theme name for Ext JS modern toolkit
 -n --name          name for Ext JS generated app
 -f --folder        folder name for Ext JS application (not implemented yet)
 -v --verbose       verbose npm messages (for problems only)
 
 ${boldGreen('Examples:')} 
-ext-gen app --template universalclassicmodern --classictheme theme-graphite --moderntheme theme-material --name CoolUniversalApp
-ext-gen app--template classicdesktop --classictheme theme-graphite --name CoolDesktopApp 
+ext-gen app --template universalmodern --moderntheme theme-material --name CoolUniversalApp
 ext-gen app --interactive
-ext-gen app -a --classictheme theme-graphite -n ClassicApp
 ext-gen app -a -t moderndesktop -n ModernApp
+${classic}
 
-${boldGreen('Templates:')}
-You can select from 4 Ext JS templates provided by Sencha ExtGen
-  
-${boldGreen('classicdesktop (default)')}
-This template is the default template in ext-gen. It contains 1 profile, configured to use the classic toolkit of Ext JS for a desktop application
- 
+You can select from the following Ext JS templates provided by Sencha ExtGen
+
+${boldGreen('Modern Templates:')}
+
 ${boldGreen('moderndesktop')}
-This template is similar to the classicdesktop template. It contains 1 profile, configured to use the modern toolkit of Ext JS for a desktop application 
-   
-${boldGreen('universalclassicmodern')}
-This template contains 2 profiles, 1 for desktop (using the classic toolkit), and 1 for mobile (using the modern toolkit)
-   
+This template contains 1 profile, configured to use the modern toolkit of Ext JS for a desktop application 
+
 ${boldGreen('universalmodern')}
 This template contains 2 profiles, 1 for desktop and 1 for mobile. Both profiles use the modern toolkit.
 
-${boldGreen('Theme Names:')}
-${boldGreen('classic themes:')} theme-classic, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite
 ${boldGreen('modern themes:')}  theme-material, theme-ios, theme-neptune, theme-triton
+
+${classic}
 `
   console.log(message)
 }
