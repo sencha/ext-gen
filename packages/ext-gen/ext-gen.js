@@ -689,7 +689,7 @@ ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme'
 -d --defaults      show defaults for package.json
 -i --interactive   run in interactive mode (question prompts will display)
 -t --template      name for Ext JS template used for generate
--c --classictheme  theme name for Ext JS classic toolkit (not in community edition)
+-c --classictheme  theme name for Ext JS classic toolkit (not in Community Edition)
 -m --moderntheme   theme name for Ext JS modern toolkit
 -n --name          name for Ext JS generated app
 -f --folder        folder name for Ext JS application (not implemented yet)
