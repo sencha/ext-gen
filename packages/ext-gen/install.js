@@ -22,9 +22,16 @@ else {
   global.isCommunity = true
   edition = `Community`
 }
+var classic = ``
+if (global.isCommunity) {
+  classic = ``
+}
+else {
+  classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
+ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`  
+}
 
-
-console.log (`Welcome to ${boldGreen('Sencha ExtGen')} v${version} - The Ext JS code generator
+console.log (`Welcome to ${boldGreen('Sencha ExtGen')} v${version} ${edition} Edition - The Ext JS code generator
 
 ${boldGreen('Quick Start:')} 
 ext-gen app MyAppName
