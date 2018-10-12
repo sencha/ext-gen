@@ -28,8 +28,8 @@ ext-gen
 To make changes to the generator, run:
 
 ```bash
-git clone git@github.com:sencha/extjs-reactor.git
-cd extjs-reactor
+git clone git@github.com:sencha/ext-gen.git
+cd ext-gen
 npm install
 cd packages/ext-gen
 npm link

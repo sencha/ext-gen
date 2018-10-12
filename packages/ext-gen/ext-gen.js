@@ -74,6 +74,8 @@ const optionDefinitions = [
 ]
 
 var version = ''
+var _resolved = ''
+
 var config = {}
 var cmdLine = {}
 var globalError = 0
@@ -89,16 +91,22 @@ function stepStart() {
   var nodeDir = path.resolve(__dirname)
   var pkg = (fs.existsSync(nodeDir + '/package.json') && JSON.parse(fs.readFileSync(nodeDir + '/package.json', 'utf-8')) || {});
   version = pkg.version
+  _resolved = pkg._resolved
+  //"_resolved": "http://npm.sencha.com/@sencha%2fext-gen/-/ext-gen-1.0.1.tgz",
+  //console.log('\n\n****\n\n' + _resolved + '\n\n****\n\n')
+  var edition = ''
+  if (-1 == _resolved.indexOf('community')) {
+    global.isCommunity = false
+    edition = `Professional`
+  }
+  else {
+    global.isCommunity = true
+    edition = `Community`
+  }
+
   var data = fs.readFileSync(nodeDir + '/config.json')
   config = JSON.parse(data)
 
-  var edition = ''
-  if (global.isCommunity) {
-    edition = `Community`
-  }
-  else {
-    edition = `Professional`
-  }
   console.log(boldGreen(`\nSencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`))
 
   console.log('')
@@ -702,17 +710,24 @@ ${boldGreen('modern themes:')}  theme-material, theme-ios, theme-neptune, theme-
 }
 
 function stepShortHelp() {
+  var classic = ``
+  if (global.isCommunity) {
+    classic = ``
+  }
+  else {
+    classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
+ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`  
+  }
+
   var message = `${boldGreen('Quick Start:')} 
 ext-gen app MyAppName
 ext-gen app -i
  
 ${boldGreen('Examples:')} 
 ext-gen app --template universalclassicmodern --classictheme theme-graphite --moderntheme theme-material --name CoolUniversalApp
-ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp 
 ext-gen app --interactive
-ext-gen app --classictheme theme-graphite -n ClassicApp
 ext-gen app -t moderndesktop -n ModernApp
-
+${classic}
 Run ${boldGreen('ext-gen --help')} to see all options
 `
   console.log(message)

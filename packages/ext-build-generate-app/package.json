@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sencha/extjs-reactor.git"
+    "url": "git+https://github.com/sencha/ext-gen.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sencha, Inc.",
   "license": "MIT",
-  "homepage": "https://github.com/sencha/extjs-reactor/tree/master/packages/ext-build-generate-app"
+  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-build-generate-app"
 }

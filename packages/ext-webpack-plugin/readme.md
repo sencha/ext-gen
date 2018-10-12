@@ -32,4 +32,4 @@ module.exports = function (env) {
 
 ```
 
-This will be included in your webpack configuration if you generate the application using [@extjs/ext-gen](https://github.com/sencha/extjs-reactor/tree/2.0.x-dev/packages/ext-gen)
+This will be included in your webpack configuration if you generate the application using [@extjs/ext-gen](https://github.com/sencha/ext-gen/tree/2.0.x-dev/packages/ext-gen)
