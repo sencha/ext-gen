@@ -57,7 +57,7 @@ try {
 		f='/cmd';fs.copySync(Sdk + f, eDir + f);util.dbgLog(eDir+f+' created')
 		f='/sass';fs.copySync(Sdk + f, eDir + f);util.dbgLog(eDir+f+' created')
 
-    var n = Sdk.indexOf("@extjs");
+    var n = Sdk.indexOf("@sencha");
 if (n == -1) {
 
 //		f='/build.xml';fs.copySync(Sdk+f,eDir+f);util.dbgLog(eDir+f+' created')

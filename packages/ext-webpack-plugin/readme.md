@@ -7,7 +7,7 @@ A [Webpack](https://webpack.js.org/) plugin for [Sencha EXTJS](https://www.sench
 Install [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
-npm install --save-dev @extjs/ext-webpack-plugin
+npm install --save-dev @sencha/ext-webpack-plugin
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install --save-dev @extjs/ext-webpack-plugin
 In your webpack configuration, 
 
 ```js
-const ExtWebpackPlugin = require('@extjs/ext-webpack-plugin');
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 
 ...
 
@@ -32,4 +32,4 @@ module.exports = function (env) {
 
 ```
 
-This will be included in your webpack configuration if you generate the application using [@extjs/ext-gen](https://github.com/sencha/ext-gen/tree/2.0.x-dev/packages/ext-gen)
+This will be included in your webpack configuration if you generate the application using [@sencha/ext-gen](https://github.com/sencha/ext-gen/tree/2.0.x-dev/packages/ext-gen)

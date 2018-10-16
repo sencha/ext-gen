@@ -95,13 +95,18 @@ function stepStart() {
   _resolved = pkg._resolved
   //"_resolved": "http://npm.sencha.com/@sencha%2fext-gen/-/ext-gen-1.0.1.tgz",
   //console.log('\n\n****\n\n' + _resolved + '\n\n****\n\n')
-  if (-1 == _resolved.indexOf('community')) {
-    global.isCommunity = false
+  if (_resolved == undefined) {
     edition = `Professional`
   }
   else {
-    global.isCommunity = true
-    edition = `Community`
+    if (-1 == _resolved.indexOf('community')) {
+      global.isCommunity = false
+      edition = `Professional`
+    }
+    else {
+      global.isCommunity = true
+      edition = `Community`
+    }
   }
 
   var data = fs.readFileSync(nodeDir + '/config.json')
