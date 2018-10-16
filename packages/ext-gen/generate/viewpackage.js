@@ -1,6 +1,6 @@
 var fs = require('fs-extra')
 var _ = require('underscore')
-var chalk = require('chalk');
+//var chalk = require('chalk');
 var path = require('path')
 var util = require('./utilGen.js')
 //const help = require('../help.js')
@@ -20,7 +20,6 @@ try {
 	};
 	
 	exports.init = function init(CurrWorkingDir, options, NodeAppTemplatesDir) { 
-    //console.log(options)
     var parms = options.parms
 
 		if(parms[3] == undefined) {
@@ -33,9 +32,10 @@ try {
 //    util.infLog('ViewName: ' + ViewName)
 		if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
     var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage');
+
 //    util.infLog('NodeAppViewPackageTemplatesDir: ' + NodeAppViewPackageTemplatesDir)
 
-    var CurrWorkingDirRoot = CurrWorkingDir
+    //var CurrWorkingDirRoot = CurrWorkingDir
     var appName = util.getAppName(CurrWorkingDir);
 //    util.infLog('appName: ' + appName)
     var toFolder = getFolder(CurrWorkingDir);
@@ -65,7 +65,7 @@ try {
     //util.infLog('viewFileName: ' + viewFileName)
     var viewNameSmall = iSmall + 'view';
     //util.infLog('viewNameSmall: ' + viewNameSmall)
-    var menuPath = `resources/shared/data/`;
+    //var menuPath = `resources/shared/data/`;
     //util.infLog('menuPath: ' + menuPath)
 		var values = {
 			appName: appName,
@@ -77,29 +77,30 @@ try {
 		}
 		fs.mkdirSync(dir);
     //util.infLog(dir + ' created')
+    //console.log(NodeAppViewPackageTemplatesDir)
 		fs.readdir(NodeAppViewPackageTemplatesDir, function(err, filenames) {
 			filenames.forEach(function(filename) {
 				var content = fs.readFileSync(NodeAppViewPackageTemplatesDir + '/' + filename).toString()
 				if (filename.substr(filename.length - 8) == 'json.tpl') { return }
 					var filetemplate = _.template(filename);
 					var f = filetemplate(values).slice(0, -4);
-					var folderAndFile = NodeAppViewPackageTemplatesDir + '/' + filename
+					//var folderAndFile = NodeAppViewPackageTemplatesDir + '/' + filename
 					var tpl = new Ext.XTemplate(content)
 					var t = tpl.apply(values)
 					delete tpl
 					fs.writeFileSync(dir + '/' + f, t);
 					util.infLog('Generated file ' + dir + '/' + f)
       });
-      newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
-			var item = chalk.yellow(newMenu + ',')
-			var itemphone = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`)
+      newMenu = `\n\t\t\t\t\t{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true },`
+			//var item = chalk.yellow(newMenu + ',')
+			//var itemphone = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`)
 
-      var menuFile = `${CurrWorkingDirRoot}/resources/desktop/menu.json`
-      var menuJson = (fs.existsSync(menuFile) && JSON.parse(fs.readFileSync(menuFile, 'utf-8')) || {})
-      menuJson.children.push(JSON.parse(newMenu))
-      fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
-
-			//console.log(help.menuText(menuFile, item, itemphone))
+      var menuFile = path.join(process.cwd(),`main/MainViewModel.js`)
+      var toFind = '"children": ['
+      var menuString = (fs.existsSync(menuFile) && fs.readFileSync(menuFile, 'utf-8') || '')
+      var position = menuString.indexOf(toFind) + toFind.length
+      var output = [menuString.slice(0, position), newMenu, menuString.slice(position)].join('')
+      fs.writeFileSync(menuFile, output, 'utf8')
 		});
 	}
 
@@ -113,5 +114,5 @@ try {
 
 }
 catch(e) {
-	console.log('ddd' + e)
+	console.log('error: ' + e)
 }
