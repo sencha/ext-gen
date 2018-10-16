@@ -177,6 +177,26 @@ function stepStart() {
         stepCheckCmdLine()
       }
       break;
+    case 'viewpackage':
+      //cmdLine.command = mainCommand
+      let viewArgs = mainCommandArgs._unknown || []
+      let viewDefinitions = [{ name: 'viewName', defaultOption: true }]
+      const viewCommandArgs = commandLineArgs(viewDefinitions, { argv: viewArgs, stopAtFirstUnknown: true })
+      var viewName = viewCommandArgs.viewName
+      console.log(`creating viewpackage '${viewName}'...\n`)
+
+      //let argv2 = mainCommandArgs._unknown || []
+      //cmdLine = commandLineArgs(optionDefinitions, { argv: argv2, stopAtFirstUnknown: true })
+      cmdLine = {}
+      cmdLine.parms = ['a','b','desktop',viewName]
+      var CurrWorkingDir = process.cwd()
+      var NodeAppBinDir = path.resolve(__dirname)
+      var TemplatesDir = '/ext-templates' 
+      var NodeAppTemplatesDir = path.join('./generate/ext-templates') 
+    
+      require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine, NodeAppTemplatesDir)
+      //return
+      break;
     case 'upgrade':
         upgrade();
         break;
