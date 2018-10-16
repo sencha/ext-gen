@@ -1,11 +1,11 @@
-$panel-navigation-background-color: $nav-background-color;
-$nav-text-color: $nav-color;
+$panel-navigation-background-color: darken($base-color,25%);
+$nav-text-color: $base-foreground-color;
 
 $treelist-font-size: 16px;
 
 $nav-base-color: lighten($panel-navigation-background-color, 20%);
 $nav-bg-color-over: lighten($nav-base-color, 10%);
-$nav-bg-color-selected: lighten($nav-base-color, 5%);
+$nav-bg-color-selected: lighten($base-color, 5%);
 $nav-text-color-over: lighten($nav-text-color, 20%);
 $nav-indicator-color: lighten($base-color, 30%);
 $nav-indicator-color-over: lighten($base-color, 40%);
