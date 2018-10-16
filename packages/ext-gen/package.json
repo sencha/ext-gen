@@ -25,6 +25,8 @@
     "cross-spawn": "^6.0.5",
     "fs-extra": "^7.0.0",
     "lodash": "^4.17.11",
+    "underscore":"^1.9.1",
+    "node-find-folder":"^0.1.32",
     "prompt-confirm": "^2.0.4",
     "prompt-input": "^3.0.0",
     "prompt-list": "^3.2.0",
