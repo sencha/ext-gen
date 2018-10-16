@@ -9,17 +9,17 @@ Ext.define('{appName}.view.home.HomeView',{
   html: `Welcome to the Ext JS 6.6 Modern Desktop Template Application!
 <br><br><br>
 This template has the standard architecture for a desktop application
-<br><br>
+<br>
 - header and footer with custom buttons and text
-<br><br>
+<br>
 - left-side collapsable menu with custom area on top of menu
-<br><br>
+<br>
 - right-side (optional) detail view
-<br><br>
+<br>
 - Single Page Application (spa) routing (note # in URL)
-<br><br>
+<br>
 - Each View (menu) isolated into its own folder (under the 'view' folder) with
-<br><br>
+<br>
 These files: View, View scss file, ViewController, ViewModel (called a ViewPackage)
 <br><br><br>
 Notice that the menu allows you to select from several views, 
