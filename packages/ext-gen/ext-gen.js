@@ -83,6 +83,7 @@ var globalError = 0
 
 main()
 async function main() {
+  console.log('001')
   //await run (`npm view @sencha/ext version`)
   //await run (`npm --registry https://npm.sencha.com whoami`)
   stepStart()
