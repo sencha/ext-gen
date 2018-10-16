@@ -7,7 +7,7 @@ Ext.define('{appName}.view.home.HomeView',{
 	extend: 'Ext.Container',
   scrollable: true,
   html: `Welcome to the Ext JS 6.6 Modern Desktop Template Application!
-<br><br><br>
+<br><br>
 This template has the standard architecture for a desktop application
 <br>
 - header and footer with custom buttons and text
@@ -18,32 +18,28 @@ This template has the standard architecture for a desktop application
 <br>
 - Single Page Application (spa) routing (note # in URL)
 <br>
-- Each View (menu) isolated into its own folder (under the 'view' folder) with
+- Each View (menu) isolated into its own folder (under the 'view' folder)
 <br>
-These files: View, View scss file, ViewController, ViewModel (called a ViewPackage)
-<br><br><br>
+- These files: View, View scss file, ViewController, ViewModel (called a ViewPackage)
+<br><br>
 Notice that the menu allows you to select from several views, 
-<br><br>
+<br>
 - Home (the view you are currently on)
-<br><br>
+<br>
 - Personnel
 <br><br>
 select the personnel menu item to see an example of a page with an Ext JS grid
-<br><br><br>
+<br><br>
 To build a new ViewPackage, run:
-<br><br><br>
- npm run createview employee
-<br><br><br>
+<br><br>
+ npm run createview employee (shortcut: ext vp employee)
+<br><br>
 follow the instructions to add a menu item for this employeeview
-<br><br><br>
+<br><br>
 Simple Theming:
 <br><br>
 go to 'app/desktop/sass/var.scss', uncomment one of the $base-color variables
 <br><br>
-be patient and give it a few seconds to rebuild... :)
-<br><br>
-more adventurous? go to 'app/shared/sass/var.scss', uncomment all lines
-
-
+more adventurous? go to 'app/shared/sass/var.scss' and uncomment all lines
 `
 });

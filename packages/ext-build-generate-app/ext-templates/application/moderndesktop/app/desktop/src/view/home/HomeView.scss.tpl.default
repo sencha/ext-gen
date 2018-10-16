@@ -1,6 +1,6 @@
 // sass for {appName}.view.home.HomeView
 .homeview { 
-	color: $base-color;
+	color: $color;
   background-color: $base-foreground-color;
   padding: 15px 0px 0px 15px;
   border: 1px solid lightgray;
