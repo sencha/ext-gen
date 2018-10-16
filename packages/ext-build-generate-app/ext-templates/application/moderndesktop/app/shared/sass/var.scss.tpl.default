@@ -1,15 +1,3 @@
-//$nav-background-color: darken($base-color,25%);
-//$nav-color: white;
-
-//$header-background-color: $base-color;
-//$header-color: white;
-
-//$footer-background-color: $base-color;
-//$footer-color: white;
-
-
-
-
 // //https://www.sencha.com/blog/build-a-completely-custom-ext-js-theme-in-less-than-10-minutes/
 // //Defining Colors
 
