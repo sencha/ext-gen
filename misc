@@ -11,3 +11,6 @@ Testing:
 //1. npm login --registry=https://www.myget.org/F/sencha-community-sandbox/npm/ --scope=@sencha
 2. (for managers) npm publish  --registry=https://www.myget.org/F/sencha-community-sandbox/npm/
 3. npm install -g @sencha/ext-react - testing  (works well for me)
+
+
+/usr/local/lib/node_modules/node/lib/node_modules/@sencha
