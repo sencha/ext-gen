@@ -114,7 +114,7 @@ class app {
 //		if (!fs.existsSync(Sdk)){throw Sdk + ' sdk folder does not exist'}
 		var NodeAppApplicationTemplatesDir = path.join(NodeAppTemplatesDir + '/Application');util.dbgLog('NodeAppApplicationTemplatesDir: ' + NodeAppApplicationTemplatesDir)
 		var TemplateDir = path.join(NodeAppApplicationTemplatesDir + '/' + Template);util.dbgLog('TemplateDir: ' + TemplateDir)
-    //var TemplateDir = path.join(NodeAppBinDir + '/node_modules/@extjs/apptemplate-' + Template + '/template');util.dbgLog('TemplateDir: ' + TemplateDir)
+    //var TemplateDir = path.join(NodeAppBinDir + '/node_modules/@sencha/apptemplate-' + Template + '/template');util.dbgLog('TemplateDir: ' + TemplateDir)
     //var TemplateDir = o.options.templateFull
 
     var TemplateDir = ''
@@ -149,7 +149,7 @@ class app {
 
     var SdkVal
     var Packages
-    var n = Sdk.indexOf("@extjs");
+    var n = Sdk.indexOf("@sencha");
     if (n == -1) {
       SdkVal = 'ext'
       Packages = '$\u007Bworkspace.dir}/packages'
@@ -157,15 +157,14 @@ class app {
     else {
       //need this to be a variable - Sdk?
       SdkVal = Sdk
-//      SdkVal = 'node_modules/@extjs/ext'
-      Packages = '$\u007Bworkspace.dir}/packages,node_modules/@extjs'
+      Packages = '$\u007Bworkspace.dir}/packages,node_modules/@sencha'
 		}
 
 		walkSync(TemplateDir, TemplateDir.length+1, ApplicationDir, ApplicationName, Template, SdkVal, Packages)
     var f
 
     //console.log(NodeAppBinDir)
-    //f=NodeAppBinDir + '/../../@extjs/sencha-cmd/dist/templates/app/{senchadir}/app'
+    //f=NodeAppBinDir + '/../../@sencha/cmd/dist/templates/app/{senchadir}/app'
     //fs.copySync(f, ApplicationDir + '/.sencha');util.dbgLog(ApplicationDir + '/.sencha' + ' created')
     f='/.sencha';fs.copySync(NodeAppApplicationTemplatesDir  + '/sencha', ApplicationDir + f);util.dbgLog(ApplicationDir + f+' created')
 
@@ -204,7 +203,7 @@ class app {
 		// f='/cmd';fs.copySync(Sdk + f, eDir + f);util.dbgLog(eDir+f+' created')
     // f='/sass';fs.copySync(Sdk + f, eDir + f);util.dbgLog(eDir+f+' created')
     
-    // var n = Sdk.indexOf("@extjs");
+    // var n = Sdk.indexOf("@sencha");
     // if (n == -1) {
     //   f='/build.xml';fs.copySync(Sdk+f,eDir+f);util.dbgLog(eDir+f+' created')
     //   f='/ext-bootstrap.js';fs.copySync(Sdk+f,eDir+f);util.dbgLog(eDir+f+' created')

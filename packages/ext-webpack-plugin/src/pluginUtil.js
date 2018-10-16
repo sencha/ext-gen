@@ -137,14 +137,16 @@ export async function emit(compiler, compilation, vars, options, callback) {
         command = 'build'
       }
 
+      var cmdPort = '--port'
+      var cmdPortVal = '1234'
       if (vars.rebuild == true) {
         var parms = []
         if (options.profile == undefined || options.profile == '' || options.profile == null) {
-          parms = ['app', command, options.environment]
+          parms = ['app', command, cmdPort, cmdPortVal, options.environment]
         }
         else { //mjg
           //parms = ['app', command, options.profile, options.environment, '--web-server', false]
-          parms = ['app', command, options.profile, options.environment]
+          parms = ['app', command, cmdPort, cmdPortVal, options.profile, options.environment]
 
         }
         await _buildExtBundle(app, compilation, outputPath, parms, options)

@@ -7,7 +7,7 @@ Sencha Cmd functionality in Node
 Install [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
-npm install -g @extjs/ext-build
+npm install -g @sencha/ext-build
 ```
 
 

@@ -42,7 +42,6 @@
       "src": "app/shared/sass/save"
     },</tpl>
     "etc": [
-      //"node_modules/@extjs/ext/sass/etc/all.scss"
       "sass/etc/all.scss"
     ],
     "var": [
