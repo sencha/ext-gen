@@ -19,7 +19,9 @@ try {
 		evaluate: /\<\<=(.+?)\>\>/g
 	};
 	
-	exports.init = function init(CurrWorkingDir, options, NodeAppTemplatesDir) { 
+	exports.init = function init(CurrWorkingDir, options) { 
+    var NodeAppTemplatesDir =  path.join(__dirname, 'ext-templates') 
+
     var parms = options.parms
 
 		if(parms[3] == undefined) {
@@ -77,7 +79,7 @@ try {
 		}
 		fs.mkdirSync(dir);
     //util.infLog(dir + ' created')
-    //console.log(NodeAppViewPackageTemplatesDir)
+    console.log(NodeAppViewPackageTemplatesDir)
 		fs.readdir(NodeAppViewPackageTemplatesDir, function(err, filenames) {
 			filenames.forEach(function(filename) {
 				var content = fs.readFileSync(NodeAppViewPackageTemplatesDir + '/' + filename).toString()

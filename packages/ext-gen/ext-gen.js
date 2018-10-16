@@ -193,9 +193,8 @@ function stepStart() {
       var CurrWorkingDir = process.cwd()
       var NodeAppBinDir = path.resolve(__dirname)
       var TemplatesDir = '/ext-templates' 
-      var NodeAppTemplatesDir = path.join('./generate/ext-templates') 
     
-      require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine, NodeAppTemplatesDir)
+      require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine)
       //return
       break;
     case 'upgrade':
