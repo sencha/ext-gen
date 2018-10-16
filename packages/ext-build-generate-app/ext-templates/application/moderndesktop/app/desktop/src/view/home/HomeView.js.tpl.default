@@ -30,16 +30,14 @@ Notice that the menu allows you to select from several views,
 <br><br>
 select the personnel menu item to see an example of a page with an Ext JS grid
 <br><br>
-To build a new ViewPackage, run:
-<br><br>
- npm run createview employee (shortcut: ext vp employee)
-<br><br>
-follow the instructions to add a menu item for this employeeview
+To build a new ViewPackage, type the following in a command window:
+<br>
+- npm run createview employee (shortcut: ext vp employee)
 <br><br>
 Simple Theming:
 <br><br>
-go to 'app/desktop/sass/var.scss', uncomment one of the $base-color variables
-<br><br>
-more adventurous? go to 'app/shared/sass/var.scss' and uncomment all lines
+- go to 'app/desktop/sass/var.scss', uncomment one of the $base-color variables
+<br>
+- more adventurous? go to 'app/shared/sass/var.scss' and uncomment all the lines
 `
 });
