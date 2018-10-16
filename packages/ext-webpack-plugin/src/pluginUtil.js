@@ -149,7 +149,10 @@ export async function emit(compiler, compilation, vars, options, callback) {
           parms = ['app', command, cmdPort, cmdPortVal, options.profile, options.environment]
 
         }
-        await _buildExtBundle(app, compilation, outputPath, parms, options)
+        if (vars.watchStarted == false) {
+          await _buildExtBundle(app, compilation, outputPath, parms, options)
+          vars.watchStarted = true
+        }
 
         //const jsChunk = compilation.addChunk(`ext-angular-js`)
         //jsChunk.hasRuntime = jsChunk.isInitial = () => true;

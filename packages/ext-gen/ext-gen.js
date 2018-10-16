@@ -179,6 +179,7 @@ function stepStart() {
       }
       break;
     case 'viewpackage':
+    case 'vp':
       //cmdLine.command = mainCommand
       let viewArgs = mainCommandArgs._unknown || []
       let viewDefinitions = [{ name: 'viewName', defaultOption: true }]
