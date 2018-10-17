@@ -260,7 +260,7 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
       fs.writeFileSync(manifest, js, 'utf8')
       vars.rebuild = true
       var bundleDir = output.replace(process.cwd(), '')
-      if (bundleDir == '') {bundleDir = './'}
+      if (bundleDir.trim() == '') {bundleDir = './'}
       log(app + 'Building Ext bundle at: ' + bundleDir)
     }
     else {
