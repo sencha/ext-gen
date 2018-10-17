@@ -480,5 +480,7 @@ export function _getVersions(app, pluginName, frameworkName) {
     frameworkInfo = ', ' + frameworkName + ' v' + v.frameworkVersion
   }
 
-  return app + 'ext-webpack-plugin v' + v.pluginVersion + ', Ext JS v' + v.extVersion + ' ', v.edition + ' Edition, Sencha Cmd v' + v.cmdVersion + ', webpack v' + v.webpackVersion + frameworkInfo
+  return `${app} ext-webpack-plugin v${v.pluginVersion}, Ext JS v${v.extVersion}, ${v.edition} Edition, Sencha Cmd v${v.cmdVersion}, webpack v${v.webpackVersion} ${frameworkInfo}`
+
+  //return app + 'ext-webpack-plugin v' + v.pluginVersion + ', Ext JS v' + v.extVersion + ' ', v.edition + ' Edition, Sencha Cmd v' + v.cmdVersion + ', webpack v' + v.webpackVersion + frameworkInfo
 }
