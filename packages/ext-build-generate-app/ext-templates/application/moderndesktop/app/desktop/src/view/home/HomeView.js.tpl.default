@@ -32,12 +32,12 @@ select the personnel menu item to see an example of a page with an Ext JS grid
 <br><br>
 To build a new ViewPackage, type the following in a command window:
 <br>
-- npm run createview employee (shortcut: ext vp employee)
+- <span style="color:red;">ext-gen viewpackage employee</span> (shortcut: <span style="color:red;">ext vp employee</span>)
 <br><br>
 Simple Theming:
 <br><br>
 - go to 'app/desktop/sass/var.scss', uncomment one of the $base-color variables
 <br>
-- more adventurous? go to 'app/shared/sass/var.scss' and uncomment all the lines
+- more adventurous? go to <span style="color:red;">'app/shared/sass/var.scss'</span> and uncomment all the lines
 `
 });

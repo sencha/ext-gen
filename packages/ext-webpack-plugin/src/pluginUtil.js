@@ -405,10 +405,46 @@ export function _getVersions(app, pluginName, frameworkName) {
   const path = require('path')
   const fs = require('fs')
 
+
+
+  // var nodeDir = path.resolve(__dirname)
+  // var pkg = (fs.existsSync(nodeDir + '/package.json') && JSON.parse(fs.readFileSync(nodeDir + '/package.json', 'utf-8')) || {});
+  // version = pkg.version
+  // _resolved = pkg._resolved
+  // if (_resolved == undefined) {
+  //   edition = `Professional`
+  // }
+  // else {
+  //   if (-1 == _resolved.indexOf('community')) {
+  //     global.isCommunity = false
+  //     edition = `Professional`
+  //   }
+  //   else {
+  //     global.isCommunity = true
+  //     edition = `Community`
+  //   }
+  // }
+
+
+
+
+
   var v = {}
   var pluginPath = path.resolve(process.cwd(),'node_modules/@sencha', pluginName)
   var pluginPkg = (fs.existsSync(pluginPath+'/package.json') && JSON.parse(fs.readFileSync(pluginPath+'/package.json', 'utf-8')) || {});
   v.pluginVersion = pluginPkg.version
+  v._resolved = pluginPkg._resolved
+  if (v._resolved == undefined) {
+    v.edition = `Professional`
+  }
+  else {
+    if (-1 == _resolved.indexOf('community')) {
+      v.edition = `Professional`
+    }
+    else {
+      v.edition = `Community`
+    }
+  }
 
   var webpackPath = path.resolve(process.cwd(),'node_modules/webpack')
   var webpackPkg = (fs.existsSync(webpackPath+'/package.json') && JSON.parse(fs.readFileSync(webpackPath+'/package.json', 'utf-8')) || {});
@@ -442,5 +478,5 @@ export function _getVersions(app, pluginName, frameworkName) {
     frameworkInfo = ', ' + frameworkName + ' v' + v.frameworkVersion
   }
 
-  return app + 'ext-webpack-plugin v' + v.pluginVersion + ', Ext JS v' + v.extVersion + ', Sencha Cmd v' + v.cmdVersion + ', webpack v' + v.webpackVersion + frameworkInfo
+  return app + 'ext-webpack-plugin v' + v.pluginVersion + ',' + v.edition + ' Edition, Ext JS v' + v.extVersion + ', Sencha Cmd v' + v.cmdVersion + ', webpack v' + v.webpackVersion + frameworkInfo
 }
