@@ -438,7 +438,7 @@ export function _getVersions(app, pluginName, frameworkName) {
     v.edition = `Professional`
   }
   else {
-    if (-1 == _resolved.indexOf('community')) {
+    if (-1 == v._resolved.indexOf('community')) {
       v.edition = `Professional`
     }
     else {
