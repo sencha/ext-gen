@@ -259,7 +259,9 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
       const manifest = path.join(output, 'manifest.js')
       fs.writeFileSync(manifest, js, 'utf8')
       vars.rebuild = true
-      log(app + 'Building Ext bundle at: ' + output.replace(process.cwd(), ''))
+      var bundleDir = output.replace(process.cwd(), '')
+      if (bundleDir == '') {bundleDir = './'}
+      log(app + 'Building Ext bundle at: ' + bundleDir)
     }
     else {
       vars.rebuild = false
@@ -311,7 +313,7 @@ export function _buildExtBundle(app, compilation, outputPath, parms, options) {
 export async function executeAsync (app, command, parms, opts, compilation, options) {
   try {
     //const DEFAULT_SUBSTRS = ['[INF] Loading', '[INF] Processing', '[LOG] Fashion build complete', '[ERR]', '[WRN]', "[INF] Server", "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
-    const DEFAULT_SUBSTRS = ['[INF] Loading', '[INF] Append', '[INF] Processing', '[INF] Processing Build', '[LOG] Fashion build complete', '[ERR]', '[WRN]', "[INF] Server", "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
+    const DEFAULT_SUBSTRS = ["[INF] xServer", '[INF] Loading', '[INF] Append', '[INF] Processing', '[INF] Processing Build', '[LOG] Fashion build complete', '[ERR]', '[WRN]', "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
     var substrings = DEFAULT_SUBSTRS 
     var chalk = require('chalk')
     const crossSpawn = require('cross-spawn')
