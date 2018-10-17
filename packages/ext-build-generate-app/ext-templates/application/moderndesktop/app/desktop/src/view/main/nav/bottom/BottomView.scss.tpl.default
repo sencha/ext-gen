@@ -3,7 +3,8 @@
 	border-top: 0;
 	padding: 0; 
   color: $base-foreground-color; 
-	background-color: $base-dark-color;
+	background-color: darken($base-dark-color, 20%);
+
 }
 
 @include button-ui(
