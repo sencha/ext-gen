@@ -1,7 +1,7 @@
-.x-treelist-nav .x-treelist-item-selected .x-treelist-item-text
-{
-  color: $accent-foreground-color;
-}
+//.x-treelist-nav .x-treelist-item-selected .x-treelist-item-text
+//{
+//  color: $accent-foreground-color;
+//}
 
 @include treelist-ui(
   $ui: 'nav',
@@ -24,9 +24,9 @@
   $item-text-icon-gap: 1px,
   $item-expander-width: 24px,
 
-  $item-icon-font-size: $treelist-font-size,
-  $item-text-font-size: $treelist-font-size,
-  $item-expander-font-size: $treelist-font-size,
+  $item-icon-font-size: 16px,
+  $item-text-font-size: 16px,
+  $item-expander-font-size: 16px,
 
   $item-line-height : 35px,
   $item-text-overflow: initial,
