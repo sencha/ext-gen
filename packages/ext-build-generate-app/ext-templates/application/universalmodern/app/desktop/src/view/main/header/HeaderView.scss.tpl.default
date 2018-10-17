@@ -1,8 +1,8 @@
 .headerview {
 	border-left: 0;
 	border-top: 0;
-	color: $header-color;
-	background-color: $header-background-color;
+	color: $base-foreground-color;
+	background-color: $base-color;
 }
 
 .headerviewtext { 
@@ -14,7 +14,7 @@
 @include button-ui(
 	$ui: 'headerbutton',
 	$background-color: transparent,
-	$color:  $header-color,
-	$icon-color:  $header-color,
+	$color: $base-foreground-color,
+	$icon-color:  $base-foreground-color,
 	$border-color: transparent
 );

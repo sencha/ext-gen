@@ -12,7 +12,10 @@
 // // ***** Sencha Sass Variable Below *****
 
 // // Global Colors
-// $base_color : $dark_chocolate; 
+// $base-color : $dark_chocolate; 
+// $base-dark-color
+// $base-light-color
+// $base-foreground-color
 // $neutral_color : $white_chocolate;
 // $body_background_color : lighten($caramel_chocolate,50%);
 
@@ -53,12 +56,3 @@
 // $font-family: $chewy;
 // $font-size: 14px;
 // $color: $white_chocolate;
-
-$nav-background-color: darken($base-color,25%);
-$nav-color: white;
-
-$header-background-color: $base-color;
-$header-color: white;
-
-$footer-background-color: $base-color;
-$footer-color: white;

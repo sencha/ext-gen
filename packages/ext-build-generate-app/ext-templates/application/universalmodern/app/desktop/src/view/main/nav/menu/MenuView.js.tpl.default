@@ -7,7 +7,7 @@ Ext.define('{appName}.view.nav.menu.MenuView', {
 	],
 	scrollable: true,
 	bind: { 
-		store: '\u007Bdesktopmenu}', 
+		store: '\u007Bmenu}', 
 		micro: '\u007BnavCollapsed}' 
 	},
 	expanderFirst: false,
