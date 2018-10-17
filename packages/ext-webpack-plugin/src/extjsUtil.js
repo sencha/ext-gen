@@ -141,7 +141,9 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
 
     if (currentNumFiles != vars.lastNumFiles || doBuild) {
       vars.rebuild = true
-      log(app + 'building Ext bundle at: ' + output.replace(process.cwd(), ''))
+      var bundleDir = output.replace(process.cwd(), '')
+      if (bundleDir.trim() == '') {bundleDir = './'}
+      log(app + 'Building Ext bundle at: ' + bundleDir)
     }
     else {
       vars.rebuild = false
