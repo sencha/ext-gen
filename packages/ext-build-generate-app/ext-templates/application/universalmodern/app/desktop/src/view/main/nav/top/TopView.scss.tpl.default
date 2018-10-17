@@ -2,8 +2,8 @@
 	border-left: 0; 
 	border-top: 0; 
 	padding: 0 0 0 0;
-	color: $nav-color; 
-	background-color: $nav-background-color ;
+	color: $base-foreground-color; 
+	background-color: darken($base-dark-color, 20%);
 }
 
 .topviewtext { 
@@ -16,8 +16,8 @@
 	$ui: 'topviewbutton',
 	$icon-font-size: 18px,
 	$background-color: transparent,
-	$color: $nav-color,
-	$icon-color: $nav-color,
+	$color: $base-foreground-color,
+	$icon-color: $base-foreground-color,
 	$border-color: transparent
 );
 

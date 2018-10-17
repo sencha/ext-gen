@@ -7,13 +7,8 @@ Ext.define('{appName}.view.main.footer.FooterView', {
 		{ 
 			xtype: 'container',
 			cls: 'footerviewtext',
-			html: 'footer'
-		},
-//		'->',
-//		{
-//			xtype: 'button',
-//			ui: 'footerbutton',
-//			iconCls: 'x-fa fa-automobile'
-//		}
+      html: 'Ext JS version: ' + Ext.versions.extjs.version
+			//bind: { html: '\u007Bname} footer' }
+		}
 	]
 });

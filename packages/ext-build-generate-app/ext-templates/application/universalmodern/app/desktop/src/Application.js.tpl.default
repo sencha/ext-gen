@@ -2,15 +2,18 @@ Ext.define('{appName}.Application', {
 	extend: 'Ext.app.Application',
 	name: '{appName}',
 	requires: ['{appName}.*'],
-//	defaultToken: 'personnelview',
+	defaultToken: 'homeview',
 
-	launch: function () {
-		Ext.ariaWarn = Ext.emptyFn
+	removeSplash: function () {
 		Ext.getBody().removeCls('launching')
 		var elem = document.getElementById("splash")
 		elem.parentNode.removeChild(elem)
-		
-		Ext.Viewport.add([{xtype: 'mainview'}])
+	},
+
+	launch: function () {
+		this.removeSplash()
+		var whichView = 'mainview'
+		Ext.Viewport.add([{xtype: whichView}])
 	},
 
 	onAppUpdate: function () {

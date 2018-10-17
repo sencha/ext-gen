@@ -6,10 +6,6 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
 	controller: {type: 'personnelviewcontroller'},
 	viewModel: {type: 'personnelviewmodel'},
 	store: {type: 'personnelviewstore'},
-	selectable: { mode: 'single' },
-	listeners: {
-		select: 'onItemSelected'
-	},
 	columns: [
 		{ 
 			text: 'Name',
@@ -23,5 +19,8 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
 			dataIndex: 'phone',
 			width: 150 
 		}
-	]
+	],
+	listeners: {
+		select: 'onItemSelected'
+	}
 });

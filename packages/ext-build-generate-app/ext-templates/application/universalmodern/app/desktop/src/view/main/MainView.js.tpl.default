@@ -1,8 +1,13 @@
 Ext.define('{appName}.view.main.MainView', {
 	extend: 'Ext.Container',
 	xtype: 'mainview',
-	controller: {type: 'mainviewcontroller'},
-	viewModel: {type: 'mainviewmodel'},
+	controller: 'mainviewcontroller',
+	viewModel: {
+		type: 'mainviewmodel'
+	},
+  requires: [
+    'Ext.layout.Fit'
+  ],
 	layout: 'fit',
 	items: [
 		{ xtype: 'navview',    reference: 'navview',    docked: 'left',   bind: {width:  '\u007Bnavview_width}'}, listeners: { select: "onMenuViewSelectionChange"} },

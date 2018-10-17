@@ -1,6 +1,13 @@
-Ext.define('{appName}.view.main.detail.DetailView', {
+Ext.define('app02.view.main.detail.DetailView', {
 	extend: 'Ext.Container',
 	xtype: 'detailview',
-	cls: 'detailview',
-	html: '<div style="font-size:24px;">detailview</div>'
-});
+  cls: 'detailview',
+  layout: 'fit',
+  items: [
+    {
+      xtype: 'container', 
+      style: 'background:white', 
+      html: '<div style="padding:10px;font-size:24px;">detailview</div>'
+    }
+  ]
+})
