@@ -16,7 +16,7 @@ _resolved = pkg._resolved
 var edition = ''
 if (-1 == _resolved.indexOf('community')) {
   global.isCommunity = false
-  edition = `Professional`
+  edition = `Commercial`
 }
 else {
   global.isCommunity = true

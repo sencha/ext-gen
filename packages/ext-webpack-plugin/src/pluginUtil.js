@@ -20,12 +20,12 @@ export function _constructor(options) {
 
   //fix sencha cmd no jetty server problem
 
-  var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
-  logv(options, `modify ${watchFile}`)
-  var data = fs.readFileSync(watchFile, 'utf-8');
-  var ip = 'webServerRefId="app.web.server"';
-  var newValue = data.replace(new RegExp(ip), '');
-  fs.writeFileSync(watchFile, newValue, 'utf-8');
+  // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
+  // logv(options, `modify ${watchFile}`)
+  // var data = fs.readFileSync(watchFile, 'utf-8');
+  // var ip = 'webServerRefId="app.web.server"';
+  // var newValue = data.replace(new RegExp(ip), '');
+  // fs.writeFileSync(watchFile, newValue, 'utf-8');
 
 
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
@@ -454,11 +454,11 @@ export function _getVersions(app, pluginName, frameworkName) {
   v.pluginVersion = pluginPkg.version
   v._resolved = pluginPkg._resolved
   if (v._resolved == undefined) {
-    v.edition = `Professional`
+    v.edition = `Commercial`
   }
   else {
     if (-1 == v._resolved.indexOf('community')) {
-      v.edition = `Professional`
+      v.edition = `Commercial`
     }
     else {
       v.edition = `Community`
