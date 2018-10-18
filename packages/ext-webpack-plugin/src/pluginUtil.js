@@ -1,5 +1,8 @@
 //**********
 export function _constructor(options) {
+  const path = require('path')
+  const fs = require('fs')
+
   var thisVars = {}
   var thisOptions = {}
   var plugin = {}
@@ -13,6 +16,17 @@ export function _constructor(options) {
 
   const validateOptions = require('schema-utils')
   validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
+
+
+  //fix sencha cmd no jetty server problem
+
+  var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
+  logv(options, `modify ${watchFile}`)
+  var data = fs.readFileSync(watchFile, 'utf-8');
+  var ip = 'webServerRefId="app.web.server"';
+  var newValue = data.replace(new RegExp(ip), '');
+  fs.writeFileSync(watchFile, newValue, 'utf-8');
+
 
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
@@ -32,7 +46,7 @@ export function _constructor(options) {
   thisVars.app = require('./pluginUtil')._getApp()
   logv(options, `pluginName - ${thisVars.pluginName}`)
   logv(options, `thisVars.app - ${thisVars.app}`)
-  const fs = require('fs')
+
   const rc = (fs.existsSync(`.ext-${thisVars.framework}rc`) && JSON.parse(fs.readFileSync(`.ext-${thisVars.framework}rc`, 'utf-8')) || {})
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
   logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
@@ -137,16 +151,19 @@ export async function emit(compiler, compilation, vars, options, callback) {
         command = 'build'
       }
 
-      var cmdPort = '--port'
-      var cmdPortVal = '1234'
+      //var cmdPort = '--port'
+      //var cmdPortVal = '1234'
       if (vars.rebuild == true) {
         var parms = []
         if (options.profile == undefined || options.profile == '' || options.profile == null) {
-          parms = ['app', command, cmdPort, cmdPortVal, options.environment]
+          //parms = ['app', command, cmdPort, cmdPortVal, '--web-server', 'false', options.environment]
+          parms = ['app', command, '--web-server', 'false', options.environment]
+
         }
         else { //mjg
           //parms = ['app', command, options.profile, options.environment, '--web-server', false]
-          parms = ['app', command, cmdPort, cmdPortVal, options.profile, options.environment]
+          //parms = ['app', command, cmdPort, cmdPortVal, '--web-server', 'false', options.profile, options.environment]
+          parms = ['app', command, '--web-server', 'false', options.profile, options.environment]
 
         }
         if (vars.watchStarted == false) {

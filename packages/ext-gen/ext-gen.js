@@ -190,8 +190,8 @@ function stepStart() {
       cmdLine = {}
       cmdLine.parms = ['a','b','desktop',viewName]
       var CurrWorkingDir = process.cwd()
-      var NodeAppBinDir = path.resolve(__dirname)
-      var TemplatesDir = '/ext-templates' 
+      //var NodeAppBinDir = path.resolve(__dirname)
+      //var TemplatesDir = '/ext-templates' 
     
       require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine)
       //return
