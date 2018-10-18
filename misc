@@ -15,3 +15,6 @@ Testing:
 
 
 /usr/local/lib/node_modules/node/lib/node_modules/@sencha
+
+@sencha/ext/cmd/sencha.cfg
+framework.packages.dir=${framework.dir}/../ext-modern,${framework.dir}/../ext-modern-theme-base,${framework.dir}/../ext-modern-theme-neptune,${framework.dir}/../ext-modern-theme-material,${framework.dir}/../ext-${toolkit.name}*,${framework.dir}/../ext-core,${framework.dir}/../ext-font-awesome,${framework.dir}/../ext-font-ext
