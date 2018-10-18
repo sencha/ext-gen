@@ -5,7 +5,7 @@
 
 @include treelist-ui(
   $ui: 'nav',
-  $background-color: darken($base-dark-color, 20%),
+  $background-color: darken($base-color, 20%),
   $padding: 5px 10px 0 10px,
 
   $toolstrip-background-color:  $base-light-color,
