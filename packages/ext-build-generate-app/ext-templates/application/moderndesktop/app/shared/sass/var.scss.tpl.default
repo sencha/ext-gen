@@ -13,9 +13,6 @@
 
 // // Global Colors
 // $base-color : $dark_chocolate; 
-// $base-dark-color
-// $base-light-color
-// $base-foreground-color
 // $neutral_color : $white_chocolate;
 // $body_background_color : lighten($caramel_chocolate,50%);
 
