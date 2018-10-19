@@ -9,11 +9,10 @@ Ext.define('{appName}.view.main.MainView', {
   items: [
     {
       xtype: 'component',
-      cls: 'mainview'
+      cls: 'mainview',
       bind: {
-        width: '\u007BtextWidth}'
-        html:  '\u007BclickTime}'
-        }
+        html: '{displayText}'
+      }
     },
     {
       xtype: 'button',
