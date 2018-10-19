@@ -3,7 +3,6 @@ Ext.define('{appName}.view.main.MainViewController', {
   alias: 'controller.mainviewcontroller',
 
   onButtonClick: function (button) {
-//    alert(button.getText())
     var vm = this.getViewModel()
     vm.set('clickTime', Date.now())
   }
