@@ -5,11 +5,15 @@ Ext.define('{appName}.view.main.MainView', {
   viewModel: {
     type: 'mainviewmodel'
   },
-  
+
   items: [
     {
       xtype: 'component',
-      html:  '<div class="mainview">Hello, Minimal World!</div>'
+      cls: 'mainview'
+      bind: {
+        width: '\u007BtextWidth}'
+        html:  '\u007BclickTime}'
+        }
     },
     {
       xtype: 'button',

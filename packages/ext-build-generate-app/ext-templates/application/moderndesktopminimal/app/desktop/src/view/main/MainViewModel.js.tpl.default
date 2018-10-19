@@ -2,8 +2,15 @@ Ext.define('{appName}.view.main.MainViewModel', {
   extend: 'Ext.app.ViewModel',
   alias: 'viewmodel.mainviewmodel',
   data: {
+    clickTime : 'Not Clicked Yet',
+    textCollapsed : false
+    maxWidth: 30,
+    minWidth: 10
   },
   formulas: {
+    textWidth: function(get) {
+      return get('textCollapsed') ? get('minWidth') : get('maxWidth');
+    },
   },
   stores: {
   }
