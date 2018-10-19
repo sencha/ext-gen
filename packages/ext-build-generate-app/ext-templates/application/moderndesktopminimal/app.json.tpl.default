@@ -1,0 +1,170 @@
+{
+  "name": "{name}",
+  "namespace": "{name}",
+  "version": "1.0.0.0",
+  "framework": "{frameworkKey}",
+  "template": "{template}",
+  "indexHtmlPath": "index.html",
+  "requires": [
+    "font-awesome"
+  ],
+<tpl if="universal == true">
+	"builds": {
+		"desktop": {
+			"toolkit": "modern",
+			"theme": "{modernTheme}",
+      "sass": {
+        "generated": {
+          "var": "modern/sass/save.scss",
+          "src": "modern/sass/save"
+        }
+      }
+		}
+	},
+</tpl>
+	"classpath": ["app/$\u007Bbuild.id}/src"],
+	"overrides": ["app/$\u007Bbuild.id}/overrides"],
+<tpl if="universal == true">
+	"sass": {
+		"namespace": "{name}",
+    "etc": [
+      "sass/etc/all.scss"
+    ],
+		"var": [
+			"app/$\u007Bbuild.id}/sass/var.scss"
+		],
+		"src": [
+			"app/$\u007Bbuild.id}/sass/src.scss"
+		]
+	},
+</tpl>
+	"resources": [
+		{ "path": "resources/$\u007Bbuild.id}" }
+	],
+<tpl if="universal == true">
+	"output": {
+		"base": "$\u007Bworkspace.build.dir}/$\u007Bbuild.environment}/$\u007bapp.name}",
+		"page": "index.html",
+		"manifest": "generatedFiles/$\u007Bbuild.id}.json",
+		"js": "generatedFiles/$\u007Bbuild.id}/app.js",
+		"appCache": {"enable": false},
+		"resources": {
+			"path": "$\u007Bbuild.id}/resources",
+			"shared": "resources"
+		}
+	},
+	<tpl else>
+	"output": {
+		"base": "$\u007bworkspace.build.dir}/$\u007bbuild.environment}/$\u007bapp.name}",
+		"appCache": {
+			"enable": false
+		}
+	},
+</tpl>
+	"fashion": {
+<tpl if="frameworkIsV65 == true">"missingParameters": "error",</tpl>
+		"inliner": {"enable": false}
+	},
+
+	"js": [<tpl if="universal == false">
+		{
+			"path": "$\u007Bframework.dir}/build/ext-<tpl if="toolkit == 'modern'">modern-all<tpl else>all-rtl</tpl>-debug.js"
+		},</tpl>
+		{
+			"path": "app.js",
+			"bundle": true
+		}
+	],
+<tpl if="universal == true">
+	"classic": {"js": []},
+	"modern": {"js": []},
+</tpl>
+	"css": [
+		{
+			"path": "$\u007bbuild.out.css.path}",
+			"bundle": true,
+			"exclude": ["fashion"]
+		}
+	],
+
+	"loader": {
+		"cache": false,
+		"cacheParam": "_dc"
+	},
+
+	"production": {
+		"output": {
+			"appCache": {
+				"enable": true,
+				"path": "cache.appcache"
+			}
+		},
+		"loader": {
+			"cache": "$\u007Bbuild.timestamp}"
+		},
+		"cache": {
+			"enable": true
+		},
+		"compressor": {
+			"type": "yui"
+		}
+	},
+
+	"testing": {},
+
+	"development": {
+		"watch": {
+			"delay": 250
+		}
+	},
+
+	"bootstrap": {
+		"base": "$\u007bapp.dir}/generatedFiles",
+<tpl if="universal == true">"manifest": "$\u007bbuild.id}.json",</tpl>
+		"microloader": "bootstrap.js",
+		"css": "bootstrap.css"
+	},
+<tpl if="universal == true">
+	"cache": {
+			"enable": false,
+			"deltas": "$\u007Bbuild.id}/deltas"
+	},
+<tpl else>
+	"cache": {
+			"enable": false,
+			"deltas": true
+	},
+</tpl>
+	"appCache": {
+		"cache": ["index.html"],
+		"network": ["*"],
+		"fallback": []
+	},
+<tpl if="universal == false"><tpl if="toolkit == 'classic'">
+	"slicer": {
+		"js": [
+			{
+				"path": "sass/example/custom.js",
+				"isWidgetManifest": true
+			}
+		],
+		"output": {
+			"appCache": {
+				"enable": false
+			}
+		},
+		"cache": {
+			"enable": false
+		}
+	},
+<tpl else>
+	"slicer": null,
+</tpl></tpl>
+<tpl if="universal == true">
+	"archivePath": "archive/$\u007Bbuild.id}",
+<tpl else>
+	"archivePath": "archive",
+</tpl>
+	"ignore": ["(^|/)CVS(/?$|/.*?$)"],
+	"id": "{uniqueId}"
+}
