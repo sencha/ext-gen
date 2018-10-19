@@ -5,6 +5,7 @@ Ext.define('{appName}.view.main.MainView', {
   viewModel: {
     type: 'mainviewmodel'
   },
+  
   items: [
     {
       xtype: 'component',
