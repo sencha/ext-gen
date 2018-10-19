@@ -321,10 +321,10 @@ function step04() {
   var choices = []
   console.log('isCommunity: ' + global.isCommunity)
   if (global.isCommunity) {
-    choices = ['moderndesktop', 'universalmodern']
+    choices = ['moderndesktop', 'universalmodern', 'moderndesktopminimal']
   }
   else {
-    choices = ['classicdesktop', 'classicdesktoplogin', 'moderndesktop', 'universalclassicmodern', 'universalmodern']
+    choices = ['classicdesktop', 'classicdesktoplogin', 'moderndesktop', 'moderndesktopminimal', 'universalclassicmodern', 'universalmodern']
   }
 
   new List({

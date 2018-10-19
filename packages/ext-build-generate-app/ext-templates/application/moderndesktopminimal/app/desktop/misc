@@ -1,0 +1,43 @@
+	init: function() {
+		var menuview = this.lookup('menuview');
+		var me = this;
+		me.getServerData()
+		.then(function(response) {
+			menuview.setStore(response.menuData);
+			me.redirectTo( location.hash.slice(1), true );
+		}, function(e) {
+			console.log(e);
+		})
+	},
+
+	getServerData: function () {
+		return new Ext.Promise(function (resolve, reject) {
+			try {
+				Ext.Ajax.request({
+					url: 'resources/shared/data/menu.json',
+					success: function(response, opts) {
+						var menuData = Ext.decode(response.responseText);
+						resolve({ menuData: menuData });
+					},
+					failure: function(response, opts) {
+						return reject ('server-side failure with status code ' + response.status);
+					}
+				});
+			}
+			catch(err) {
+				return reject(err);
+			}
+		});
+	},
+
+
+	
+//	viewport: {
+//		controller: 'viewportcontroller',
+//		viewModel: 'viewportmodel'
+//	},
+//Ext.Viewport.getController().onLaunch();
+
+//sencha generate view groups.GroupsView
+//SenchaNode generate viewpackage thumb
+//SenchaNode generate viewpackage grid

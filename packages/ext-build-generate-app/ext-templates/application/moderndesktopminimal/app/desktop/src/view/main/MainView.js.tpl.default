@@ -1,0 +1,17 @@
+Ext.define('{appName}.view.main.MainView', {
+  extend: 'Ext.Container',
+  xtype: 'mainview',
+  controller: 'mainviewcontroller',
+  viewModel: {
+    type: 'mainviewmodel'
+  },
+  requires: [
+    'Ext.layout.Fit'
+  ],
+  layout: 'fit',
+  items: [{
+    xtype: 'component',
+    html:  '<h1>Hello, Minimal World!</h1>'
+  }]
+  //html: '<h1>Hello, Minimal World!</h1>'
+});
