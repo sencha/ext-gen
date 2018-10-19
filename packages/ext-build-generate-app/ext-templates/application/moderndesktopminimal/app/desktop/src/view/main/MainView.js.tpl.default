@@ -16,7 +16,7 @@ Ext.define('{appName}.view.main.MainView', {
     },
     {
       xtype: 'button',
-      text: 'Click Me'
+      text: 'Click Me!'
       handler: 'onButtonClick'
     }
   ]
