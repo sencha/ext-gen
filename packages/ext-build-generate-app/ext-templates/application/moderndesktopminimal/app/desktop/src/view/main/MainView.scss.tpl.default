@@ -1,3 +1,8 @@
 // sass for {appName}.view.home.MainView
-.mainview { 
+.mainview {
+  border-left: 0; 
+  border-top: 0;
+  padding: 10; 
+  color: $base-color; 
+  background-color: darken($base-color, 20%);
 }
