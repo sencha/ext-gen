@@ -37,7 +37,7 @@
 <tpl if="universal == true">
   "sass": {
     "namespace": "{name}",
-<tpl if="universal == false">		"generated": {
+<tpl if="universal == false">    "generated": {
       "var": "app/shared/sass/save.scss",
       "src": "app/shared/sass/save"
     },</tpl>
@@ -79,7 +79,7 @@
   },
 </tpl>
   "fashion": {
-<tpl if="frameworkIsV65 == true">		"missingParameters": "error",</tpl>
+<tpl if="frameworkIsV65 == true">    "missingParameters": "error",</tpl>
     "inliner": {"enable": false}
   },
 
@@ -133,7 +133,7 @@
 
   "bootstrap": {
     "base": "$\u007bapp.dir}/generatedFiles",
-<tpl if="universal == true">		"manifest": "$\u007bbuild.id}.json",</tpl>
+<tpl if="universal == true">    "manifest": "$\u007bbuild.id}.json",</tpl>
     "microloader": "bootstrap.js",
     "css": "bootstrap.css"
   },
