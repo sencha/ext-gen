@@ -319,7 +319,6 @@ function step03() {
 
 function step04() {
   var choices = []
-  console.log('isCommunity: ' + global.isCommunity)
   if (global.isCommunity) {
     choices = ['moderndesktop', 'universalmodern', 'moderndesktopminimal']
   }
@@ -330,7 +329,7 @@ function step04() {
   new List({
     message: 'What Ext JS template would you like to use?',
     choices: choices,
-    default: 'classicdesktop'
+    default: 'moderndesktop'
   }).run().then(answer => {
     answers['classic'] = false
     answers['modern'] = false
