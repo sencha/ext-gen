@@ -3,7 +3,7 @@ Ext.define('{appName}.view.main.MainViewController', {
   alias: 'controller.mainviewcontroller',
 
   onButtonClick: function (button) {
-    alert(button.text)
+    alert(button.getText())
   }
   
 })
