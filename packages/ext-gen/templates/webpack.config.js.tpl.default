@@ -44,7 +44,6 @@ module.exports = async function (env) {
     entry: {
       'index': [
         'react-hot-loader/patch',
-        './index.js'
       ]
     },
     output: {

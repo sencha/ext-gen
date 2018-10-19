@@ -62,7 +62,7 @@
   },
 </tpl>
   "fashion": {
-<tpl if="frameworkIsV65 == true">"missingParameters": "error",</tpl>
+<tpl if="frameworkIsV65 == true">   "missingParameters": "error",</tpl>
     "inliner": {"enable": false}
   },
 
@@ -120,7 +120,7 @@
 
   "bootstrap": {
     "base": "$\u007bapp.dir}/generatedFiles",
-<tpl if="universal == true">"manifest": "$\u007bbuild.id}.json",</tpl>
+<tpl if="universal == true">    "manifest": "$\u007bbuild.id}.json",</tpl>
     "microloader": "bootstrap.js",
     "css": "bootstrap.css"
   },
