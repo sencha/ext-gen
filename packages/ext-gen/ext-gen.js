@@ -83,10 +83,14 @@ var globalError = 0
 
 main()
 async function main() {
-  console.log('001')
+  try {
   //await run (`npm view @sencha/ext version`)
   //await run (`npm --registry https://npm.sencha.com whoami`)
   stepStart()
+  }
+  catch (e) {
+    console.log(e)
+  }
 }
 
 function stepStart() {
@@ -180,11 +184,19 @@ function stepStart() {
     case 'vp':
       //cmdLine.command = mainCommand
       let viewArgs = mainCommandArgs._unknown || []
-      let viewDefinitions = [{ name: 'viewName', defaultOption: true },{ name: 'vpName', defaultOption: true }]
+      let viewDefinitions = [{ name: 'viewName', defaultOption: true },{ name: 'vpName', alias: 'v', type: String}]
       const viewCommandArgs = commandLineArgs(viewDefinitions, { argv: viewArgs, stopAtFirstUnknown: true })
+      var vpName = ''
       var viewName = viewCommandArgs.viewName
-      var vpName = viewCommandArgs.vpName
-      console.log(`creating viewpackage '${viewName}'...\n`)
+      if (viewCommandArgs.vpName == undefined) {
+        vpName = 'basic'
+      }
+      else {
+        vpName = viewCommandArgs.vpName
+      }
+
+
+
 
       //let argv2 = mainCommandArgs._unknown || []
       //cmdLine = commandLineArgs(optionDefinitions, { argv: argv2, stopAtFirstUnknown: true })
