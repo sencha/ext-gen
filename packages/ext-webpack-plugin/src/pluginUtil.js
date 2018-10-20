@@ -17,9 +17,7 @@ export function _constructor(options) {
   const validateOptions = require('schema-utils')
   validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
 
-
   //fix sencha cmd no jetty server problem
-
   // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
   // logv(options, `modify ${watchFile}`)
   // var data = fs.readFileSync(watchFile, 'utf-8');
@@ -27,26 +25,18 @@ export function _constructor(options) {
   // var newValue = data.replace(new RegExp(ip), '');
   // fs.writeFileSync(watchFile, newValue, 'utf-8');
 
-  //fix sencha cmd no jetty server problem
-
-    var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
-    logv(options, `toFashionDist ${toFashionDist}`)
-    if (!fs.existsSync(toFashionDist)) {
-      logv(options, `copy`)
-      var fromFashionDist = path.join(process.cwd(), 'fashion/dist/')
-      fs.copySync(fromFashionDist, toFashionDist)
-    }
-    else {
-      logv(options, `no copy`)
-    }
-
-  // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
-  // logv(options, `modify ${watchFile}`)
-  // var data = fs.readFileSync(watchFile, 'utf-8');
-  // var ip = 'webServerRefId="app.web.server"';
-  // var newValue = data.replace(new RegExp(ip), '');
-  // fs.writeFileSync(watchFile, newValue, 'utf-8');
-
+  //fix fashion dist problem
+  const fsx = require('fs-extra')
+  var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
+  logv(options, `toFashionDist ${toFashionDist}`)
+  if (!fs.existsSync(toFashionDist)) {
+    logv(options, `copy`)
+    var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/ext-webpack-plugin/fashion/dist/')
+    fsx.copySync(fromFashionDist, toFashionDist)
+  }
+  else {
+    logv(options, `no copy`)
+  }
 
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
@@ -171,18 +161,13 @@ export async function emit(compiler, compilation, vars, options, callback) {
         command = 'build'
       }
 
-      //var cmdPort = '--port'
-      //var cmdPortVal = '1234'
       if (vars.rebuild == true) {
         var parms = []
         if (options.profile == undefined || options.profile == '' || options.profile == null) {
-          //parms = ['app', command, cmdPort, cmdPortVal, '--web-server', 'false', options.environment]
           parms = ['app', command, '--web-server', 'false', options.environment]
 
         }
-        else { //mjg
-          //parms = ['app', command, options.profile, options.environment, '--web-server', false]
-          //parms = ['app', command, cmdPort, cmdPortVal, '--web-server', 'false', options.profile, options.environment]
+        else {
           parms = ['app', command, '--web-server', 'false', options.profile, options.environment]
 
         }
@@ -443,30 +428,6 @@ export function _getApp() {
 export function _getVersions(app, pluginName, frameworkName) {
   const path = require('path')
   const fs = require('fs')
-
-
-
-  // var nodeDir = path.resolve(__dirname)
-  // var pkg = (fs.existsSync(nodeDir + '/package.json') && JSON.parse(fs.readFileSync(nodeDir + '/package.json', 'utf-8')) || {});
-  // version = pkg.version
-  // _resolved = pkg._resolved
-  // if (_resolved == undefined) {
-  //   edition = `Professional`
-  // }
-  // else {
-  //   if (-1 == _resolved.indexOf('community')) {
-  //     global.isCommunity = false
-  //     edition = `Professional`
-  //   }
-  //   else {
-  //     global.isCommunity = true
-  //     edition = `Community`
-  //   }
-  // }
-
-
-
-
 
   var v = {}
   var pluginPath = path.resolve(process.cwd(),'node_modules/@sencha', pluginName)
