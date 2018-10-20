@@ -29,13 +29,17 @@ try {
       //throw util.err('Only 1 parameter is allowed')
     }
     var profile = parms[2];
-    var ViewName = parms[3];
+    var viewName = parms[3];
     var vpName = parms[4];
 
-//    console.log(ViewName)
-//    util.infLog('ViewName: ' + ViewName)
-		if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
-    var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage/' + vpName);
+//    console.log(viewName)
+//    util.infLog('viewName: ' + viewName)
+		if(viewName == undefined) {throw util.err('View Name parameter is empty')}
+    var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage/' + vpName)
+    if (!fs.existsSync(NodeAppViewPackageTemplatesDir)) {throw 'ViewPackage template "' + vpName + '" does not exist'}
+
+    console.log(`creating viewpackage '${viewName}'...\n`)
+
 
 //    util.infLog('NodeAppViewPackageTemplatesDir: ' + NodeAppViewPackageTemplatesDir)
 
@@ -58,10 +62,10 @@ try {
       CurrWorkingDir = viewFolder
       //util.infLog('Must be run from a view folder')
     }
-    var dir = CurrWorkingDir + '/' + ViewName;
+    var dir = CurrWorkingDir + '/' + viewName;
     //util.infLog('folder: ' + dir)
 		if (fs.existsSync(dir)){throw dir + ' folder exists.  Delete the folder to re-create.'}
-    var iSmall = ViewName.toLowerCase();
+    var iSmall = viewName.toLowerCase();
     //util.infLog('iSmall: ' + iSmall)
     var iCaps = iSmall[0].toUpperCase() + iSmall.substring(1);
     //util.infLog('iCaps: ' + iCaps)
