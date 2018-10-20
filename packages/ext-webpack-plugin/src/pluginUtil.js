@@ -27,6 +27,26 @@ export function _constructor(options) {
   // var newValue = data.replace(new RegExp(ip), '');
   // fs.writeFileSync(watchFile, newValue, 'utf-8');
 
+  //fix sencha cmd no jetty server problem
+
+    var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
+    logv(options, `toFashionDist ${toFashionDist}`)
+    if (!fs.existsSync(toFashionDist)) {
+      logv(options, `copy`)
+      var fromFashionDist = path.join(process.cwd(), 'fashion/dist/')
+      fs.copySync(fromFashionDist, toFashionDist)
+    }
+    else {
+      logv(options, `no copy`)
+    }
+
+  // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
+  // logv(options, `modify ${watchFile}`)
+  // var data = fs.readFileSync(watchFile, 'utf-8');
+  // var ip = 'webServerRefId="app.web.server"';
+  // var newValue = data.replace(new RegExp(ip), '');
+  // fs.writeFileSync(watchFile, newValue, 'utf-8');
+
 
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
