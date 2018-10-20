@@ -24,16 +24,18 @@ try {
 
     var parms = options.parms
 
-		if(parms[3] == undefined) {
-      util.errLog('3 parameters needed')
+		if(parms[4] == undefined) {
+      util.errLog('4 parameters needed')
       //throw util.err('Only 1 parameter is allowed')
     }
     var profile = parms[2];
     var ViewName = parms[3];
+    var vpName = parms[4];
+
 //    console.log(ViewName)
 //    util.infLog('ViewName: ' + ViewName)
 		if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
-    var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage');
+    var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage/' + vpName);
 
 //    util.infLog('NodeAppViewPackageTemplatesDir: ' + NodeAppViewPackageTemplatesDir)
 

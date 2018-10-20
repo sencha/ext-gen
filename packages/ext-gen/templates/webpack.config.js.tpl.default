@@ -25,10 +25,13 @@ module.exports = async function (env) {
     new ExtWebpackPlugin({
       framework: 'extjs',
       port: port,
+      emit: true,
+      browser: true,
+      watch: 'yes',
       profile: buildprofile,
       environment: buildenvironment,
       verbose: buildverbose
-    }),
+    })
   ]
   if (!isProd) {
     plugins.push(
