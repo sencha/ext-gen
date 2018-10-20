@@ -180,15 +180,16 @@ function stepStart() {
     case 'vp':
       //cmdLine.command = mainCommand
       let viewArgs = mainCommandArgs._unknown || []
-      let viewDefinitions = [{ name: 'viewName', defaultOption: true }]
+      let viewDefinitions = [{ name: 'viewName', defaultOption: true },{ name: 'vpName', defaultOption: true }]
       const viewCommandArgs = commandLineArgs(viewDefinitions, { argv: viewArgs, stopAtFirstUnknown: true })
       var viewName = viewCommandArgs.viewName
+      var vpName = viewCommandArgs.vpName
       console.log(`creating viewpackage '${viewName}'...\n`)
 
       //let argv2 = mainCommandArgs._unknown || []
       //cmdLine = commandLineArgs(optionDefinitions, { argv: argv2, stopAtFirstUnknown: true })
       cmdLine = {}
-      cmdLine.parms = ['a','b','desktop',viewName]
+      cmdLine.parms = ['a','b','desktop',viewName, vpName]
       var CurrWorkingDir = process.cwd()
       //var NodeAppBinDir = path.resolve(__dirname)
       //var TemplatesDir = '/ext-templates' 
