@@ -5,7 +5,7 @@ Ext.define('{viewNamespaceName}',{
   viewModel: {type: '{viewNameSmall}model'},
   requires: [],
   extend: 'Ext.grid.Grid',
-  store: {type: 'store.{viewNameSmall}store'},
+  store: {type: '{viewNameSmall}store'},
   columns: [
     { 
       text: 'Name',
