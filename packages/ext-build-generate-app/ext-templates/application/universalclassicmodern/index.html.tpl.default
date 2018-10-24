@@ -1,31 +1,32 @@
 <!DOCTYPE HTML>
 <html manifest="">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="resources/favicon.ico">
 <tpl if="fwIs60 == true">	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <tpl else>	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
 </tpl>	<title>{name}</title>
 <tpl if="universal == true">
-	<script type="text/javascript">
-		var Ext = Ext || {};
-		Ext.beforeLoad = function (tags) {
-			var s = location.search;
-			var profile;
-			if (s.match(/\u005cbdesktop\u005cb/)) { profile = 'desktop' }
-			else if (s.match(/\u005cbphone\u005cb/)) { profile = 'phone' }
-			else { profile = tags.desktop ? 'desktop' : 'phone' }
-			Ext.manifest ='generatedFiles/' + profile;
-		};
-	</script>
+  <script type="text/javascript">
+    var Ext = Ext || {};
+    Ext.beforeLoad = function (tags) {
+      var s = location.search;
+      var profile;
+      if (s.match(/\u005cbdesktop\u005cb/)) { profile = 'desktop' }
+      else if (s.match(/\u005cbphone\u005cb/)) { profile = 'phone' }
+      else { profile = tags.desktop ? 'desktop' : 'phone' }
+      Ext.manifest ='generatedFiles/' + profile;
+    };
+  </script>
 </tpl>
-	<!-- The line below must be kept intact for Sencha Cmd to build your application -->
-	<script id="microloader" data-app="{uniqueId}" type="text/javascript" src="generatedFiles/bootstrap.js"></script>
+  <!-- The line below must be kept intact for Sencha Cmd to build your application -->
+  <script id="microloader" data-app="{uniqueId}" type="text/javascript" src="generatedFiles/bootstrap.js"></script>
 </head>
-	<body class="launching">
-		<div id="splash" style="margin-top:20%;font-family:Arial;font-size:64px;text-align:center;color:#404040;">
-			<div id="theLoadingText">LOADING...</div>
-			<i style="margin:20px;" class="fa fa-spinner fa-spin"></i>
-		</div>
-	</body>
+  <body class="launching">
+    <div id="splash" style="margin-top:20%;font-family:Arial;font-size:64px;text-align:center;color:#404040;">
+      <div id="theLoadingText">LOADING...</div>
+      <i style="margin:20px;" class="fa fa-spinner fa-spin"></i>
+    </div>
+  </body>
 </html>
