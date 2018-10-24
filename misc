@@ -8,11 +8,14 @@ git remote add upstream https://github.com/sencha/ext-gen.git
 
 Testing:
 //rm ~/.npmrc - flush creds
-2. (for managers) npm publish  --registry=https://www.myget.org/F/sencha-community-sandbox/npm/
-3. npm install -g @sencha/ext-react - testing  (works well for me)
+
+3. npm install -g @sencha/ext-react - testing  
 
 
-npm login --registry=https://sencha.myget.org/F/community-test/npm/ --scope=@sencha
+npm login --registry=https://sencha.myget.org/F/community/npm/ --scope=@sencha
+
+
+
 
 
 /usr/local/lib/node_modules/node/lib/node_modules/@sencha

@@ -72,7 +72,7 @@
   },
 </tpl>
   "fashion": {
-<tpl if="frameworkIsV65 == true">"missingParameters": "error",</tpl>
+<tpl if="frameworkIsV65 == true">   "missingParameters": "error",</tpl>
     "inliner": {"enable": false}
   },
 
@@ -80,10 +80,7 @@
     {
       "path": "$\u007Bframework.dir}/build/ext-<tpl if="toolkit == 'modern'">modern-all<tpl else>all-rtl</tpl>-debug.js"
     },</tpl>
-    {
-      "path": "app.js",
-      "bundle": true
-    }
+    {"path": "app.js", "bundle": true}
   ],
 <tpl if="universal == true">
   "classic": {"js": []},
@@ -130,7 +127,7 @@
 
   "bootstrap": {
     "base": "$\u007bapp.dir}/generatedFiles",
-<tpl if="universal == true">"manifest": "$\u007bbuild.id}.json",</tpl>
+<tpl if="universal == true">    "manifest": "$\u007bbuild.id}.json",</tpl>
     "microloader": "bootstrap.js",
     "css": "bootstrap.css"
   },
@@ -170,12 +167,8 @@
 <tpl else>
   "slicer": null,
 </tpl></tpl>
-<tpl if="universal == true">
-  "archivePath": "archive/$\u007Bbuild.id}",
-<tpl else>
-  "archivePath": "archive",
-</tpl>
-  "ignore": ["(^|/)CVS(/?$|/.*?$)"],
+<tpl if="universal == true">  "archivePath": "archive/$\u007Bbuild.id}",
+<tpl else>  "archivePath": "archive",
+</tpl>  "ignore": ["(^|/)CVS(/?$|/.*?$)"],
   "id": "{uniqueId}"
-
 }

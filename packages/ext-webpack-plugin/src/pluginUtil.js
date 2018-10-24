@@ -25,19 +25,6 @@ export function _constructor(options) {
   // var newValue = data.replace(new RegExp(ip), '');
   // fs.writeFileSync(watchFile, newValue, 'utf-8');
 
-  //fix fashion dist problem
-  const fsx = require('fs-extra')
-  var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
-  logv(options, `toFashionDist ${toFashionDist}`)
-  if (!fs.existsSync(toFashionDist)) {
-    logv(options, `copy`)
-    var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/ext-webpack-plugin/fashion/dist/')
-    fsx.copySync(fromFashionDist, toFashionDist)
-  }
-  else {
-    logv(options, `no copy`)
-  }
-
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
   switch(thisVars.framework) {
@@ -53,6 +40,20 @@ export function _constructor(options) {
     default:
       thisVars.pluginName = 'ext-webpack-plugin'
   }
+
+  //fix fashion dist problem
+  const fsx = require('fs-extra')
+  var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
+  logv(options, `toFashionDist ${toFashionDist}`)
+  if (!fs.existsSync(toFashionDist)) {
+    logv(options, `copy`)
+    var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/' + thisVars.pluginName + '/fashion/dist/')
+    fsx.copySync(fromFashionDist, toFashionDist)
+  }
+  else {
+    logv(options, `no copy`)
+  }
+
   thisVars.app = require('./pluginUtil')._getApp()
   logv(options, `pluginName - ${thisVars.pluginName}`)
   logv(options, `thisVars.app - ${thisVars.app}`)
