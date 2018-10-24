@@ -11,8 +11,8 @@ Welcome to the Ext JS 6.6 Modern Desktop Template Application!
 <br><br>
 To build a new ViewPackage, type the following in a command window:
 <br>
-- <span style="color:red;">ext-gen viewpackage -name employee -template basic</span> 
-- (shortcut: <span style="color:red;">ext vp -n employee -t list</span>)
+- <span style="color:red;">ext-gen viewpackage --name employee --template grid</span> 
+- shortcut: <span style="color:red;">ext vp -n employee -t grid</span>
 <br><br>
 Simple Theming:
 <br><br>
@@ -20,6 +20,8 @@ Simple Theming:
 <br>
 - more adventurous? go to <span style="color:red;">'app/shared/sass/var.scss'</span> and uncomment all the lines
 <br><br><br>
+Description of this Template
+<br><br>
 This template has the standard architecture for a desktop application
 <br>
 - header and footer with custom buttons and text
