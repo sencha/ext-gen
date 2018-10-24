@@ -184,15 +184,15 @@ function stepStart() {
     case 'vp':
       //cmdLine.command = mainCommand
       let viewArgs = mainCommandArgs._unknown || []
-      let viewDefinitions = [{ name: 'viewName', defaultOption: true },{ name: 'vpName', alias: 'v', type: String}]
+      let viewDefinitions = [{ name: 'name', defaultOption: true },{ name: 'template', alias: 't', type: String}]
       const viewCommandArgs = commandLineArgs(viewDefinitions, { argv: viewArgs, stopAtFirstUnknown: true })
-      var vpName = ''
-      var viewName = viewCommandArgs.viewName
-      if (viewCommandArgs.vpName == undefined) {
-        vpName = 'basic'
+      var template = ''
+      var name = viewCommandArgs.name
+      if (viewCommandArgs.template == undefined) {
+        template = 'basic'
       }
       else {
-        vpName = viewCommandArgs.vpName
+        template = viewCommandArgs.template
       }
 
 
@@ -201,7 +201,7 @@ function stepStart() {
       //let argv2 = mainCommandArgs._unknown || []
       //cmdLine = commandLineArgs(optionDefinitions, { argv: argv2, stopAtFirstUnknown: true })
       cmdLine = {}
-      cmdLine.parms = ['a','b','desktop',viewName, vpName]
+      cmdLine.parms = ['a','b','desktop',name, template]
       var CurrWorkingDir = process.cwd()
       //var NodeAppBinDir = path.resolve(__dirname)
       //var TemplatesDir = '/ext-templates' 
