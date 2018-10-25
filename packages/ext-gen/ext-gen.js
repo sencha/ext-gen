@@ -769,9 +769,9 @@ ext-gen app MyAppName
 ext-gen app -i
  
 ${boldGreen('Examples:')} 
-ext-gen app --template universalclassicmodern --classictheme theme-graphite --moderntheme theme-material --name CoolUniversalApp
+ext-gen app --template universalmodern --moderntheme theme-material --name CoolUniversalApp
 ext-gen app --interactive
-ext-gen app -t moderndesktop -n ModernApp
+ext-gen app -a -t moderndesktop -n ModernApp
 ${classic}
 Run ${boldGreen('ext-gen --help')} to see all options
 `
