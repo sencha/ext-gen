@@ -28,10 +28,13 @@
     "defaultenvironment": "development",
     "defaultverbose": "no"
   },
-  "dependencies": {    
-<tpl if "modern == true">   "@sencha/ext-modern": "^6.6.0",
-    "@sencha/ext-modern-{modernTheme}": "^6.6.0",</tpl>
-<tpl if "classic == true">    "@sencha/ext-classic": "^6.6.0",
+  "dependencies": {  
+<tpl if="modern == true">
+    "@sencha/ext-modern": "^6.6.0",
+    "@sencha/ext-modern-{modernTheme}": "^6.6.0",
+</tpl>
+<tpl if="classic == true">
+    "@sencha/ext-classic": "^6.6.0",
     "@sencha/ext-classic-{classicTheme}": "^6.6.0",
 </tpl>
     "@sencha/ext": "^6.6.0"
