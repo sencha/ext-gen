@@ -11,10 +11,10 @@ Ext.define('{appName}.view.main.MainView', {
       html: '<a style="font-size:24px" target="_blank" href="https://docs-devel.sencha.com/extjs/6.6.0-CE/guides/quick_start/What_You_Will_Be_Coding.html">Quick Start Tutorial Here</a><p>'
     },
     {
-      xtype: 'component',
-      cls: 'mainview',
+      xtype: 'displayfield',
+      reference: 'df',
       bind: {
-        html: '\u007BdisplayText}'
+        value: '\u007BclickTime}'
       }
     },
     {
