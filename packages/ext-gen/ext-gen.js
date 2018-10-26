@@ -310,6 +310,7 @@ function step02() {
   }).run().then(answer => {
     answers['appName'] = answer
     answers['packageName'] = kebabCase(answers['appName'])
+    config.description =  `${answers['packageName']} description for Ext JS app ${answers['appName']}`
     step03()
   })
 }
@@ -386,7 +387,8 @@ function step06() {
     message: 'What would you like to name the npm Package?',
     default:  kebabCase(answers['appName'])
   }).run().then(answer => { 
-    answers['packageName'] = answer
+    answers['packageName'] = kebabCase(answer)
+    config.description =  `${answers['packageName']} description for Ext JS app ${answers['appName']}`
     step07()
   })
 }
