@@ -2,17 +2,7 @@ Ext.define('{appName}.view.main.MainViewModel', {
   extend: 'Ext.app.ViewModel',
   alias: 'viewmodel.mainviewmodel',
   data: {
-    clickTime : '',
-  },
-  formulas: {
-    displayText: function(get) {
-      if (get('clickTime') == '') {
-        return 'minimal template'
-      }
-      else {
-        return 'Time: ' + get('clickTime')
-      }
-    }
+    clickTime : Date.now()
   },
   stores: {
   }

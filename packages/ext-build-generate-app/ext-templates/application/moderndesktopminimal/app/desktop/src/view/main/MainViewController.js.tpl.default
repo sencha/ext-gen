@@ -3,8 +3,7 @@ Ext.define('{appName}.view.main.MainViewController', {
   alias: 'controller.mainviewcontroller',
 
   onButtonClick: function (button) {
-    var vm = this.getViewModel()
-    vm.set('clickTime', Date.now())
+    this.lookupReference('df').setValue(Date.now())
   }
 
 })
