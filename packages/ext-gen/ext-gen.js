@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 let run = require('./util').run
+const semver = require("semver")
 const npmScope = '@sencha'
 const appUpgrade = require('./appUpgrade.js')
 require('./XTemplate/js')
@@ -398,8 +399,14 @@ function step07() {
     message: 'What version is your Ext JS application?',
     default: config.version
   }).run().then(answer => { 
-    answers['version'] = answer
-    step08()
+    if (semver.valid(answer) == null) {
+      console.log('version is not a valid format, must be 0.0.0')
+      step07()
+    }
+    else {
+      answers['version'] = answer
+      step08()
+    }
   })
 }
 
