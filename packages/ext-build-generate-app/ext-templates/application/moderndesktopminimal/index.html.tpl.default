@@ -19,5 +19,5 @@
   <!-- The line below must be kept intact for Sencha Cmd to build your application -->
   <script id="microloader" data-app="{uniqueId}" type="text/javascript" src="generatedFiles/bootstrap.js"></script>
 </head>
-  <body</body>
+  <body></body>
 </html>
