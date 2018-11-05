@@ -6,6 +6,8 @@ const portfinder = require('portfinder')
 const sourcePath = path.join(__dirname, './')
 
 module.exports = async function (env) {
+  var browserprofile = JSON.parse(env.browser) || true
+  var watchprofile = env.watch || 'yes'
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
@@ -26,11 +28,13 @@ module.exports = async function (env) {
       framework: 'extjs',
       port: port,
       emit: true,
-      browser: true,
-      watch: 'yes',
+      browser: browserprofile,
+      watch: watchprofile,
       profile: buildprofile,
       environment: buildenvironment,
-      verbose: buildverbose
+      verbose: buildverbose,
+      theme: 'theme-material',
+      packages: []
     })
   ]
   if (!isProd) {

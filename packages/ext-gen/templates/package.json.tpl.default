@@ -8,9 +8,7 @@
     "start": "cross-env-shell npm run dev",
     "dev": "webpack-dev-server --env.verbose=no --env.environment=development",
     "prod": "webpack-dev-server --env.verbose=no --env.environment=production",
-    "build": "cross-env-shell npm run clean && cross-env webpack --env.environment=production",
-
-    "startx": "cross-env-shell npm run $npm_package_extbuild_defaultprofile",
+    "build": "cross-env-shell npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no"
     "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=no -w",
     "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=yes",
     "phone": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=no",
