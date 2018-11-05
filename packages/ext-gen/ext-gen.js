@@ -709,10 +709,20 @@ function stepHelpGeneral() {
 }
 
 function stepHelpApp() {
-
-  var classic = ``
+   var classic = ``
+  var parms = ``
   if (global.isCommunity) {
     classic = ``
+    parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-n 'name') (-f 'folder')
+
+-h --help          show help (no parameters also shows help)
+-d --defaults      show defaults for package.json
+-i --interactive   run in interactive mode (question prompts will display)
+-t --template      name for Ext JS template used for generate
+-m --moderntheme   theme name for Ext JS modern toolkit
+-n --name          name for Ext JS generated app
+-f --folder        folder name for Ext JS application (not implemented yet)
+-v --verbose       verbose npm messages (for problems only`
   }
   else {
     classic = `${boldGreen('Classic Templates:')}
@@ -724,21 +734,23 @@ function stepHelpApp() {
     This template contains 2 profiles, 1 for desktop (using the classic toolkit), and 1 for mobile (using the modern toolkit)
     
     ${boldGreen('classic themes:')} theme-classic, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite\n`
+
+    parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme') (-n 'name') (-f 'folder')
+
+    -h --help          show help (no parameters also shows help)
+    -d --defaults      show defaults for package.json
+    -i --interactive   run in interactive mode (question prompts will display)
+    -t --template      name for Ext JS template used for generate
+    -c --classictheme  theme name for Ext JS classic toolkit (not in Community Edition)
+    -m --moderntheme   theme name for Ext JS modern toolkit
+    -n --name          name for Ext JS generated app
+    -f --folder        folder name for Ext JS application (not implemented yet)
+    -v --verbose       verbose npm messages (for problems only)`
   }
 
   var message = `${boldGreen('Quick Start:')} ext-gen -a
 
-ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme') (-n 'name') (-f 'folder')
-
--h --help          show help (no parameters also shows help)
--d --defaults      show defaults for package.json
--i --interactive   run in interactive mode (question prompts will display)
--t --template      name for Ext JS template used for generate
--c --classictheme  theme name for Ext JS classic toolkit (not in Community Edition)
--m --moderntheme   theme name for Ext JS modern toolkit
--n --name          name for Ext JS generated app
--f --folder        folder name for Ext JS application (not implemented yet)
--v --verbose       verbose npm messages (for problems only)
+${parms}
 
 ${boldGreen('Examples:')} 
 ext-gen app --template universalmodern --moderntheme theme-material --name CoolUniversalApp
