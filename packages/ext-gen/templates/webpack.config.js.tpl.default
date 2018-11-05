@@ -6,7 +6,10 @@ const portfinder = require('portfinder')
 const sourcePath = path.join(__dirname, './')
 
 module.exports = async function (env) {
-  var browserprofile = JSON.parse(env.browser) || true
+  var browserprofile = false
+  if (env.browser != undefined) {
+    browserprofile = JSON.parse(env.browser) || true
+  }
   var watchprofile = env.watch || 'yes'
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
@@ -32,9 +35,7 @@ module.exports = async function (env) {
       watch: watchprofile,
       profile: buildprofile,
       environment: buildenvironment,
-      verbose: buildverbose,
-      theme: 'theme-material',
-      packages: []
+      verbose: buildverbose
     })
   ]
   if (!isProd) {
