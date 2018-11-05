@@ -713,7 +713,7 @@ function stepHelpApp() {
   var parms = ``
   if (global.isCommunity) {
     classic = ``
-    parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-n 'name') (-f 'folder')
+    parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-n 'name')
 
 -h --help          show help (no parameters also shows help)
 -d --defaults      show defaults for package.json
@@ -721,8 +721,7 @@ function stepHelpApp() {
 -t --template      name for Ext JS template used for generate
 -m --moderntheme   theme name for Ext JS modern toolkit
 -n --name          name for Ext JS generated app
--f --folder        folder name for Ext JS application (not implemented yet)
--v --verbose       verbose npm messages (for problems only`
+-v --verbose       verbose npm messages (for problems only)`
   }
   else {
     classic = `${boldGreen('Classic Templates:')}
