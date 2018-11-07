@@ -1,9 +1,9 @@
 {
   "name": "{packageName}",
-  universal: "{universal}",
   "product": "ext",
   "version": "{version}",
   "description": "{description}",
+<tpl if="universal == true">
   "scripts": {
     "clean": "rimraf build",
     "start": "cross-env-shell npm run dev",
@@ -12,20 +12,31 @@
     "build": "cross-env-shell npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no",
     "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=no -w",
     "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=yes",
-<tpl if="universal == true">
+    "build-desktop-testing": "npx sencha app build desktop testing",
+    "build-desktop-production": "npx sencha app build desktop production",
     "phone": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=no",
     "phone-v": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=yes",
     "all": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=no",
     "all-v": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=yes",
-</tpl>
-    "build-desktop-testing": "npx sencha app build desktop testing",
-    "build-desktop-production": "npx sencha app build desktop production",
-<tpl if="universal == true">
     "build-phone-testing": "npx sencha app build phone testing",
     "build-phone-production": "npx sencha app build phone production",
-</tpl>
     "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
   },
+</tpl>
+<tpl if="universal == false">
+  "scripts": {
+    "clean": "rimraf build",
+    "start": "cross-env-shell npm run dev",
+    "dev": "webpack-dev-server --env.verbose=no --env.environment=development",
+    "prod": "webpack-dev-server --env.verbose=no --env.environment=production",
+    "build": "cross-env-shell npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no",
+    "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=no -w",
+    "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=yes",
+    "build-desktop-testing": "npx sencha app build desktop testing",
+    "build-desktop-production": "npx sencha app build desktop production",
+    "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
+  },
+</tpl>
   "extbuild": {
     "defaultprofile": "desktop",
     "defaultenvironment": "development",
