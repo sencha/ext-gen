@@ -661,6 +661,7 @@ async function stepCreate() {
     answers['modern'] = true
   }
 
+  answers['universal'] = false
   answers['version'] = config.version
   answers['repositoryURL'] = config.repositoryURL
   answers['keywords'] = config.keywords
