@@ -14,11 +14,13 @@
 <tpl if="universal == true">    "phone": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=no",
     "phone-v": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=yes",
     "all": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=no",
-    "all-v": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=yes",</tpl>
+    "all-v": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=yes",
+</tpl>
     "build-desktop-testing": "npx sencha app build desktop testing",
     "build-desktop-production": "npx sencha app build desktop production",
 <tpl if="universal == true">    "build-phone-testing": "npx sencha app build phone testing",
-    "build-phone-production": "npx sencha app build phone production",</tpl>
+    "build-phone-production": "npx sencha app build phone production",
+</tpl>
     "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
   },
   "extbuild": {
