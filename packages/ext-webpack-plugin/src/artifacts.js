@@ -15,6 +15,10 @@ export const buildXML = function(compress, options, output) {
     `;
   }
 
+// <x-extend-classpath>
+//   <jar path="\${cmd.dir}/sencha.jar"/>
+// </x-extend-classpath>
+
     return `<project name="simple-build" basedir=".">
   <!--  internally, watch calls the init target, so need to have one here -->
   <target name="init"/>
@@ -22,9 +26,6 @@ export const buildXML = function(compress, options, output) {
     <taskdef  resource="com/sencha/ant/antlib.xml"
               classpath="\${cmd.dir}/sencha.jar"
               loaderref="senchaloader"/>
-    <x-extend-classpath>
-        <jar path="\${cmd.dir}/sencha.jar"/>
-    </x-extend-classpath>
     <x-sencha-init prefix=""/>
     <x-compile refid="theCompiler"
                       dir="\${basedir}"
