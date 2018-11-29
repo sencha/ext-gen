@@ -22,213 +22,10 @@ var gitIgnoreData = '/build ' + os.EOL + gitIgnoreAppend;
 var extFrameworkPath = 'node_modules/@sencha/ext';
 var classic = false;
 var modern = false;
-var universal = false;
 var classicTheme;
 var modernTheme;
 var values;
 var appJsonObject;
-
-//upgradeApp();
-
-//sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern -r appCmd ./appCMD
-//sencha generate workspace ws
-//cd ws
-//sencha -sdk ~/aaExt/ext-6.6.0 generate app -r wsApp01 wsApp01
-//sencha -sdk ~/aaExt/ext-6.6.0 generate app -r wsApp02 wsApp02
-
-function processApp(appJsonPath) {
-  appJsonObject = getJson(appJsonPath)
-  if (appJsonObject.hasOwnProperty('name')) {
-    if (allResults.multiApp == false) {
-      allResults.name = appJsonObject.name
-    }
-    var name = appJsonObject.name
-    var o = {}
-    o.name = name
-    o.folder = '/'
-    ToolKitAndTheme(appJsonObject, o)
-    allApps.push(o)
-  }
-  else {
-    console.log('error')
-  }
-}
-
-function ToolKitAndTheme(appJsonObject, o) {
-  o.classic = false
-  o.modern = false
-	if (appJsonObject.hasOwnProperty('toolkit')) {
-		if (appJsonObject.toolkit == classicProfile) {
-      o.classic = true
-			o.classicTheme = appJsonObject.theme
-		}
-		else {
-			o.modern = true;
-			o.modernTheme = appJsonObject.theme
-    }
-    o.universal = false
-	}
-	else {
-    if (appJsonObject.builds.length == 1) {
-      o.universal = false
-    }
-    else {
-      o.universal = true
-    }
-		for (profile in appJsonObject.builds) {
-			if (profile === classicProfile) {
-				o.classic = true;
-				o.classicTheme = appJsonObject.builds[profile].theme;
-			}
-			if (profile == modernProfile) {
-				o.modern = true;
-				o.modernTheme = appJsonObject.builds[profile].theme;
-			}
-		}
-	}
-}
-
-var allApps = []
-var allResults = {
-  name : '',
-  multiApp: false,
-  universal: false,
-  classic: false,
-  modern: false,
-  modernThemes: [],
-  classicThemes: []
-}
-exports.upgradeApp = function upgradeApp() {
-
-  var workspaceJsonObject = json.parse(fs.readFileSync(workspaceJson).toString())
-  if (workspaceJsonObject.hasOwnProperty('apps')) {
-    if (workspaceJsonObject.apps.length > 0) {
-      var cwd = process.cwd()
-      var lastslashindex = cwd.lastIndexOf('/')
-      var folderName = cwd.substring(lastslashindex  + 1)
-      allResults.name = folderName
-      workspaceJsonObject.apps.forEach(function(name) {
-        allResults.multiApp = true
-        processApp(name + '/' + appJson)
-      })
-    }
-    else {
-      processApp(appJson)
-    }
-  }
-  else {
-    processApp(appJson)
-  }
-  console.log('allApps')
-  console.log(allApps)
-
-  allApps.forEach(function(app) {
-    if (app.classic == true) {
-      allResults.classic = true
-      if (!allResults.classicThemes.includes(app.classicTheme)) {
-        allResults.classicThemes.push(app.classicTheme)
-      }
-    }
-    if (app.modern == true) {
-      allResults.modern = true
-      if (!allResults.modernThemes.includes(app.modernTheme)) {
-        allResults.modernThemes.push(app.modernTheme)
-      }
-    }
-  })
-  console.log('allResults')
-  console.log(allResults)
-
-  // if (allResults.classic == true && allResults.modern == true) {
-  //   allResults.universal = true
-  // }
-	// values = {
-  //   universal: allResults.universal,
-	// 	npmScope: npmScope,
-	// 	classic: allResults.classic,
-	// 	modern: allResults.modern,
-	// 	classicTheme: classicTheme,
-	// 	modernTheme: modernTheme,
-	// 	appName: appJsonObject.name,
-	// 	packageName: appJsonObject.name,
-	// 	version: toSemVer(appJsonObject.version)
-	// }
-
-
-
-
-  return
-
-
-
-
-  createPackageJson()
-  console.log('2')
-  createWebPackConfig()
-  console.log('3')
-
-  doUpgrade(workspaceJson)
-  console.log('5')
-
-
-  //console.log('hi')
-  //console.log(workspaceJson)
-  //console.log(workspaceJsonObject)
-  console.log(workspaceJsonObject.hasOwnProperty('apps'))
-  
-  if (workspaceJsonObject.hasOwnProperty('apps')) {
-//    console.log('workspaceJsonObject.apps')
-//    console.log(workspaceJsonObject.apps)
-    if (workspaceJsonObject.apps.length > 0) {
-      workspaceJsonObject.apps.forEach(function(app) {
-  //      console.log(app)
-        appJsonObject = getJson(app + '/' + appJson)
-        //console.log(appJsonObject)
-
-        populateValues()
-        console.log('1')
-
-        doUpgrade(app + '/' + appJson)
-        console.log('4')
-
-      })
-    }
-    else {
-    appJsonObject = getJson(appJson)
-    populateValues()
-    console.log('1')
-    doUpgrade(appJson)
-    console.log('4')
-    createEmptyFolders()
-    console.log('6')
-    moveUnncessaryFiles()
-    console.log('7')
-    createGitIgnore()
-    console.log('8')
-    }
-
-  }
-  else {
-    appJsonObject = getJson(appJson)
-    //return
-    // populateValues()
-    // console.log('1')
-    // createPackageJson()
-    // console.log('2')
-    // createWebPackConfig()
-    // console.log('3')
-    doUpgrade(appJson)
-    console.log('4')
-
-    createEmptyFolders()
-    console.log('6')
-    moveUnncessaryFiles()
-    console.log('7')
-    createGitIgnore()
-    console.log('8')
-  }
-}
-
 
 function doesBackupExist(fileName) {
 	return doesFileExist(backupFolder + '/' + fileName);
@@ -324,7 +121,30 @@ function getJson(filename) {
 	return json.parse(fs.readFileSync(filename).toString());
 }
 
+//upgradeApp();
 
+exports.upgradeApp = function upgradeApp() {
+
+  var workspaceJsonObject = json.parse(fs.readFileSync(workspaceJson).toString())
+  if (workspaceJsonObject.hasOwnProperty('app')) {
+    console.log(workspaceJsonObject.app)
+  }
+  return
+
+
+
+
+
+	appJsonObject = getJson(appJson);
+	populateValues();
+	createPackageJson();
+	createWebPackConfig();
+	doUpgrade(appJson);
+	doUpgrade(workspaceJson);
+	createEmptyFolders();
+	moveUnncessaryFiles();
+	createGitIgnore();
+}
 
 function createGitIgnore() {
 	if (doesBackupExist(gitIgnore)) {
@@ -392,7 +212,6 @@ function populateValues() {
 	//var config = JSON.parse(data);
 	buildToolKitAndThemeDetails();
 	values = {
-    universal: universal,
 		npmScope: npmScope,
 		classic: classic,
 		modern: modern,
@@ -416,14 +235,6 @@ function buildToolKitAndThemeDetails() {
 		}
 	}
 	else {
-    if (appJsonObject.builds.length == 1) {
-      universal = false
-    }
-    else {
-      universal = true
-    }
-    console.log('universal')
-    console.log(universal)
 		for (profile in appJsonObject.builds) {
 			if (profile === classicProfile) {
 				classic = true;
