@@ -6,6 +6,7 @@ const sencha = require(`${npmScope}/cmd`)
 const spawnSync = require('child_process').spawnSync
 const spawn = require('child_process').spawn
 const crossSpawn = require('cross-spawn')
+const readLine = require('readline')
 
 var prefix = ``
 if (require('os').platform() == 'darwin') {
@@ -18,9 +19,9 @@ const app = `${chalk.green(prefix)} ext-build-util:`
 const DEFAULT_SUBSTRS = ['[ERR]', '[WRN]', '[INF] Processing', "[INF] Server", "[INF] Writing content", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
 
 exports.senchaCmd = (parms) => {
-  process.stdout.cursorTo(0);console.log(app + 'started - sencha ' + parms.toString().replace(/,/g , " ") + '\n')
+  readLine.cursorTo(process.stdout, 0);console.log(app + 'started - sencha ' + parms.toString().replace(/,/g , " ") + '\n')
   spawnSync(sencha, parms, { stdio: 'inherit', encoding: 'utf-8'})
-  process.stdout.cursorTo(0);console.log(app + 'completed - sencha ' + parms.toString().replace(/,/g , " "))
+  readLine.cursorTo(process.stdout, 0);console.log(app + 'completed - sencha ' + parms.toString().replace(/,/g , " "))
 }
 
 exports.senchaCmdAsync = async (parms, verbose, substrings = DEFAULT_SUBSTRS) => {

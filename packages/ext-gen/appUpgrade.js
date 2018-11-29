@@ -5,6 +5,7 @@ const path = require('path');
 const os = require('os')
 const npmScope = '@sencha';
 
+var workspaceDir = '';
 var packageFolder = 'packages';
 var generatedFilesFolder = 'generatedFiles';
 var backupFolder = 'backup';
@@ -325,6 +326,59 @@ function getJson(filename) {
 }
 
 
+exports.upgradeApp = function upgradeApp() {
+	if (doesFileExist(workspaceJson)) {
+		// could be parent directory of a workspace
+		workspaceDir = process.cwd();
+		if (doesFileExist(appJson)) {
+			upgradeSingleAppWorkspace();
+		} else {
+			upgradeMultiAppWorkspace();
+		}
+	} else {
+		console.log("Missing workspace.json");
+	} 
+}
+
+function upgradeSingleAppWorkspace() {
+	appJsonObject = getJson(appJson);
+	populateValues();
+	createPackageJson();
+	createWebPackConfig();
+	doUpgrade(appJson);
+	doUpgrade(workspaceJson);
+	createEmptyFolders();
+	moveUnncessaryFiles();
+	createGitIgnore();
+}
+
+
+function upgradeMultiAppWorkspace() {
+	workspaceJsonObject = getJson(workspaceJson);
+	appNames = workspaceJsonObject.apps;
+	console.log("Upgrading multi app workspace " + workspaceDir);
+	console.log(appNames);
+	for (appName in appNames) {
+		// changing directory to the app directory within workspace and running upgrade
+		// inside the context of the app directory
+		process.chdir(path.join(workspaceDir, appNames[appName]));
+		console.log("Upgrading app " + appNames[appName]);
+		//console.log(process.cwd());
+		appJsonObject = getJson(appJson);
+		populateValues();
+		createPackageJson();
+		createWebPackConfig();
+		doUpgrade(appJson);
+		createEmptyFolders();
+		moveUnncessaryFiles();
+		createGitIgnore();
+		console.log("Upgraded app " + appNames[appName] + " successfully");
+	}
+	// switching back to workspace directory
+	process.chdir(workspaceDir);
+	// is this needed?
+	doUpgrade(workspaceJson);
+}
 
 function createGitIgnore() {
 	if (doesBackupExist(gitIgnore)) {
