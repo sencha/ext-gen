@@ -3,8 +3,6 @@ export const buildXML = function(compress, options, output) {
   logv(options,'FUNCTION buildXML')
 
   let compression = ''
-
-  var a = 3
   
   if (compress) {
     compression = `
