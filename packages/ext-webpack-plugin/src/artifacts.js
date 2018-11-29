@@ -4,6 +4,8 @@ export const buildXML = function(compress, options, output) {
 
   let compression = ''
 
+  var a = 3
+  
   if (compress) {
     compression = `
       then 
