@@ -522,6 +522,11 @@ function step99() {
 }
 
 async function stepCreate() {
+
+  if (answers['template'].includes("universal")) {
+    answers['universal'] = true
+  }
+
   var nodeDir = path.resolve(__dirname)
   var currDir = process.cwd()
   var destDir = currDir + '/' + answers['packageName']
