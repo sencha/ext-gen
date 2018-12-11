@@ -53,9 +53,7 @@ module.exports = async function (env) {
     devtool: isProd ? 'source-map' : 'cheap-module-source-map',
     context: sourcePath,
     entry: {
-      'index': [
-        'react-hot-loader/patch',
-      ]
+      'index': []
     },
     output: {
       path: path.resolve(__dirname, './'),
