@@ -15,10 +15,6 @@ export const buildXML = function(compress, options, output) {
     `;
   }
 
-// <x-extend-classpath>
-//   <jar path="\${cmd.dir}/sencha.jar"/>
-// </x-extend-classpath>
-
     return `<project name="simple-build" basedir=".">
   <!--  internally, watch calls the init target, so need to have one here -->
   <target name="init"/>

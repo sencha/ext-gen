@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-webpack-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
   "scripts": {
@@ -25,13 +25,13 @@
     "recursive-readdir-sync": "^1.0.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-async-to-generator": "^7.2.0",
     "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.2.0",
     "babel-plugin-add-module-exports": "^1.0.0"
   },
   "babel": {
