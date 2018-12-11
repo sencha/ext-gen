@@ -1,5 +1,11 @@
 # Release Notes
 
+## v1.0.3
+
+* Upgraded package.json for generated application
+* Remove unneeded dependencies for generated application
+* 
+
 ## v1.0.2
 
 * Align with Ext JS Community Edition
