@@ -43,18 +43,15 @@
     "defaultverbose": "no"
   },
   "dependencies": {
-    "@sencha/ext": "~6.6.0",<tpl if="modern == true">
+    <tpl if="modern == true">
     "@sencha/ext-modern": "~6.6.0",
-    "@sencha/ext-modern-{modernTheme}": "~6.6.0"
-</tpl>
-<tpl if="classic == true">
+    "@sencha/ext-modern-{modernTheme}": "~6.6.0",</tpl><tpl if="classic == true">
     "@sencha/ext-classic": "~6.6.0",
-    "@sencha/ext-classic-{classicTheme}": "~6.6.0"
-</tpl>
-
+    "@sencha/ext-classic-{classicTheme}": "~6.6.0",</tpl>
+    "@sencha/ext": "~6.6.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~1.0.3",
+    "@sencha/ext-webpack-plugin": "~1.0.2",
     "html-webpack-plugin": "^3.2.0",
     "portfinder": "^1.0.20",
     "webpack": "^4.27.1",
