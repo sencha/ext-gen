@@ -1,5 +1,6 @@
 rm ~/.npmrc
 npm login --registry=https://sencha.myget.org/F/commercial-test/npm/ --scope=@sencha
+npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
 cat ~/.npmrc
 
 npm login --registry=https://npm.sencha.com/ --scope=@sencha
