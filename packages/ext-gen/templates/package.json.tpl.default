@@ -3,6 +3,7 @@
   "product": "ext",
   "version": "{version}",
   "description": "{description}",
+<tpl if="universal == true">
   "scripts": {
     "clean": "rimraf build",
     "start": "cross-env-shell npm run dev",
@@ -11,47 +12,56 @@
     "build": "cross-env-shell npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no",
     "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=no -w",
     "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=yes",
+    "build-desktop-testing": "npx sencha app build desktop testing",
+    "build-desktop-production": "npx sencha app build desktop production",
     "phone": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=no",
     "phone-v": "webpack-dev-server --env.profile=phone --env.environment=development --env.verbose=yes",
     "all": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=no",
     "all-v": "webpack-dev-server --env.profile=all --env.environment=development --env.verbose=yes",
-    "build-desktop-testing": "npx sencha app build desktop testing",
-    "build-desktop-production": "npx sencha app build desktop production",
     "build-phone-testing": "npx sencha app build phone testing",
     "build-phone-production": "npx sencha app build phone production",
     "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
   },
+</tpl>
+<tpl if="universal == false">
+  "scripts": {
+    "clean": "rimraf build",
+    "start": "cross-env-shell npm run dev",
+    "dev": "webpack-dev-server --env.verbose=no --env.environment=development",
+    "prod": "webpack-dev-server --env.verbose=no --env.environment=production",
+    "build": "cross-env-shell npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no",
+    "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=no -w",
+    "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development --env.verbose=yes",
+    "build-desktop-testing": "npx sencha app build desktop testing",
+    "build-desktop-production": "npx sencha app build desktop production",
+    "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
+  },
+</tpl>
   "extbuild": {
     "defaultprofile": "desktop",
     "defaultenvironment": "development",
     "defaultverbose": "no"
   },
-  "dependencies": {  
-<tpl if="modern == true">
-    "@sencha/ext-modern": "^6.6.0",
-    "@sencha/ext-modern-{modernTheme}": "^6.6.0",
-</tpl>
-<tpl if="classic == true">
-    "@sencha/ext-classic": "^6.6.0",
-    "@sencha/ext-classic-{classicTheme}": "^6.6.0",
-</tpl>
-    "@sencha/ext": "^6.6.0"
+  "dependencies": {
+    <tpl if="modern == true">
+    "@sencha/ext-modern": "~6.6.0",
+    "@sencha/ext-modern-{modernTheme}": "~6.6.0",</tpl><tpl if="classic == true">
+    "@sencha/ext-classic": "~6.6.0",
+    "@sencha/ext-classic-{classicTheme}": "~6.6.0",</tpl>
+    "@sencha/ext": "~6.6.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~1.0.1",
-    "command-line-args": "^5.0.2",
-    "cross-env": "^5.2.0",
-    "portfinder": "^1.0.18",
-    "react": "^16.5.2",
-    "react-hot-loader": "^4.3.11",
+    "@sencha/ext-webpack-plugin": "~1.0.2",
     "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.21.0",
+    "portfinder": "^1.0.20",
+    "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.10",
+    "cross-env": "^5.2.0"
   },
   "repository": {
     "type": "git",
-    "url": "{gitRepositoryURL}"
+    "url": "{repositoryURL}"
   },
   "keywords": [{keywords}],
   "author": "{authorName}",
