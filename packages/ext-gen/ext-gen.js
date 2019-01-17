@@ -1,9 +1,11 @@
 #! /usr/bin/env node
 let run = require('./util').run
+
 const semver = require("semver")
 const npmScope = '@sencha'
 const appUpgrade = require('./appUpgrade.js')
 require('./XTemplate/js')
+
 const util = require('./util.js')
 const path = require('path');
 const fs = require('fs-extra');
@@ -253,25 +255,25 @@ function stepCheckCmdLine() {
     console.log(`${app} ${boldRed('[ERR]')} unknown command '${cmdLine.command}'`)
   }
   else if (cmdLine.interactive == true && cmdLine.command == 'app') {
-    step00a()
+    stepSeeDefaults()
   }
   else if (process.argv.length == 2) {
     stepShortHelp()
   }
 
   else if (cmdLine.auto == true) {
-    step99()
+    stepGo()
   }
   else if (cmdLine.name != undefined) {
     cmdLine.auto = true
-    step99()
+    stepGo()
   }
   else {
     stepHelpGeneral()
   }
 }
 
-function step00a() {
+function stepSeeDefaults() {
   new Confirm({
     message: 
     `would you like to see the defaults for package.json?`,
@@ -280,15 +282,15 @@ function step00a() {
     answers['seeDefaults'] = answer
     if(answers['seeDefaults'] == true) {
       displayDefaults()
-      step01()
+      stepCreateWithDefaults()
     }
     else {
-      step01()
+      stepCreateWithDefaults()
     }
   })
 }
 
-function step01() {
+function stepCreateWithDefaults() {
   new Confirm({
     message: 'Would you like to create a package.json file with defaults?',
     default: config.useDefaults
@@ -296,15 +298,15 @@ function step01() {
     answers['useDefaults'] = answer
     if(answers['useDefaults'] == true) {
       setDefaults()
-      step02()
+      stepNameYourApp()
     }
     else {
-      step02()
+      stepNameYourApp()
     }
   })
 }
 
-function step02() {
+function stepNameYourApp() {
   new Input({
     message: 'What would you like to name your Ext JS app?',
     default:  config.appName
@@ -360,7 +362,7 @@ function step04() {
     }
     answers['template'] = answer
     if(answers['useDefaults'] == true) {
-      step99()
+      stepGo()
     }
     else {
       step06()
@@ -375,112 +377,112 @@ function step05() {
   }).run().then(answer => { 
     answers['templateFolderName'] = answer
     if(answers['useDefaults'] == true) {
-      step99()
+      stepGo()
     }
     else {
-      step06()
+      stepPackageName()
     }
   })
 }
 
-function step06() {
+function stepPackageName() {
   new Input({
     message: 'What would you like to name the npm Package?',
     default:  kebabCase(answers['appName'])
   }).run().then(answer => { 
     answers['packageName'] = kebabCase(answer)
     config.description =  `${answers['packageName']} description for Ext JS app ${answers['appName']}`
-    step07()
+    stepVersion()
   })
 }
 
-function step07() {
+function stepVersion() {
   new Input({
     message: 'What version is your Ext JS application?',
     default: config.version
   }).run().then(answer => { 
     if (semver.valid(answer) == null) {
       console.log('version is not a valid format, must be 0.0.0')
-      step07()
+      stepVersion()
     }
     else {
       answers['version'] = answer
-      step08()
+      stepDescription()
     }
   })
 }
 
-function step08() {
+function stepDescription() {
   new Input({
     message: 'What is the description?',
     default: config.description
   }).run().then(answer => { 
     answers['description'] = answer
-    step09()
+    stepRepositoryURL()
   })
 }
 
-function step09() {
+function stepRepositoryURL() {
   new Input({
     message: 'What is the GIT repository URL?',
     default: config.repositoryURL
   }).run().then(answer => { 
     answers['repositoryURL'] = answer
-    step10()
+    stepKeywords()
   })
 }
 
-function step10() {
+function stepKeywords() {
   new Input({
     message: 'What are the npm keywords?',
     default: config.keywords
   }).run().then(answer => { 
     answers['keywords'] = answer
-    step11()
+    stepAuthorName()
   })
 }
 
-function step11() {
+function stepAuthorName() {
   new Input({
     message: `What is the Author's Name?`,
     default: config.authorName
   }).run().then(answer => { 
     answers['authorName'] = answer
-    step12()
+    stepLicense()
   })
 }
 
-function step12() {
+function stepLicense() {
   new Input({
     message: 'What type of License does this project need?',
     default: config.license
   }).run().then(answer => { 
     answers['license'] = answer
-    step13()
+    stepBugsURL()
   })
 }
 
-function step13() {
+function stepBugsURL() {
   new Input({
     message: 'What is the URL to submit bugs?',
     default: config.bugsURL
   }).run().then(answer => { 
     answers['bugsURL'] = answer
-    step14()
+    stepHomepageURL()
   })
 }
 
-function step14() {
+function stepHomepageURL() {
   new Input({
     message: 'What is the Home Page URL?',
     default: config.homepageURL
   }).run().then(answer => { 
     answers['homepageURL'] = answer
-    step99()
+    stepGo()
   })
 }
 
-function step99() {
+function stepGo() {
 
   displayDefaults()
 
