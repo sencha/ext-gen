@@ -51,11 +51,11 @@
     "@sencha/ext": "~6.7.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~1.0.2",
+    "@sencha/ext-webpack-plugin": "~6.7.0",
     "html-webpack-plugin": "^3.2.0",
     "portfinder": "^1.0.20",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "cross-env": "^5.2.0"
   },
