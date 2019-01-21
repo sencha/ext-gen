@@ -31,6 +31,7 @@ var appJsonObject;
 
 //upgradeApp();
 
+//sencha -sdk ~/aaExt/ext-6.6.0 generate app -r universalApp01 universalApp01
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern -r appCmd ./appCMD
 //sencha generate workspace ws
 //cd ws

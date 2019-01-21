@@ -8,8 +8,8 @@
   },
   "packages": {
     "dir": [
-      "{packages}",
       "$\u007Bworkspace.dir}/packages/local",
+      "{packages}",
       "$\u007Bworkspace.dir}/node_modules/@sencha/ext-$\u007Btoolkit.name}",
       "$\u007Bworkspace.dir}/node_modules/@sencha/ext-$\u007Btoolkit.name}-theme-base",
       "$\u007Bworkspace.dir}/node_modules/@sencha/ext-$\u007Btoolkit.name}-theme-ios",
