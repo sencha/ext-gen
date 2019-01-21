@@ -26,3 +26,5 @@ git checkout v6.6.0
 git fetch upstream
 git merge upstream/master
 git merge upstream/ext-gen-6.7.x
+
+/usr/local/lib/node_modules/node/lib/node_modules/@sencha/ext-gen
