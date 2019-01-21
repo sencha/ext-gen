@@ -7,7 +7,6 @@
     "dir": "$\u007Bworkspace.dir}/build"
   },
   "packages": {
-    "dir": "{packages},node_modules/@sencha",
     "dir": [
       "{packages}",
       "$\u007Bworkspace.dir}/packages/local",
