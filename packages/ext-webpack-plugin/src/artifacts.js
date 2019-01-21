@@ -189,17 +189,34 @@ export function createWorkspaceJson(options, output) {
   for (var i = 0; i < numberOfPaths; i++) { 
     nodeModulePath += "../"
   }
-
   const config = {
     "frameworks": {
       "ext": nodeModulePath + "node_modules/@sencha/ext"
     },
+    "build": {
+      "dir": "${workspace.dir}/" + nodeModulePath + "build"
+    },
     "packages": {
       "dir": [
-        "${workspace.dir}" + nodeModulePath + "ext-" + options.framework + "/packages",
-        "${workspace.dir}" + nodeModulePath + "node_modules/@sencha"
+        "${workspace.dir}/" + nodeModulePath + "ext-" + options.framework + "/packages/local",
+        "${workspace.dir}/" + nodeModulePath + "ext-" + options.framework + "/packages",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-base",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-ios",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-material",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-aria",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-neutral",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-classic",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-gray",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-crisp",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-crisp-touch",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-neptune",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-neptune-touch",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-triton",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-graphite"
       ],
-      "extract": "${workspace.dir}/packages/remote"
+      "extract": "${workspace.dir}/" + nodeModulePath + "packages/remote"
     }
   }
   return JSON.stringify(config, null, 2)

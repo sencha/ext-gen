@@ -1,0 +1,47 @@
+sencha generate workspace ./multiApp
+cd multiApp
+
+{
+  "frameworks": {
+  },
+  "build": {
+    "dir": "${workspace.dir}/build"
+  },
+  "packages": {
+    "dir": "${workspace.dir}/packages/local,${workspace.dir}/packages",
+    "extract": "${workspace.dir}/packages/remote"
+  }
+}
+
+sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern appSingle1 ./appSingle1
+
+sencha generate app --ext -modern app01 ./app01
+sencha generate app --ext -modern app02 ./app02
+sencha generate app --ext -modern app03 ./app03Folder
+
+sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern app660a ./app660a
+sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern app660b ./app660b
+
+sencha -sdk ~/aaExt/ext-6.5.3 generate app -modern app653 ./app653
+
+{
+  "apps": [
+    "app01",
+    "app02",
+    "app03Folder",
+    "appModern"
+  ],
+  "frameworks": {
+    "ext": {
+      "path":"ext",
+      "version":"6.0.0.640"
+    }
+  },
+  "build": {
+    "dir": "${workspace.dir}/build"
+  },
+  "packages": {
+    "dir": "${workspace.dir}/packages/local,${workspace.dir}/packages",
+    "extract": "${workspace.dir}/packages/remote"
+  }
+}
