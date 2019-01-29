@@ -28,3 +28,24 @@ git merge upstream/master
 git merge upstream/ext-gen-6.7.x
 
 /usr/local/lib/node_modules/node/lib/node_modules/@sencha/ext-gen
+
+
+  //fix sencha cmd no jetty server problem
+  // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
+  // logv(options, `modify ${watchFile}`)
+  // var data = fs.readFileSync(watchFile, 'utf-8');
+  // var ip = 'webServerRefId="app.web.server"';
+  // var newValue = data.replace(new RegExp(ip), '');
+  // fs.writeFileSync(watchFile, newValue, 'utf-8');
+
+  //fix fashion dist problem
+  // var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
+  // logv(options, `toFashionDist ${toFashionDist}`)
+  // if (!fs.existsSync(toFashionDist)) {
+  //   logv(options, `copy`)
+  //   var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/' + thisVars.pluginName + '/fashion/dist/')
+  //   fsx.copySync(fromFashionDist, toFashionDist)
+  // }
+  // else {
+  //   logv(options, `no copy of fashion`)
+  // }

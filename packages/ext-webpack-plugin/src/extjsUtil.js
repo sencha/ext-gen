@@ -11,7 +11,11 @@ export function getValidateOptions() {
       "watch":       {"type": [ "string" ]},
       "profile":     {"type": [ "string" ]},
       "environment": {"type": [ "string" ]},
-      "verbose":     {"type": [ "string" ]}
+      "verbose":     {"type": [ "string" ]},
+//      "theme":       {"type": [ "string" ]},
+//      "toolkit":     {"type": [ "string" ]},
+      "packages":    {"type": [ "string", "array" ]},
+      "genProdData": {"type": [ "boolean" ]}
     },
     "additionalProperties": false
     // "errorMessage": {
