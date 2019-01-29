@@ -20,7 +20,6 @@ Ext.define("{appName}.view.main.nav.NavViewController", {
     this.lookup("menuview").setSelection(record);
   },
   updateMicro: function(micro) {
-    console.log("updateMicro");
     this.lookup("menuview").setMicro(micro);
     this.getView().setWidth(micro ? 44 : 300);
     this.lookup("bottomview").setHidden(micro);
