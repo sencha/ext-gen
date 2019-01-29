@@ -8,6 +8,9 @@ npm login --registry=https://test.npm.sencha.com/ --scope=@sencha
 
 npm --registry https://npm.sencha.com/ whoami
 
+https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+
+
 git remote add upstream https://github.com/sencha/ext-react.git
 git remote -v
 

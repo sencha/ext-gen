@@ -29,8 +29,6 @@ var modernTheme;
 var values;
 var appJsonObject;
 
-//upgradeApp();
-
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -r universalApp01 universalApp01
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern -r appCmd ./appCMD
 //sencha generate workspace ws
@@ -102,8 +100,11 @@ var allResults = {
 }
 exports.upgradeApp = function upgradeApp() {
 
+  console.log('1')
   var workspaceJsonObject = json.parse(fs.readFileSync(workspaceJson).toString())
   if (workspaceJsonObject.hasOwnProperty('apps')) {
+    console.log('upgrading multi-application workspaces is not yet supported')
+    return
     if (workspaceJsonObject.apps.length > 0) {
       var cwd = process.cwd()
       var lastslashindex = cwd.lastIndexOf('/')
@@ -328,6 +329,7 @@ function getJson(filename) {
 
 
 exports.upgradeApp = function upgradeApp() {
+  console.log('2')
 	if (doesFileExist(workspaceJson)) {
 		// could be parent directory of a workspace
 		workspaceDir = process.cwd();
