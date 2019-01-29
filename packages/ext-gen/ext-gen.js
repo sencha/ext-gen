@@ -224,7 +224,9 @@ async function upgrade()
 {
  console.log('Upgrade started'); 
   await appUpgrade.upgradeApp();
-  console.log('Upgrade done . Please run npm install and then npm run all');
+  //console.log('Upgrade done . Please run npm install and then npm run all');
+  console.log('Upgrade ended');
+
 }
 
 function stepCheckCmdLine() {
