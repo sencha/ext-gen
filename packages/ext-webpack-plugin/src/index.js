@@ -39,8 +39,8 @@ export default class ExtWebpackPlugin {
       })
     }
 
-    if((this.plugin.options.genProdData == true && this.plugin.options.environment == 'production') ||
-       (this.plugin.options.genProdData == false && this.plugin.options.environment != 'production'))
+    if((this.plugin.options.treeshake == true && this.plugin.options.environment == 'production') ||
+       (this.plugin.options.treeshake == false && this.plugin.options.environment != 'production'))
     {
       compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
         require('./pluginUtil').logv(this.plugin.options,'HOOK emit')

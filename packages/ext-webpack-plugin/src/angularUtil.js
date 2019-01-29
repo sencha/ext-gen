@@ -15,7 +15,7 @@ export function getValidateOptions() {
       "theme":       {"type": [ "string" ]},
       "toolkit":     {"type": [ "string" ]},
       "packages":    {"type": [ "string", "array" ]},
-      "genProdData": {"type": [ "boolean" ]}
+      "treeshake": {"type": [ "boolean" ]}
     },
     "additionalProperties": false
     // "errorMessage": {
@@ -31,7 +31,7 @@ export function getDefaultOptions() {
     browser: true,
     watch: 'yes',
     profile: '', 
-    genProdData: false,
+    treeshake: false,
     environment: 'development', 
     verbose: 'no',
     toolkit: 'modern',
@@ -138,7 +138,7 @@ export function _done(vars, options) {
     const logv = require('./pluginUtil').logv
     logv(options,'FUNCTION _done')
 
-   // if (vars.production && !options.genProdData && options.framework == 'angular') {
+   // if (vars.production && !options.treeshake && options.framework == 'angular') {
       const path = require('path')
       const fsx = require('fs-extra')
       var rimraf = require("rimraf");

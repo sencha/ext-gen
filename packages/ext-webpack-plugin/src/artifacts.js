@@ -3,7 +3,7 @@ export const buildXML = function(compress, options, output) {
   logv(options,'FUNCTION buildXML')
 
   let compression = ''
-  
+
   if (compress) {
     compression = `
       then 
@@ -179,6 +179,32 @@ export function createJSDOMEnvironment(options, output) {
   logv(options,'FUNCTION createJSDOMEnvironment')
 
   return 'window.Ext = Ext;'
+}
+
+export function createWorkspaceJson2(options, output) {
+  const logv = require('./pluginUtil').logv
+  logv(options,'FUNCTION createWorkspaceJson')
+
+  var pathDifference = output.substring(process.cwd().length)
+  var numberOfPaths = (pathDifference.split("/").length - 1)
+  var nodeModulePath = ''
+  for (var i = 0; i < numberOfPaths; i++) { 
+    nodeModulePath += "../"
+  }
+
+  const config = {
+    "frameworks": {
+      "ext": nodeModulePath + "node_modules/@sencha/ext"
+    },
+    "packages": {
+      "dir": [
+        "${workspace.dir}" + nodeModulePath + "ext-" + options.framework + "/packages",
+        "${workspace.dir}" + nodeModulePath + "node_modules/@sencha"
+      ],
+      "extract": "${workspace.dir}/packages/remote"
+    }
+  }
+  return JSON.stringify(config, null, 2)
 }
 
 export function createWorkspaceJson(options, output) {

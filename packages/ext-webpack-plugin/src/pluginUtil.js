@@ -1,8 +1,8 @@
 //**********
 export function _constructor(options) {
-  const path = require('path')
+  //const path = require('path')
   const fs = require('fs')
-  const fsx = require('fs-extra')
+  //const fsx = require('fs-extra')
 
   var thisVars = {}
   var thisOptions = {}
@@ -48,7 +48,7 @@ export function _constructor(options) {
 
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
-  log(thisVars.app + 'Generating production data: ' + thisOptions.genProdData)
+  log(thisVars.app + 'Treeshake is ' + thisOptions.treeshake)
 
   plugin.vars = thisVars
   plugin.options = thisOptions
@@ -73,7 +73,7 @@ export function _compilation(compiler, compilation, vars, options) {
     var extComponents = []
 
     if (vars.production) {
-      if (options.framework == 'angular' && options.genProdData) {
+      if (options.framework == 'angular' && options.treeshake) {
         const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
         var files = fsx.readdirSync(`${packagePath}/lib`)
         files.forEach((fileName) => {
@@ -86,8 +86,6 @@ export function _compilation(compiler, compilation, vars, options) {
         })
 
         try {
-
-
           const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
           var js = fsx.readFileSync(appModulePath).toString()
           var newJs = js.replace(
@@ -104,7 +102,6 @@ export function _compilation(compiler, compilation, vars, options) {
           );
           fsx.writeFileSync(mainPath, newJsMain, 'utf-8', ()=>{return})
 
-          // Create the prod folder if does not exists.
           if (!fs.existsSync(pathToExtAngularModern)) {
             mkdirp.sync(pathToExtAngularModern)
             const t = require('./artifacts').extAngularModule('', '', '')
@@ -131,7 +128,7 @@ export function _compilation(compiler, compilation, vars, options) {
         // }
       })
 
-      if (options.framework == 'angular' && options.genProdData) {
+      if (options.framework == 'angular' && options.treeshake) {
 
 
 
@@ -181,7 +178,7 @@ export function _compilation(compiler, compilation, vars, options) {
 
     }
 
-    if (options.framework != 'extjs' && !options.genProdData) {
+    if (options.framework != 'extjs' && !options.treeshake) {
 
       compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
         logv(options,'HOOK ext-html-generation')
@@ -247,7 +244,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
         _prepareForBuild(app, vars, options, outputPath, compilation)
       }
       else {
-        if (options.framework == 'angular' && !options.genProdData) {
+        if (options.framework == 'angular' && !options.treeshake) {
           require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
         }
         else {
@@ -468,7 +465,7 @@ export function _done(vars, options) {
     const logv = require('./pluginUtil').logv
     logv(options,'FUNCTION _done')
 
-    if (vars.production && !options.genProdData && options.framework == 'angular') {
+    if (vars.production && !options.treeshake && options.framework == 'angular') {
       require(`./${framework}Util`)._done(vars, options)
 
       // const path = require('path')
