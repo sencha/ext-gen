@@ -163,6 +163,8 @@ export function createAppJson( theme, packages, toolkit, options, output ) {
 
   // if theme is local add it as an additional package dir
   if (fs.existsSync(theme)) {
+      const path = require('path')
+      const cjson = require('cjson')
       const packageInfo = cjson.load(path.join(theme, 'package.json'));
       config.theme = packageInfo.name;
       config.packages.dir.push(path.resolve(theme));
@@ -220,4 +222,20 @@ export function createWorkspaceJson(options, output) {
     }
   }
   return JSON.stringify(config, null, 2)
+}
+
+export const extAngularModule = function(imports, exports, declarations) {
+  return `
+  import { NgModule } from '@angular/core';
+  ${imports}
+  @NgModule({
+    imports: [
+    ],
+    declarations: [
+  ${declarations}  ],
+    exports: [
+  ${exports}  ]
+  })
+  export class ExtAngularModule { }
+  `
 }

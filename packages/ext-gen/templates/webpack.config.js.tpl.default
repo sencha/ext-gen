@@ -1,24 +1,33 @@
-const webpack = require('webpack');
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const webpack = require('webpack');
 const portfinder = require('portfinder');
-const sourcePath = path.join(__dirname, './');
 
 module.exports = async function (env) {
-  // `npm start` will open browser by default
-  var browserprofile = true;
-  if (env.browser != undefined) {
-    // Set "env.browser=false" to not open browser by default
-    browserprofile = JSON.parse(env.browser);
+  var browserprofile
+  var watchprofile
+  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
+  if (buildenvironment == 'production') {
+    browserprofile = false
+    watchprofile = 'no'
   }
-  var watchprofile = env.watch || 'yes';
-  var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile;
-  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment;
-  var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose;
-  if (buildprofile == 'all') { buildprofile = '' };
+  else {
+    if (env.browser == undefined) {env.browser = true}
+    browserprofile = JSON.parse(env.browser) || true
+    watchprofile = env.watch || 'yes'
+  }
+  const isProd = buildenvironment === 'production'
+  var basehref = env.basehref || '/'
+  var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
+  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
+  var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
+  if (buildprofile == 'all') { buildprofile = '' }
+  if (env.genProdData == undefined) {env.genProdData = false}
+  var genProdData = env.genProdData ? JSON.parse(env.genProdData) : false
+  var mode = isProd ? 'production': 'development'
+
   portfinder.basePort = (env && env.port) || 1962;
-  
   return portfinder.getPortPromise().then(port => {
     const nodeEnv = env && env.prod ? 'production' : 'development'
     const isProd = nodeEnv === 'production'
@@ -32,10 +41,11 @@ module.exports = async function (env) {
         port: port,
         emit: true,
         browser: browserprofile,
+        genProdData: genProdData,
         watch: watchprofile,
-        profile: buildprofile,
-        environment: buildenvironment,
-        verbose: buildverbose
+        profile: buildprofile, 
+        environment: buildenvironment, 
+        verbose: buildverbose,
       })
     ]
     if (!isProd) {
@@ -47,7 +57,7 @@ module.exports = async function (env) {
       mode: 'development',
       cache: true,
       devtool: isProd ? 'source-map' : 'cheap-module-source-map',
-      context: sourcePath,
+      context: path.join(__dirname, './'),
       entry: {
         'index': []
       },
