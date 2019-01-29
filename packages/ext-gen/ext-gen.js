@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-let run = require('./util').run
+//let run = require('./util').run
 
 const semver = require("semver")
 const npmScope = '@sencha'
