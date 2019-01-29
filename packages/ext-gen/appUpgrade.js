@@ -29,6 +29,24 @@ var modernTheme;
 var values;
 var appJsonObject;
 
+exports.upgradeApp = function upgradeApp() {
+  if (doesFileExist(workspaceJson)) {
+    // could be parent directory of a workspace
+    workspaceDir = process.cwd();
+    if (doesFileExist(appJson)) {
+      upgradeSingleAppWorkspace();
+    } else {
+      console.log('upgrading multi-application workspaces is not yet supported')
+      return
+      upgradeMultiAppWorkspace();
+    }
+  } else {
+    console.log("Missing workspace.json");
+  } 
+}
+
+
+
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -r universalApp01 universalApp01
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -modern -r appCmd ./appCMD
 //sencha generate workspace ws
@@ -98,139 +116,141 @@ var allResults = {
   modernThemes: [],
   classicThemes: []
 }
-exports.upgradeApp = function upgradeApp() {
-
-  console.log('1')
-  var workspaceJsonObject = json.parse(fs.readFileSync(workspaceJson).toString())
-  if (workspaceJsonObject.hasOwnProperty('apps')) {
-    console.log('upgrading multi-application workspaces is not yet supported')
-    return
-    if (workspaceJsonObject.apps.length > 0) {
-      var cwd = process.cwd()
-      var lastslashindex = cwd.lastIndexOf('/')
-      var folderName = cwd.substring(lastslashindex  + 1)
-      allResults.name = folderName
-      workspaceJsonObject.apps.forEach(function(name) {
-        allResults.multiApp = true
-        processApp(name + '/' + appJson)
-      })
-    }
-    else {
-      processApp(appJson)
-    }
-  }
-  else {
-    processApp(appJson)
-  }
-  console.log('allApps')
-  console.log(allApps)
-
-  allApps.forEach(function(app) {
-    if (app.classic == true) {
-      allResults.classic = true
-      if (!allResults.classicThemes.includes(app.classicTheme)) {
-        allResults.classicThemes.push(app.classicTheme)
-      }
-    }
-    if (app.modern == true) {
-      allResults.modern = true
-      if (!allResults.modernThemes.includes(app.modernTheme)) {
-        allResults.modernThemes.push(app.modernTheme)
-      }
-    }
-  })
-  console.log('allResults')
-  console.log(allResults)
-
-  // if (allResults.classic == true && allResults.modern == true) {
-  //   allResults.universal = true
-  // }
-	// values = {
-  //   universal: allResults.universal,
-	// 	npmScope: npmScope,
-	// 	classic: allResults.classic,
-	// 	modern: allResults.modern,
-	// 	classicTheme: classicTheme,
-	// 	modernTheme: modernTheme,
-	// 	appName: appJsonObject.name,
-	// 	packageName: appJsonObject.name,
-	// 	version: toSemVer(appJsonObject.version)
-	// }
 
 
 
+// exports.upgradeApp = function upgradeApp() {
 
-  return
+//   var workspaceJsonObject = json.parse(fs.readFileSync(workspaceJson).toString())
+//   if (workspaceJsonObject.hasOwnProperty('apps')) {
+//     console.log('upgrading multi-application workspaces is not yet supported')
+//     return
+//     if (workspaceJsonObject.apps.length > 0) {
+//       var cwd = process.cwd()
+//       var lastslashindex = cwd.lastIndexOf('/')
+//       var folderName = cwd.substring(lastslashindex  + 1)
+//       allResults.name = folderName
+//       workspaceJsonObject.apps.forEach(function(name) {
+//         allResults.multiApp = true
+//         processApp(name + '/' + appJson)
+//       })
+//     }
+//     else {
+//       processApp(appJson)
+//     }
+//   }
+//   else {
+//     processApp(appJson)
+//   }
+//   console.log('allApps')
+//   console.log(allApps)
+
+//   allApps.forEach(function(app) {
+//     if (app.classic == true) {
+//       allResults.classic = true
+//       if (!allResults.classicThemes.includes(app.classicTheme)) {
+//         allResults.classicThemes.push(app.classicTheme)
+//       }
+//     }
+//     if (app.modern == true) {
+//       allResults.modern = true
+//       if (!allResults.modernThemes.includes(app.modernTheme)) {
+//         allResults.modernThemes.push(app.modernTheme)
+//       }
+//     }
+//   })
+//   console.log('allResults')
+//   console.log(allResults)
+
+//   // if (allResults.classic == true && allResults.modern == true) {
+//   //   allResults.universal = true
+//   // }
+// 	// values = {
+//   //   universal: allResults.universal,
+// 	// 	npmScope: npmScope,
+// 	// 	classic: allResults.classic,
+// 	// 	modern: allResults.modern,
+// 	// 	classicTheme: classicTheme,
+// 	// 	modernTheme: modernTheme,
+// 	// 	appName: appJsonObject.name,
+// 	// 	packageName: appJsonObject.name,
+// 	// 	version: toSemVer(appJsonObject.version)
+// 	// }
 
 
 
 
-  createPackageJson()
-  console.log('2')
-  createWebPackConfig()
-  console.log('3')
-
-  doUpgrade(workspaceJson)
-  console.log('5')
+//   return
 
 
-  //console.log('hi')
-  //console.log(workspaceJson)
-  //console.log(workspaceJsonObject)
-  console.log(workspaceJsonObject.hasOwnProperty('apps'))
+
+
+//   createPackageJson()
+//   console.log('2')
+//   createWebPackConfig()
+//   console.log('3')
+
+//   doUpgrade(workspaceJson)
+//   console.log('5')
+
+
+//   //console.log('hi')
+//   //console.log(workspaceJson)
+//   //console.log(workspaceJsonObject)
+//   console.log(workspaceJsonObject.hasOwnProperty('apps'))
   
-  if (workspaceJsonObject.hasOwnProperty('apps')) {
-//    console.log('workspaceJsonObject.apps')
-//    console.log(workspaceJsonObject.apps)
-    if (workspaceJsonObject.apps.length > 0) {
-      workspaceJsonObject.apps.forEach(function(app) {
-  //      console.log(app)
-        appJsonObject = getJson(app + '/' + appJson)
-        //console.log(appJsonObject)
+//   if (workspaceJsonObject.hasOwnProperty('apps')) {
+// //    console.log('workspaceJsonObject.apps')
+// //    console.log(workspaceJsonObject.apps)
+//     if (workspaceJsonObject.apps.length > 0) {
+//       workspaceJsonObject.apps.forEach(function(app) {
+//   //      console.log(app)
+//         appJsonObject = getJson(app + '/' + appJson)
+//         //console.log(appJsonObject)
 
-        populateValues()
-        console.log('1')
+//         populateValues()
+//         console.log('1')
 
-        doUpgrade(app + '/' + appJson)
-        console.log('4')
+//         doUpgrade(app + '/' + appJson)
+//         console.log('4')
 
-      })
-    }
-    else {
-    appJsonObject = getJson(appJson)
-    populateValues()
-    console.log('1')
-    doUpgrade(appJson)
-    console.log('4')
-    createEmptyFolders()
-    console.log('6')
-    moveUnncessaryFiles()
-    console.log('7')
-    createGitIgnore()
-    console.log('8')
-    }
+//       })
+//     }
+//     else {
+//     appJsonObject = getJson(appJson)
+//     populateValues()
+//     console.log('1')
+//     doUpgrade(appJson)
+//     console.log('4')
+//     createEmptyFolders()
+//     console.log('6')
+//     moveUnncessaryFiles()
+//     console.log('7')
+//     createGitIgnore()
+//     console.log('8')
+//     }
 
-  }
-  else {
-    appJsonObject = getJson(appJson)
-    //return
-    // populateValues()
-    // console.log('1')
-    // createPackageJson()
-    // console.log('2')
-    // createWebPackConfig()
-    // console.log('3')
-    doUpgrade(appJson)
-    console.log('4')
+//   }
+//   else {
+//     appJsonObject = getJson(appJson)
+//     //return
+//     // populateValues()
+//     // console.log('1')
+//     // createPackageJson()
+//     // console.log('2')
+//     // createWebPackConfig()
+//     // console.log('3')
+//     doUpgrade(appJson)
+//     console.log('4')
 
-    createEmptyFolders()
-    console.log('6')
-    moveUnncessaryFiles()
-    console.log('7')
-    createGitIgnore()
-    console.log('8')
-  }
-}
+//     createEmptyFolders()
+//     console.log('6')
+//     moveUnncessaryFiles()
+//     console.log('7')
+//     createGitIgnore()
+//     console.log('8')
+//   }
+// }
 
 
 function doesBackupExist(fileName) {
@@ -328,20 +348,7 @@ function getJson(filename) {
 }
 
 
-exports.upgradeApp = function upgradeApp() {
-  console.log('2')
-	if (doesFileExist(workspaceJson)) {
-		// could be parent directory of a workspace
-		workspaceDir = process.cwd();
-		if (doesFileExist(appJson)) {
-			upgradeSingleAppWorkspace();
-		} else {
-			upgradeMultiAppWorkspace();
-		}
-	} else {
-		console.log("Missing workspace.json");
-	} 
-}
+
 
 function upgradeSingleAppWorkspace() {
 	appJsonObject = getJson(appJson);
