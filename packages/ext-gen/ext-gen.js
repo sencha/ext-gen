@@ -367,7 +367,7 @@ function step04() {
       stepGo()
     }
     else {
-      step06()
+      step05()
     }
   })
 }
