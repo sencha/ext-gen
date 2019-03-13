@@ -107,26 +107,30 @@ export function _compilation(compiler, compilation, vars, options) {
         compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
         logv(options,'HOOK ext-html-generation')
         const path = require('path')
-        var outputPath = ''
-        if (compiler.options.devServer) {
-          if (compiler.outputPath === '/') {
-            outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
-          }
-          else {
-            if (compiler.options.devServer.contentBase == undefined) {
-              outputPath = 'build'
-            }
-            else {
-              outputPath = ''
-            }
-          }
-        }
-        else {
-          outputPath = 'build'
-        }
-        outputPath = outputPath.replace(process.cwd(), '').trim()
-        var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
-        var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+
+        //var outputPath = ''
+        // if (compiler.options.devServer) {
+        //   if (compiler.outputPath === '/') {
+        //     outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+        //   }
+        //   else {
+        //     if (compiler.options.devServer.contentBase == undefined) {
+        //       outputPath = 'build'
+        //     }
+        //     else {
+        //       outputPath = ''
+        //     }
+        //   }
+        // }
+        // else {
+        //   outputPath = 'build'
+        // }
+        // outputPath = outputPath.replace(process.cwd(), '').trim()
+        //var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
+        //var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+
+        var jsPath = path.join(vars.extPath, 'ext.js')
+        var cssPath = path.join(vars.extPath, 'ext.css')
         data.assets.js.unshift(jsPath)
         data.assets.css.unshift(cssPath)
         log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
@@ -211,7 +215,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
         callback()
       }
       else {
-        callback()
+          callback()
       }
     }
     else {
@@ -408,7 +412,12 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
       child.stdout.on('data', (data) => {
         var str = data.toString().replace(/\r?\n|\r/g, " ").trim()
         logv(options, `${str}`)
-        if (data && data.toString().match(/waiting for changes\.\.\./)) {
+        if (data && data.toString().match(/Fashion waiting for changes\.\.\./)) {
+          const fs = require('fs');
+          var filename = process.cwd()+'/src/index.js';
+          var data = fs.readFileSync(filename);
+          fs.writeFileSync(filename, data + ' ', 'utf8')
+          logv(options, `touching ${filename}`)
           resolve(0)
         }
         else {
