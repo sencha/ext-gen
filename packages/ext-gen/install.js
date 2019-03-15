@@ -11,10 +11,16 @@ var nodeDir = path.resolve(__dirname)
 var pkg = (fs.existsSync(nodeDir + '/package.json') && JSON.parse(fs.readFileSync(nodeDir + '/package.json', 'utf-8')) || {});
 version = pkg.version
 _resolved = pkg._resolved
+
 //"_resolved": "http://npm.sencha.com/@sencha%2fext-gen/-/ext-gen-1.0.1.tgz",
 //console.log('\n\n****\n\n' + _resolved + '\n\n****\n\n')
+
 var edition = ''
-if (-1 == _resolved.indexOf('community')) {
+if(_resolved == undefined) {
+  global.isCommunity = true
+  edition = `Community`
+}
+else if (-1 == _resolved.indexOf('community')) {
   global.isCommunity = false
   edition = `Commercial`
 }

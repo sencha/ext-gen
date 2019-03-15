@@ -15,8 +15,8 @@
       "theme": "{classicTheme}",
       "sass": {
         "generated": {
-          "var": "classic/sass/save.scss",
-          "src": "classic/sass/save"
+          "var": "$\u007Bbuild.id}/sass/save.scss",
+          "src": "$\u007Bbuild.id}/sass/save"
         }
       }
     }

@@ -1,94 +1,73 @@
-const webpack = require('webpack')
-const path = require('path')
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
 const portfinder = require('portfinder')
-const sourcePath = path.join(__dirname, './')
 
-module.exports = async function (env) {
-  var browserprofile
-  if (env.browser != undefined) {
-    browserprofile = JSON.parse(env.browser) || true
+module.exports = function (env) {
+  function get(it, val) {if(env == undefined) {return val} else if(env[it] == undefined) {return val} else {return env[it]}}
+
+  var profile     = get('profile',     '')
+  var environment = get('environment', 'development')
+  var treeshake   = get('treeshake',   'no')
+  var browser     = get('browser',     'yes')
+  var watch       = get('watch',       'yes')
+  var verbose     = get('verbose',     'no')
+  if (environment == 'production') {
+    browser = 'no'
+    watch = 'no'
   }
-  else {
-    browserprofile = true
-  }
-  var watchprofile = env.watch || 'yes'
-  var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
-  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
-  var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
-  if (buildprofile == 'all') { buildprofile = '' }
+  const isProd = environment === 'production'
+  const outputFolder = './'
   portfinder.basePort = (env && env.port) || 1962
-  
   return portfinder.getPortPromise().then(port => {
-    const nodeEnv = env && env.prod ? 'production' : 'development'
-    const isProd = nodeEnv === 'production'
     const plugins = [
-      new HtmlWebpackPlugin({
-        template: 'index.html',
-        hash: true
-      }), 
+      new HtmlWebpackPlugin({template: "index.html",hash: true,inject: "body"}),
       new ExtWebpackPlugin({
         framework: 'extjs',
+        toolkit: 'modern',
+        theme: 'theme-kitchensink',
+        emit: 'yes',
+        script: '',
         port: port,
-        emit: true,
-        browser: browserprofile,
-        watch: watchprofile,
-        profile: buildprofile,
-        environment: buildenvironment,
-        verbose: buildverbose
+        packages: [],
+        profile: profile, 
+        environment: environment,
+        treeshake: treeshake,
+        browser: browser,
+        watch: watch,
+        verbose: verbose
       })
     ]
-    if (!isProd) {
-      plugins.push(
-        new webpack.HotModuleReplacementPlugin()
-      )
-    }
     return {
-      mode: 'development',
-      cache: true,
-      devtool: isProd ? 'source-map' : 'cheap-module-source-map',
-      context: sourcePath,
-      entry: {
-        'index': []
-      },
+      mode: environment,
+      devtool: (environment === 'development') ? 'inline-source-map' : false,
+      context: path.join(__dirname, './'),
+      entry: './app.js',
       output: {
-        path: path.resolve(__dirname, './'),
-        filename: '[name].js'
+        path: path.join(__dirname, outputFolder),
+        filename: "[name].js"
+        //filename: "[name].[chunkhash:20].js"
       },
+      plugins: plugins,
       module: {
         rules: [
-          {
-            test: /.js$/,
-            exclude: /node_modules/
-          }
+          { test: /\.(js)$/, exclude: /node_modules/ }
         ]
       },
-      plugins,
+      performance: { hints: false },
+      stats: 'none',
+      optimization: { noEmitOnErrors: true },
+      node: false,
       devServer: {
-        contentBase: './',
+        contentBase: outputFolder,
+        hot: !isProd,
         historyApiFallback: true,
         host: '0.0.0.0',
-        hot: false,
-        port,
+        port: port,
         disableHostCheck: false,
         compress: isProd,
-        inline: !isProd,
-        stats: {
-          entrypoints: false,
-          assets: false,
-          children: false,
-          chunks: false,
-          hash: false,
-          modules: false,
-          publicPath: false,
-          timings: false,
-          version: false,
-          warnings: false,
-          colors: {
-            green: '[32m'
-          }
-        }
+        inline:!isProd,
+        stats: 'none'
       }
     }
   })

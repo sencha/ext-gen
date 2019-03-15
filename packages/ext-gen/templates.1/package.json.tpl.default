@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf build",
     "start": "cross-env-shell npm run dev",
-    "dev": "webpack-dev-server --env.verbose='no'",
+    "dev": "webpack-dev-server --env.environment=development",
     "prod": "webpack-dev-server --env.environment=production",
     "build": "npm run clean && cross-env webpack --env.environment=production",
     "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development",
@@ -51,9 +51,9 @@
     "@sencha/ext": "~6.7.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~7.0.0",
+    "@sencha/ext-webpack-plugin": "~6.7.0",
 
-   "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.20",
 

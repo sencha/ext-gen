@@ -15,8 +15,8 @@
       "theme": "{modernTheme}",
       "sass": {
         "generated": {
-          "var": "modern/sass/save.scss",
-          "src": "modern/sass/save"
+          "var": "$\u007Bbuild.id}/sass/save.scss",
+          "src": "$\u007Bbuild.id}/sass/save"
         }
       }
     }
