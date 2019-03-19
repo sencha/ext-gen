@@ -51,7 +51,7 @@ class Upgrade {
         return false 
       }
       var majorminor = version.substring(0, 3)
-      var supportedVersions = ['6.6', '6.7']
+      var supportedVersions = ['6.6', '6.7', '7.0']
       if (!supportedVersions.includes(majorminor) ) {
         console.log(`framework ${version} not supported, versions supported: ${supportedVersions}`)
         return false
