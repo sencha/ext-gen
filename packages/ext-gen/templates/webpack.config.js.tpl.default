@@ -17,7 +17,7 @@ module.exports = async function (env) {
   var basehref    = get('basehref',    '/')
 
   const isProd = environment === 'production'
-  const outputFolder = 'build'
+  const outputFolder = './'
   portfinder.basePort = (env && env.port) || 1962
 
   return portfinder.getPortPromise().then(port => {
