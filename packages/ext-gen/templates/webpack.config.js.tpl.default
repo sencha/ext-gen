@@ -53,6 +53,7 @@ module.exports = async function (env) {
       module: {
         rules: [
           { test: /\.(js|jsx)$/, exclude: /node_modules/ }
+        ]
       },
       performance: { hints: false },
       stats: 'none',
