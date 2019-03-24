@@ -18,8 +18,8 @@
   },
   "preferGlobal": true,
   "dependencies": {
-    "@sencha/ext-build-generate-app": "~6.7.0",
-    "command-line-args": "^5.0.2",
+    "@sencha/ext-build-generate-app": "~6.7.1",
+    "command-line-args": "^5.1.0",
     "comment-json": "^1.1.3",
     "cross-spawn": "^6.0.5",
     "chalk":"~2.4.2",
