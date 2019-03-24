@@ -118,30 +118,34 @@ export function _compilation(compiler, compilation, vars, options) {
     var framework = options.framework
     logv(verbose, 'FUNCTION _compilation')
     
-    if (framework == 'extjs') {
-      logv(verbose, 'FUNCTION _compilation end (extjs)')
-      return
-    }
-    var extComponents = []
-    if (vars.buildstep == '1 of 2') {
-      extComponents = require(`./${framework}Util`)._getAllComponents(vars, options)
-    }
-    compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
-      if (module.resource && !module.resource.match(/node_modules/)) {
-        if(module.resource.match(/\.html$/) != null) {
-          if(module._source._value.toLowerCase().includes('doctype html') == false) {
+    // if (framework == 'extjs') {
+    //   logv(verbose, 'FUNCTION _compilation end (extjs)')
+    //   return
+    // }
+
+    if (framework != 'extjs') {
+      var extComponents = []
+      if (vars.buildstep == '1 of 2') {
+        extComponents = require(`./${framework}Util`)._getAllComponents(vars, options)
+      }
+      compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
+        if (module.resource && !module.resource.match(/node_modules/)) {
+          if(module.resource.match(/\.html$/) != null) {
+            if(module._source._value.toLowerCase().includes('doctype html') == false) {
+              vars.deps = [
+                ...(vars.deps || []),
+                ...require(`./${framework}Util`)._extractFromSource(module, options, compilation, extComponents)]
+            }
+          }
+          else {
             vars.deps = [
               ...(vars.deps || []),
               ...require(`./${framework}Util`)._extractFromSource(module, options, compilation, extComponents)]
           }
         }
-        else {
-          vars.deps = [
-            ...(vars.deps || []),
-            ...require(`./${framework}Util`)._extractFromSource(module, options, compilation, extComponents)]
-        }
-      }
-    })
+      })
+    }
+
     if (vars.buildstep == '1 of 2') {
       compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {
         require(`./${framework}Util`)._writeFilesToProdFolder(vars, options)
