@@ -1,5 +1,5 @@
 {
-  "name": "@sencha/ext-webpack-plugin-orig",
+  "name": "@sencha/ext-webpack-plugin",
   "version": "6.7.1",
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
@@ -8,24 +8,24 @@
   },
   "dependencies": {
     "switchit":"^1.0.8",
-    "@babel/generator": "^7.3.0",
-    "@babel/polyfill": "^7.2.5",
+    "@babel/generator": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
     "@sencha/cmd": "~6.7.0",
     "lodash.uniq": "^4.5.0",
     "schema-utils": "^1.0.0",
     "chalk": "^2.4.2",
     "fs-extra":"^7.0.1",
-    "opn": "^5.4.0",
+    "opn": "^5.5.0",
     "recursive-readdir-sync": "^1.0.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
-    "@babel/plugin-transform-async-to-generator": "^7.2.0",
-    "@babel/plugin-transform-regenerator": "^7.0.0",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/plugin-transform-async-to-generator": "^7.4.0",
+    "@babel/plugin-transform-regenerator": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "babel-plugin-add-module-exports": "^1.0.0"
   },
   "babel": {
