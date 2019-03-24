@@ -3,6 +3,17 @@
   "product": "ext",
   "version": "{version}",
   "description": "{description}",
+  "repository": {
+    "type": "git",
+    "url": "{repositoryURL}"
+  },
+  "keywords": [{keywords}],
+  "author": "{authorName}",
+  "license": "{license}",
+  "bugs": {
+    "url": "{bugsURL}"
+  },
+  "homepage": "{homepageURL}",
 <tpl if="universal == true">
   "scripts": {
     "start": "npm run dev:desktop",
@@ -41,16 +52,5 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "{repositoryURL}"
-  },
-  "keywords": [{keywords}],
-  "author": "{authorName}",
-  "license": "{license}",
-  "bugs": {
-    "url": "{bugsURL}"
-  },
-  "homepage": "{homepageURL}"
+  }
 }
