@@ -29,6 +29,7 @@ module.exports = async function (env) {
   portfinder.basePort = (env && env.port) || 1962
 
   return portfinder.getPortPromise().then(port => {
+    
     const plugins = [
       new HtmlWebpackPlugin({ template: "index.html", hash: true, inject: "body" }),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
@@ -51,6 +52,8 @@ module.exports = async function (env) {
     const rules =[
       { test: /\.(js|jsx)$/, exclude: /node_modules/ }
     ]
+    const resolve = {
+    }
     return {
       mode: environment,
       devtool: (environment === 'development') ? 'inline-source-map' : false,
@@ -64,6 +67,7 @@ module.exports = async function (env) {
       module: {
         rules: rules
       },
+      resolve: resolve,
       performance: { hints: false },
       stats: 'none',
       optimization: { noEmitOnErrors: true },
