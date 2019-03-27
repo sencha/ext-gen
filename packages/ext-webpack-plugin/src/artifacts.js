@@ -200,6 +200,8 @@ export function createWorkspaceJson(options, output) {
   logv(options,'numberOfPaths: ' + numberOfPaths)
   logv(options,'nodeModulePath: ' + nodeModulePath)
 
+
+
   const config = {
     "frameworks": {
       "ext": nodeModulePath + "node_modules/@sencha/ext"
@@ -212,7 +214,8 @@ export function createWorkspaceJson(options, output) {
         "${workspace.dir}/" + nodeModulePath + "ext-" + options.framework + "/packages/local",
         "${workspace.dir}/" + nodeModulePath + "ext-" + options.framework + "/packages",
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha",
-        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-font-ios",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-base",
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-base",
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-ios",
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-material",
@@ -225,7 +228,14 @@ export function createWorkspaceJson(options, output) {
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-neptune",
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-neptune-touch",
         "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-triton",
-        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-graphite"
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-${toolkit.name}-theme-graphite",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-calendar",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-charts",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-d3",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-exporter",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-pivot",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-pivot-d3",
+        "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext-ux",
       ],
       "extract": "${workspace.dir}/" + nodeModulePath + "packages/remote"
     }
