@@ -36,6 +36,7 @@ if (global.isCommunity) {
 else {
   classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
 ext-gen app --template universalclassicmodern --classictheme theme-graphite --moderntheme theme-material --name CoolUniversalApp
+ext-gen app --template classicdesktop --classictheme theme-gray --name GrayDesktopApp
 ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`  
 }
 var welcome = boldGreen(`Welcome to Sencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`)
