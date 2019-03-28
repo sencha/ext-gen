@@ -10,7 +10,7 @@ module.exports = async function (env) {
   //******* */
   var framework     = get('framework',     'extjs')
   var contextFolder = get('contextFolder', './')
-  var entryFile     = get('entryFile',     './app.js')
+  var entryFile     = get('entryFile',     './index.js')
   var outputFolder  = get('outputFolder',  './')
   const rules =[
     { test: /\.(js|jsx)$/, exclude: /node_modules/ }
