@@ -678,6 +678,8 @@ async function stepCreate() {
   answers['license'] = config.license
   answers['bugsURL'] = config.bugsURL
   answers['homepageURL'] = config.homepageURL
+
+  console.dir(answers)
 }
 
 function displayDefaults() {

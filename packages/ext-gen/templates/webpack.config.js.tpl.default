@@ -1,35 +1,51 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
-const portfinder = require('portfinder')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const portfinder = require('portfinder');
 
-module.exports = function (env) {
+module.exports = async function (env) {
   function get(it, val) {if(env == undefined) {return val} else if(env[it] == undefined) {return val} else {return env[it]}}
 
-  var profile     = get('profile',     '')
-  var environment = get('environment', 'development')
-  var treeshake   = get('treeshake',   'no')
-  var browser     = get('browser',     'yes')
-  var watch       = get('watch',       'yes')
-  var verbose     = get('verbose',     'no')
-  if (environment == 'production') {
-    browser = 'no'
-    watch = 'no'
+  //******* */
+  var framework     = get('framework',     'extjs')
+  var contextFolder = get('contextFolder', './')
+  var entryFile     = get('entryFile',     './index.js')
+  var outputFolder  = get('outputFolder',  './')
+  const rules =[
+    { test: /\.(js|jsx)$/, exclude: /node_modules/ }
+  ]
+  const resolve = {
   }
+  //******* */
+
+  var toolkit       = get('toolkit',       'modern')
+  var theme         = get('theme',         'theme-material')
+  var packages      = get('packages',      ['treegrid'])
+  var script        = get('script',        '')
+  var emit          = get('emit',          'yes')
+  var profile       = get('profile',       '')
+  var environment   = get('environment',   'development')
+  var treeshake     = get('treeshake',     'no')
+  var browser       = get('browser',       'yes')
+  var watch         = get('watch',         'yes')
+  var verbose       = get('verbose',       'no')
+  var basehref      = get('basehref',      '/')
+
   const isProd = environment === 'production'
-  const outputFolder = './'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
-      new HtmlWebpackPlugin({template: "index.html",hash: true,inject: "body"}),
+      new HtmlWebpackPlugin({ template: "index.html", hash: true, inject: "body" }),
+      new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
-        framework: 'extjs',
-        toolkit: 'modern',
-        theme: 'theme-kitchensink',
-        emit: 'yes',
-        script: '',
+        framework: framework,
+        toolkit: toolkit,
+        theme: theme,
+        packages: packages,
+        script: script,
+        emit: emit,
         port: port,
-        packages: [],
         profile: profile, 
         environment: environment,
         treeshake: treeshake,
@@ -38,22 +54,21 @@ module.exports = function (env) {
         verbose: verbose
       })
     ]
+
     return {
       mode: environment,
       devtool: (environment === 'development') ? 'inline-source-map' : false,
-      context: path.join(__dirname, './'),
-      entry: './app.js',
+      context: path.join(__dirname, contextFolder),
+      entry: entryFile,
       output: {
         path: path.join(__dirname, outputFolder),
         filename: "[name].js"
-        //filename: "[name].[chunkhash:20].js"
       },
       plugins: plugins,
       module: {
-        rules: [
-          { test: /\.(js)$/, exclude: /node_modules/ }
-        ]
+        rules: rules
       },
+      resolve: resolve,
       performance: { hints: false },
       stats: 'none',
       optimization: { noEmitOnErrors: true },
