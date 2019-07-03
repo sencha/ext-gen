@@ -13,7 +13,8 @@ module.exports = async function (env) {
   var entryFile     = get('entryFile',     './index.js')
   var outputFolder  = get('outputFolder',  './')
   const rules =[
-    { test: /\.(js|jsx)$/, exclude: /node_modules/ }
+    //{ test: /\.(js|jsx)$/, exclude: /node_modules/ }
+    { test: /\.(js)$/, use: ['babel-loader'] }
   ]
   const resolve = {
   }
