@@ -249,7 +249,7 @@ class Upgrade {
   handleWorkspaceJsonUpgrade() {
     var workspaceJsonObject = this.getJson('workspace.json')
     workspaceJsonObject.frameworks.ext.path = 'node_modules/@sencha/ext'
-    //workspaceJsonObject.frameworks.ext.version = '6.7.0.0'  //needs to be looked up
+    //workspaceJsonObject.frameworks.ext.version = '7.0.0.0'  //needs to be looked up
 
     //workspaceJsonObject.packages.dir.push("node_modules/@sencha")
 

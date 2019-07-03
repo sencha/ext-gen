@@ -1,1 +1,4 @@
 //this file exists so the webpack build process will succeed
+  Ext.onReady(function() {
+    Ext._ = require('lodash');
+  });

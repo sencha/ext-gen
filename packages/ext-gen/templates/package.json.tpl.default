@@ -34,14 +34,14 @@
 </tpl>
   "dependencies": {
     <tpl if="modern == true">
-    "@sencha/ext-modern": "~6.7.0",
-    "@sencha/ext-modern-{modernTheme}": "~6.7.0",</tpl><tpl if="classic == true">
-    "@sencha/ext-classic": "~6.7.0",
-    "@sencha/ext-classic-{classicTheme}": "~6.7.0",</tpl>
-    "@sencha/ext": "~6.7.0"
+    "@sencha/ext-modern": "~7.0.0",
+    "@sencha/ext-modern-{modernTheme}": "~7.0.0",</tpl><tpl if="classic == true">
+    "@sencha/ext-classic": "~7.0.0",
+    "@sencha/ext-classic-{classicTheme}": "~7.0.0",</tpl>
+    "@sencha/ext": "~7.0.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~6.7.1",
+    "@sencha/ext-webpack-plugin": "~7.0.0",
 
     "html-webpack-plugin": "^3.2.0",
     "base-href-webpack-plugin": "~2.0.0",
@@ -51,6 +51,17 @@
 
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-loader": "^8.0.5",
+
+    "lodash": "^4.17.11"
   }
 }
