@@ -10,6 +10,8 @@ npm --registry https://npm.sencha.com/ whoami
 
 https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
 
+ps -ej | grep sencha.jar
+sudo kill -9 22952
 
 git remote add upstream https://github.com/sencha/ext-react.git
 git remote -v
@@ -29,6 +31,7 @@ git checkout v6.6.0
 git fetch upstream
 git merge upstream/master
 git merge upstream/ext-gen-6.7.x
+git merge upstream/ext-gen-7.0.x
 
 /usr/local/lib/node_modules/node/lib/node_modules/@sencha/ext-gen
 
