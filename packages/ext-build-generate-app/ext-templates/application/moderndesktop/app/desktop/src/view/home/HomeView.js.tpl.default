@@ -6,7 +6,7 @@ Ext.define('{appName}.view.home.HomeView',{
 	requires: [],
 	extend: 'Ext.Container',
   scrollable: true,
-  html: `<div style="user-select: text !important;">Welcome to the Ext JS 6.7 Modern Desktop Template Application!
+  html: `<div style="user-select: text !important;">Welcome to the Ext JS 7.0 Modern Desktop Template Application!
 <br><br>
 This template has the standard architecture for a desktop application
 <br>
