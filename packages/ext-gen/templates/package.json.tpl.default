@@ -49,18 +49,18 @@
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.20",
 
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1",
+    "webpack": "~4.35.3",
+    "webpack-cli": "~3.3.5",
+    "webpack-dev-server": "~3.7.2"
 
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-transform-async-to-generator": "^7.1.0",
-    "@babel/plugin-transform-regenerator": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
-    "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-loader": "^8.0.5",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.3",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-regenerator": "^7.4.5",
+    "@babel/preset-env": "^7.5.3",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-loader": "^8.0.6",
 
     "lodash": "^4.17.11"
   }
