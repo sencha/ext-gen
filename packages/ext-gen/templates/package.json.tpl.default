@@ -51,7 +51,7 @@
 
     "webpack": "~4.35.3",
     "webpack-cli": "~3.3.5",
-    "webpack-dev-server": "~3.7.2"
+    "webpack-dev-server": "~3.7.2",
 
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.0",
