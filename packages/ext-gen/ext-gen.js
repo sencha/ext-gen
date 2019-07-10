@@ -439,14 +439,11 @@ function stepKeywords() {
     message: 'What are the npm keywords?',
     default: config.keywords
   }).run().then(answer => { 
-      console.log(answer)
     var theKeywords = "";
     var keywordArray = answer.split(" ");
-    console.log(keywordArray)
-    for (var i = 0; i < keywordArray.length; i++) { 
+     for (var i = 0; i < keywordArray.length; i++) { 
         theKeywords += '"' + keywordArray[i] + '",'
     }
-    console.log(theKeywords)
     answers['keywords'] = theKeywords.slice(0, -1);
     stepAuthorName()
   })
