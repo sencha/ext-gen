@@ -439,12 +439,7 @@ function stepKeywords() {
     message: 'What are the npm keywords?',
     default: config.keywords
   }).run().then(answer => { 
-    var theKeywords = "";
-    var keywordArray = answer.split(" ");
-     for (var i = 0; i < keywordArray.length; i++) { 
-        theKeywords += '"' + keywordArray[i] + '",'
-    }
-    answers['keywords'] = theKeywords.slice(0, -1);
+    answers['keywords'] = processKeywords(answer)
     stepAuthorName()
   })
 }
@@ -678,7 +673,7 @@ async function stepCreate() {
   answers['universal'] = false
   answers['version'] = config.version
   answers['repositoryURL'] = config.repositoryURL
-  answers['keywords'] = config.keywords
+  answers['keywords'] = processKeywords(config.keywords)
   answers['authorName'] = config.authorName
   answers['license'] = config.license
   answers['bugsURL'] = config.bugsURL
@@ -813,4 +808,13 @@ ${classic}
 Run ${boldGreen('ext-gen --help')} to see all options
 `
   console.log(message)
+}
+
+function processKeywords(answer) {
+  var theKeywords = "";
+    var keywordArray = answer.split(" ");
+     for (var i = 0; i < keywordArray.length; i++) { 
+        theKeywords += '"' + keywordArray[i] + '",'
+    }
+    return theKeywords.slice(0, -1);
 }
