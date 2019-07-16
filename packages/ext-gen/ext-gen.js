@@ -214,7 +214,7 @@ function stepStart() {
       //return
       break;
       case 'movetolatest':
-        movetolatest();
+        callmovetolatest();
         break;
 
     // case 'upgrade':
@@ -225,10 +225,10 @@ function stepStart() {
   }
 }
 
-async function movetolatest()
+async function callmovetolatest()
 {
  console.log('movetolatest started'); 
-  await movetolatest.upgradeApp();
+  await movetolatest.movetolatestfunction();
   //console.log('Upgrade done . Please run npm install and then npm run all');
   console.log('movetolatest ended');
 
