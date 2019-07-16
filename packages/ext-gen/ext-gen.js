@@ -4,6 +4,7 @@
 const semver = require("semver")
 const npmScope = '@sencha'
 const appUpgrade = require('./appUpgrade.js')
+const movetolatest = require('./movetolatest.js')
 require('./XTemplate/js')
 
 const util = require('./util.js')
@@ -212,12 +213,25 @@ function stepStart() {
       require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine)
       //return
       break;
-    case 'upgrade':
-        upgrade();
+      case 'movetolatest':
+        movetolatest();
         break;
+
+    // case 'upgrade':
+    //     upgrade();
+    //     break;
     default:
       console.log(`${app} ${boldRed('[ERR]')} command not available: '${mainCommand}'`)
   }
+}
+
+async function movetolatest()
+{
+ console.log('movetolatest started'); 
+  await movetolatest.upgradeApp();
+  //console.log('Upgrade done . Please run npm install and then npm run all');
+  console.log('movetolatest ended');
+
 }
 
 async function upgrade()
@@ -439,6 +453,7 @@ function stepKeywords() {
     message: 'What are the npm keywords?',
     default: config.keywords
   }).run().then(answer => { 
+
     var theKeywords = "";
     var keywordArray = answer.split(" ");
      for (var i = 0; i < keywordArray.length; i++) { 
@@ -446,6 +461,7 @@ function stepKeywords() {
     }
     answers['keywords'] = theKeywords.slice(0, -1);
     stepAuthorName()
+    
   })
 }
 
