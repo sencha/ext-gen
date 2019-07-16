@@ -750,8 +750,10 @@ function stepHelpApp() {
   var parms = ``
   if (global.isCommunity) {
     classic = ``
-    parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-n 'name')
+    parms = `ext-gen movetolatest
+ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-n 'name')
 
+movetolatest       moves an older version ext-gen project to the latest version
 -h --help          show help (no parameters also shows help)
 -d --defaults      show defaults for package.json
 -i --interactive   run in interactive mode (question prompts will display)
