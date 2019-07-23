@@ -121,7 +121,7 @@ function stepStart() {
 
   console.log(boldGreen(`\nSencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`))
   console.log('')
-  
+
   let mainDefinitions = [{ name: 'command', defaultOption: true }]
   const mainCommandArgs = commandLineArgs(mainDefinitions, { stopAtFirstUnknown: true })
 //  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
@@ -208,8 +208,8 @@ function stepStart() {
       cmdLine.parms = ['a','b','desktop',name, template]
       var CurrWorkingDir = process.cwd()
       //var NodeAppBinDir = path.resolve(__dirname)
-      //var TemplatesDir = '/ext-templates' 
-    
+      //var TemplatesDir = '/ext-templates'
+
       require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine)
       //return
       break;
@@ -228,7 +228,7 @@ function stepStart() {
 
 async function callmovetolatest()
 {
- console.log('movetolatest started'); 
+ console.log('movetolatest started');
   await movetolatest.movetolatestfunction();
   //console.log('Upgrade done . Please run npm install and then npm run all');
   console.log('movetolatest ended');
@@ -237,7 +237,7 @@ async function callmovetolatest()
 
 async function upgrade()
 {
- console.log('Upgrade started'); 
+ console.log('Upgrade started');
   await appUpgrade.upgradeApp();
   //console.log('Upgrade done . Please run npm install and then npm run all');
   console.log('Upgrade ended');
@@ -256,7 +256,7 @@ function stepCheckCmdLine() {
     process.env.EXTGEN_VERBOSE = 'false'
   }
   if (cmdLine.help == true) {
-    stepHelpGeneral() 
+    stepHelpGeneral()
   }
   else if (cmdLine.command == undefined) {
     console.log(`${app} ${boldRed('[ERR]')} no command specified (app, view)`)
@@ -292,7 +292,7 @@ function stepCheckCmdLine() {
 
 function stepSeeDefaults() {
   new Confirm({
-    message: 
+    message:
     `would you like to see the defaults for package.json?`,
     default: config.seeDefaults
   }).run().then(answer => {
@@ -391,7 +391,7 @@ function step05() {
   new Input({
     message: 'What is the Template folder name?',
     default:  config.templateFolderName
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['templateFolderName'] = answer
     if(answers['useDefaults'] == true) {
       stepGo()
@@ -406,7 +406,7 @@ function stepPackageName() {
   new Input({
     message: 'What would you like to name the npm Package?',
     default:  kebabCase(answers['appName'])
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['packageName'] = kebabCase(answer)
     config.description =  `${answers['packageName']} description for Ext JS app ${answers['appName']}`
     stepVersion()
@@ -417,7 +417,7 @@ function stepVersion() {
   new Input({
     message: 'What version is your Ext JS application?',
     default: config.version
-  }).run().then(answer => { 
+  }).run().then(answer => {
     if (semver.valid(answer) == null) {
       console.log('version is not a valid format, must be 0.0.0')
       stepVersion()
@@ -433,7 +433,7 @@ function stepDescription() {
   new Input({
     message: 'What is the description?',
     default: config.description
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['description'] = answer
     stepRepositoryURL()
   })
@@ -443,7 +443,7 @@ function stepRepositoryURL() {
   new Input({
     message: 'What is the GIT repository URL?',
     default: config.repositoryURL
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['repositoryURL'] = answer
     stepKeywords()
   })
@@ -453,19 +453,19 @@ function stepKeywords() {
   new Input({
     message: 'What are the npm keywords?',
     default: config.keywords
-  }).run().then(answer => { 
+  }).run().then(answer => {
 
 
     var theKeywords = "";
     var keywordArray = answer.split(" ");
-     for (var i = 0; i < keywordArray.length; i++) { 
+     for (var i = 0; i < keywordArray.length; i++) {
         theKeywords += '"' + keywordArray[i] + '",'
     }
     answers['keywords'] = theKeywords.slice(0, -1);
     //answers['keywords'] = processKeywords(answer)
 
     stepAuthorName()
-    
+
   })
 }
 
@@ -473,7 +473,7 @@ function stepAuthorName() {
   new Input({
     message: `What is the Author's Name?`,
     default: config.authorName
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['authorName'] = answer
     stepLicense()
   })
@@ -483,7 +483,7 @@ function stepLicense() {
   new Input({
     message: 'What type of License does this project need?',
     default: config.license
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['license'] = answer
     stepBugsURL()
   })
@@ -493,7 +493,7 @@ function stepBugsURL() {
   new Input({
     message: 'What is the URL to submit bugs?',
     default: config.bugsURL
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['bugsURL'] = answer
     stepHomepageURL()
   })
@@ -503,7 +503,7 @@ function stepHomepageURL() {
   new Input({
     message: 'What is the Home Page URL?',
     default: config.homepageURL
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['homepageURL'] = answer
     stepGo()
   })
@@ -634,7 +634,7 @@ async function stepCreate() {
   var frameworkVersion = frameworkPkg.sencha.version
 
   var generateApp = require(`${npmScope}/ext-build-generate-app/generateApp.js`)
-  var options = { 
+  var options = {
     parms: [ 'generate', 'app', answers['appName'], './' ],
     sdk: `node_modules/${npmScope}/ext`,
     template: answers['template'],
@@ -767,11 +767,11 @@ movetolatest       moves an older version ext-gen project to the latest version
 
     ${boldGreen('classicdesktop (default)')}
     This template contains 1 profile, configured to use the classic toolkit of Ext JS for a desktop application
-    
+
     ${boldGreen('universalclassicmodern')}
     This template contains 2 profiles, 1 for desktop (using the classic toolkit), and 1 for mobile (using the modern toolkit)
-    
-    ${boldGreen('classic themes:')} theme-classic, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite\n`
+
+    ${boldGreen('classic themes:')} theme-classic, theme-material, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite\n`
 
     parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme') (-n 'name') (-f 'folder')
 
@@ -790,7 +790,7 @@ movetolatest       moves an older version ext-gen project to the latest version
 
 ${parms}
 
-${boldGreen('Examples:')} 
+${boldGreen('Examples:')}
 ext-gen app --template universalmodern --moderntheme theme-material --name CoolUniversalApp
 ext-gen app --interactive
 ext-gen app -a -t moderndesktop -n ModernApp
@@ -801,7 +801,7 @@ You can select from the following Ext JS templates provided by Sencha ExtGen
 ${boldGreen('Modern Templates:')}
 
 ${boldGreen('moderndesktop')}
-This template contains 1 profile, configured to use the modern toolkit of Ext JS for a desktop application 
+This template contains 1 profile, configured to use the modern toolkit of Ext JS for a desktop application
 
 ${boldGreen('universalmodern')}
 This template contains 2 profiles, 1 for desktop and 1 for mobile. Both profiles use the modern toolkit.
@@ -820,14 +820,14 @@ function stepShortHelp() {
   }
   else {
     classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
-ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`  
+ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`
   }
 
-  var message = `${boldGreen('Quick Start:')} 
+  var message = `${boldGreen('Quick Start:')}
 ext-gen app MyAppName
 ext-gen app -i
- 
-${boldGreen('Examples:')} 
+
+${boldGreen('Examples:')}
 ext-gen app --template universalmodern --moderntheme theme-material --name CoolUniversalApp
 ext-gen app --interactive
 ext-gen app -a -t moderndesktop -n ModernApp
@@ -840,7 +840,7 @@ Run ${boldGreen('ext-gen --help')} to see all options
 function processKeywords(answer) {
   var theKeywords = "";
     var keywordArray = answer.split(" ");
-     for (var i = 0; i < keywordArray.length; i++) { 
+     for (var i = 0; i < keywordArray.length; i++) {
         theKeywords += '"' + keywordArray[i] + '",'
     }
     return theKeywords.slice(0, -1);

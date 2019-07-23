@@ -6,7 +6,7 @@
   "templateType":"make a selection from a list",
   "templateType2":"type a folder name",
   "template":"moderndesktop",
-  "classicTheme": "theme-graphite",
+  "classicTheme": "theme-material",
   "modernTheme": "theme-material",
   "templateFolderName":"~/extjs-templates/Application/moderndesktop",
   "packageName":"my-app",
