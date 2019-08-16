@@ -6,7 +6,7 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
     controller: {type: 'personnelviewcontroller'},
     viewModel: {type: 'personnelviewmodel'},
     store: {type: 'personnelviewstore'},
-        grouped: true,
+    grouped: true,
     groupFooter: {
         xtype: 'gridsummaryrow'
     },
