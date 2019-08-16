@@ -5,11 +5,8 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
     requires: [],
     controller: {type: 'personnelviewcontroller'},
     viewModel: {type: 'personnelviewmodel'},
-    store: {type: 'personnelviewstore'},
+    store: {type: 'personnelshared'},
     grouped: true,
-    groupFooter: {
-        xtype: 'gridsummaryrow'
-    },
     plugins: {
         rowedit: {
             autoConfirm: false
@@ -22,13 +19,13 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
             width: 100,
             cell: {userCls: 'bold'}
         },
-        {text: 'Dept', dataIndex: 'dept',width: 100},
         {text: 'Email',dataIndex: 'email',width: 230},
         {
             text: 'Phone',
             dataIndex: 'phone',
             width: 150
-        }
+        },
+        {text: 'Dept', dataIndex: 'dept',width: 100}
     ],
     listeners: {
         //select: 'onItemSelected'
