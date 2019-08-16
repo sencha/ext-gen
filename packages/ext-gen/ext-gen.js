@@ -771,7 +771,7 @@ movetolatest       moves an older version ext-gen project to the latest version
     ${boldGreen('universalclassicmodern')}
     This template contains 2 profiles, 1 for desktop (using the classic toolkit), and 1 for mobile (using the modern toolkit)
 
-    ${boldGreen('classic themes:')} theme-classic, theme-material, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite\n`
+    ${boldGreen('classic themes:')} theme-classic, theme-material, theme-neptune, theme-neptune-touch, theme-crisp, theme-crisp-touch  theme-triton, theme-graphite, theme-material\n`
 
     parms = `ext-gen app (-h) (-d) (-i) (-t 'template') (-m 'moderntheme') (-c 'classictheme') (-n 'name') (-f 'folder')
 
@@ -819,8 +819,8 @@ function stepShortHelp() {
     classic = ``
   }
   else {
-    classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
-ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`
+    classic = `ext-gen app --classictheme theme-material -n ClassicApp
+ext-gen app --template classicdesktop --classictheme theme-material --name CoolDesktopApp\n`
   }
 
   var message = `${boldGreen('Quick Start:')}
