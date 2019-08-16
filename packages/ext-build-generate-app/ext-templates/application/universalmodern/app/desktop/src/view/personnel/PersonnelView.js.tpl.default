@@ -1,26 +1,36 @@
 Ext.define('{appName}.view.personnel.PersonnelView',{
-	extend: 'Ext.grid.Grid',
-	xtype: 'personnelview',
-	cls: 'personnelview',
-	requires: [],
-	controller: {type: 'personnelviewcontroller'},
-	viewModel: {type: 'personnelviewmodel'},
-	store: {type: 'personnelviewstore'},
-	columns: [
-		{ 
-			text: 'Name',
-			dataIndex: 'name',
-			width: 100,
-			cell: {userCls: 'bold'}
-		},
-		{text: 'Email',dataIndex: 'email',width: 230},
-		{
-			text: 'Phone',
-			dataIndex: 'phone',
-			width: 150 
-		}
-	],
-	listeners: {
-		select: 'onItemSelected'
-	}
+    extend: 'Ext.grid.Grid',
+    xtype: 'personnelview',
+    cls: 'personnelview',
+    requires: [],
+    controller: {type: 'personnelviewcontroller'},
+    viewModel: {type: 'personnelviewmodel'},
+    store: {type: 'personnelviewstore'},
+    grouped: true,
+    groupFooter: {
+        xtype: 'gridsummaryrow'
+    },
+    plugins: {
+        rowedit: {
+            autoConfirm: false
+        }
+    },
+    columns: [
+        {
+            text: 'Name',
+            dataIndex: 'name',
+            width: 100,
+            cell: {userCls: 'bold'}
+        },
+        {text: 'Dept', dataIndex: 'dept',width: 100},
+        {text: 'Email',dataIndex: 'email',width: 230},
+        {
+            text: 'Phone',
+            dataIndex: 'phone',
+            width: 150
+        }
+    ],
+    listeners: {
+        //select: 'onItemSelected'
+    }
 });
