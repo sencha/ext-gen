@@ -19,17 +19,19 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
         {
             text: 'Name',
             dataIndex: 'name',
+            editable: true,
             width: 100,
             cell: {userCls: 'bold'}
         },
-        {text: 'Email',dataIndex: 'email',width: 230},
+        {text: 'Email',dataIndex: 'email',editable: true, width: 230},
         {
             text: 'Phone',
             dataIndex: 'phone',
+            editable: true,
             width: 150
         }
     ],
     listeners: {
-        //select: 'onItemSelected'
+        canceledit: 'onEditCancelled'
     }
 });
