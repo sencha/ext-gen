@@ -1,14 +1,32 @@
 Ext.define('{appName}.view.personnel.PersonnelViewController', {
-	extend: 'Ext.app.ViewController',
-	alias: 'controller.personnelviewcontroller',
+    extend: 'Ext.app.ViewController',
+    alias: 'controller.personnelviewcontroller',
 
-	onItemSelected: function (sender, record) {
-		Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+    onEditCancelled: function (editor, value, startValue, eOpts) {
+        console.log(editor)
+        console.log(value)
+        console.log(startValue)
+        console.log(eOpts)
+        var user = Ext._.find(value.record.store.config.data.items, { name: value.record.data.name });
+        Ext.Msg.confirm('Confirm', value.record.data.name + ': ' + user.phone + ' is phone number', 'onConfirm', this);
+    },
+
+    onItemSelected: function (sender, record) {
+        var users = [
+        { firstName: "John", lastName: "Doe", age: 28, gender: "male" },
+        { firstName: "Jane", lastName: "Doe", age: 5, gender: "female" },
+        { firstName: "Jim", lastName: "Carrey", age: 54, gender: "male" },
+        { firstName: "Kate", lastName: "Winslet", age: 40, gender: "female" }
+        ];
+        var user = Ext._.find(users, { lastName: "Doe", gender: "male" });
+
+        Ext.Msg.confirm('Confirm', 'Are you sure? ' + user.age + ' years old', 'onConfirm', this);
+    //    Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
 	},
 
-	onConfirm: function (choice) {
-		if (choice === 'yes') {
-			//
-		}
-	}
+    onConfirm: function (choice) {
+        if (choice === 'yes') {
+        //
+        }
+    }
 });
