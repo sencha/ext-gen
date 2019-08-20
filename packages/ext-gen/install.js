@@ -34,7 +34,7 @@ if (global.isCommunity) {
   classic = ``
 }
 else {
-  classic = `ext-gen app --classictheme theme-material -n ClassicApp
+  classic = `ext-gen app --template classicdesktop --classictheme theme-material -n ClassicApp
 ext-gen app --template universalclassicmodern --classictheme theme-material --moderntheme theme-material --name CoolUniversalApp
 ext-gen app --template classicdesktop --classictheme theme-gray --name GrayDesktopApp
 ext-gen app --template classicdesktop --classictheme theme-material --name CoolDesktopApp\n`
