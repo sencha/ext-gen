@@ -7,7 +7,7 @@ Ext.define('{appName}.view.personnel.PersonnelViewController', {
         console.log(value)
         console.log(startValue)
         console.log(eOpts)
-        var user = Ext._.find(value.record.store.config.data.items, { name: value.record.data.name });
+        var user = Ext._find(value.record.store.config.data.items, { name: value.record.data.name });
         Ext.Msg.confirm('Confirm', value.record.data.name + ': ' + user.phone + ' is phone number', 'onConfirm', this);
     },
 

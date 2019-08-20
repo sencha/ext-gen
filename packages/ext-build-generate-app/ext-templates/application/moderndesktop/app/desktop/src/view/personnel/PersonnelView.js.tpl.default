@@ -2,7 +2,7 @@ Ext.define('{appName}.view.personnel.PersonnelView',{
     extend: 'Ext.grid.Grid',
     xtype: 'personnelview',
     cls: 'personnelview',
-    requires: [],
+    requires: ['Ext.grid.rowedit.Plugin'],
     controller: {type: 'personnelviewcontroller'},
     viewModel: {type: 'personnelviewmodel'},
     store: {type: 'personnelviewstore'},
