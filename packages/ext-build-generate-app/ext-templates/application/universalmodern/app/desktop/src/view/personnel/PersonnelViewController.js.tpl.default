@@ -18,7 +18,7 @@ Ext.define('{appName}.view.personnel.PersonnelViewController', {
         { firstName: "Jim", lastName: "Carrey", age: 54, gender: "male" },
         { firstName: "Kate", lastName: "Winslet", age: 40, gender: "female" }
         ];
-        var user = Ext._.find(users, { lastName: "Doe", gender: "male" });
+        var user = Ext._find(users, { lastName: "Doe", gender: "male" });
 
         Ext.Msg.confirm('Confirm', 'Are you sure? ' + user.age + ' years old', 'onConfirm', this);
     //    Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
