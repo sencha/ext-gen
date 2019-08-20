@@ -819,8 +819,7 @@ function stepShortHelp() {
     classic = ``
   }
   else {
-    classic = `ext-gen app --classictheme theme-material -n ClassicApp
-ext-gen app --template classicdesktop --classictheme theme-material --name CoolDesktopApp\n`
+    classic = `ext-gen app --template classicdesktop --classictheme theme-material --name CoolClassicDesktopApp\n`
   }
 
   var message = `${boldGreen('Quick Start:')}
