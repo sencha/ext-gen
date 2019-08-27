@@ -17,6 +17,7 @@ var appJson = 'app.json';
 var packageJson = 'package.json';
 var workspaceJson = 'workspace.json';
 var webpackConfig = 'webpack.config.js';
+var indexJS = 'index.js';
 var gitIgnore = '.gitIgnore';
 var gitIgnoreAppend = '/generatedFiles ' + os.EOL + '/cordova ' + os.EOL + '/node_modules' + os.EOL;
 var gitIgnoreData = '/build ' + os.EOL + gitIgnoreAppend;
@@ -43,6 +44,9 @@ exports.migrateApp = function migrateApp() {
   } else {
     console.log("Missing workspace.json");
   } 
+  if (!doesFileExist(indexJS)) {
+	createIndexJS();
+  }
 }
 
 
@@ -451,6 +455,15 @@ function createWebPackConfig() {
 	var t = tpl.apply(values);
 	tpl = null;
 	fs.writeFileSync(webpackConfig, t);
+}
+
+function createIndexJS() {
+	var fs = require("fs");
+	var data = "//this file exists so the webpack build process will succeed\nExt._find = require('lodash.find');";
+	fs.writeFile("index.js", data, (err) => {
+		if (err) console.log("Migration failed to create index.js " + err);
+		console.log("Created index.js");
+	});
 }
 
 function populateValues() {
