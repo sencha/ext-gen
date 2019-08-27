@@ -217,9 +217,9 @@ function stepStart() {
         callmovetolatest();
         break;
 
-    // case 'upgrade':
-    //     upgrade();
-    //     break;
+      case 'upgrade':
+          upgrade();
+          break;
     default:
       console.log(`${app} ${boldRed('[ERR]')} command not available: '${mainCommand}'`)
   }
