@@ -18,9 +18,7 @@
   "scripts": {
     "start": "npm run dev",
     "clean": "rimraf build",
-    //Update these provide scripts with your desired build profile: --env.profile=<YOUR_PROFILE_HERE e.g. 'classic', 'phone', 'desktop'>
     "dev": "webpack-dev-server --env.browser=yes --env.verbose=no",
-    //If you choose to use OpenTools without specifying a build profile the same profile(s) that Sencha Cmd will use by default will ALSO be used by the webpack plugin
     "build": "npm run clean && cross-env webpack --env.profile=desktop --env.environment=production --env.treeshake=yes"
   },
 </tpl>

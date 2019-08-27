@@ -462,7 +462,6 @@ function createIndexJS() {
 	var data = "//this file exists so the webpack build process will succeed\nExt._find = require('lodash.find');";
 	fs.writeFile("index.js", data, (err) => {
 		if (err) console.log("Migration failed to create index.js " + err);
-		console.log("Created index.js");
 	});
 }
 
