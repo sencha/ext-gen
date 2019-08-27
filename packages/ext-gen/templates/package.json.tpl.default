@@ -16,12 +16,10 @@
   "homepage": "{homepageURL}",
 <tpl if="universal == true">
   "scripts": {
-    "start": "npm run dev:desktop",
+    "start": "npm run dev",
     "clean": "rimraf build",
-    "dev:desktop": "webpack-dev-server --env.profile=desktop --env.browser=yes --env.verbose=no",
-    "dev:phone": "webpack-dev-server --env.profile=phone --env.browser=yes --env.verbose=no",
-    "build:desktop": "npm run clean && cross-env webpack --env.profile=desktop --env.environment=production --env.treeshake=yes",
-    "build:phone": "npm run clean && cross-env webpack --env.profile=phone --env.environment=production --env.treeshake=yes"
+    "dev": "webpack-dev-server --env.browser=yes --env.verbose=no",
+    "build": "npm run clean && cross-env webpack --env.profile=desktop --env.environment=production --env.treeshake=yes"
   },
 </tpl>
 <tpl if="universal == false">
