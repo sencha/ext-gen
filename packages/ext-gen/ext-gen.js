@@ -3,7 +3,7 @@
 
 const semver = require("semver")
 const npmScope = '@sencha'
-const appUpgrade = require('./appUpgrade.js')
+const appMigrate = require('./appMigrate.js')
 const movetolatest = require('./movetolatest.js')
 require('./XTemplate/js')
 
@@ -216,9 +216,8 @@ function stepStart() {
       case 'movetolatest':
         callmovetolatest();
         break;
-
-      case 'upgrade':
-          upgrade();
+      case 'migrate':
+          migrate();
           break;
     default:
       console.log(`${app} ${boldRed('[ERR]')} command not available: '${mainCommand}'`)
@@ -235,12 +234,12 @@ async function callmovetolatest()
 
 }
 
-async function upgrade()
+async function migrate()
 {
- console.log('Upgrade started');
-  await appUpgrade.upgradeApp();
+ console.log('Migration to Open Tools started...');
+  await appMigrate.migrateApp();
   //console.log('Upgrade done . Please run npm install and then npm run all');
-  console.log('Upgrade ended');
+  console.log('Migration to Open Tools ended');
 
 }
 

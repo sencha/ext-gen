@@ -29,16 +29,16 @@ var modernTheme;
 var values;
 var appJsonObject;
 
-exports.upgradeApp = function upgradeApp() {
+exports.migrateApp = function migrateApp() {
   if (doesFileExist(workspaceJson)) {
     // could be parent directory of a workspace
     workspaceDir = process.cwd();
     if (doesFileExist(appJson)) {
-      upgradeSingleAppWorkspace();
+      migrateSingleAppWorkspace();
     } else {
       console.log('upgrading multi-application workspaces is not yet supported')
       return
-      upgradeMultiAppWorkspace();
+      migrateMultiAppWorkspace();
     }
   } else {
     console.log("Missing workspace.json");
@@ -55,6 +55,7 @@ exports.upgradeApp = function upgradeApp() {
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -r wsApp02 wsApp02
 
 function processApp(appJsonPath) {
+  console.log('Updating app.json')
   appJsonObject = getJson(appJsonPath)
   if (appJsonObject.hasOwnProperty('name')) {
     if (allResults.multiApp == false) {
@@ -73,6 +74,7 @@ function processApp(appJsonPath) {
 }
 
 function ToolKitAndTheme(appJsonObject, o) {
+  console.log('Updating toolkit and theming')
   o.classic = false
   o.modern = false
 	if (appJsonObject.hasOwnProperty('toolkit')) {
@@ -119,7 +121,7 @@ var allResults = {
 
 
 
-// exports.upgradeApp = function upgradeApp() {
+// exports.migrateApp = function migrateApp() {
 
 //   var workspaceJsonObject = json.parse(fs.readFileSync(workspaceJson).toString())
 //   if (workspaceJsonObject.hasOwnProperty('apps')) {
@@ -190,7 +192,7 @@ var allResults = {
 //   createWebPackConfig()
 //   console.log('3')
 
-//   doUpgrade(workspaceJson)
+//   domigrate(workspaceJson)
 //   console.log('5')
 
 
@@ -211,7 +213,7 @@ var allResults = {
 //         populateValues()
 //         console.log('1')
 
-//         doUpgrade(app + '/' + appJson)
+//         domigrate(app + '/' + appJson)
 //         console.log('4')
 
 //       })
@@ -220,7 +222,7 @@ var allResults = {
 //     appJsonObject = getJson(appJson)
 //     populateValues()
 //     console.log('1')
-//     doUpgrade(appJson)
+//     domigrate(appJson)
 //     console.log('4')
 //     createEmptyFolders()
 //     console.log('6')
@@ -240,7 +242,7 @@ var allResults = {
 //     // console.log('2')
 //     // createWebPackConfig()
 //     // console.log('3')
-//     doUpgrade(appJson)
+//     domigrate(appJson)
 //     console.log('4')
 
 //     createEmptyFolders()
@@ -280,32 +282,32 @@ function copyFile(sourceFile, targetFile) {
 	fs.copySync(sourceFile, targetFile);
 }
 
-function doUpgrade(fileName) {
+function domigrate(fileName) {
 	if (doesBackupExist(fileName)) {
-		console.log("The upgrade is already done. If need to upgrade again Please move files from  " + backupFolder + "/" + fileName +
+		console.log("The migration is already done. If you need to migrate again, please move files from  " + backupFolder + "/" + fileName +
 			" to " + fileName);
 		return;
 	}
 	createBackup(fileName);
-	if (!upgradeFile(fileName)) {
-		console.log("The upgrade has failed for " + fileName);
+	if (!migrateFile(fileName)) {
+		console.log("The migration failed for " + fileName);
 		restoreBackup(fileName);
 	}
 }
 
 
-function upgradeFile(fileName) {
+function migrateFile(fileName) {
 	switch (fileName) {
 		case appJson:
-			handleAppJsonUpgrade();
+			handleAppJsonmigrate();
 			return true;
 		case workspaceJson:
-			return handleWorkspaceJsonUpgrade();
+			return handleWorkspaceJsonmigrate();
 		default:
 	}
 }
 
-function handleAppJsonUpgrade() {
+function handleAppJsonmigrate() {
 	if (appJsonObject.hasOwnProperty('modern')) {
 		removeDebugJsPath(appJsonObject.modern.js);
 	}
@@ -332,7 +334,7 @@ function removeDebugJsPath(jsonLocation) {
 	}
 }
 
-function handleWorkspaceJsonUpgrade() {
+function handleWorkspaceJsonmigrate() {
 	var workspaceJsonObject = getJson(workspaceJson);
 	workspaceJsonObject.frameworks.ext = extFrameworkPath;
 	createFileFromJson(workspaceJson, workspaceJsonObject);
@@ -350,26 +352,26 @@ function getJson(filename) {
 
 
 
-function upgradeSingleAppWorkspace() {
+function migrateSingleAppWorkspace() {
 	appJsonObject = getJson(appJson);
 	populateValues();
 	createPackageJson();
 	createWebPackConfig();
-	doUpgrade(appJson);
-	doUpgrade(workspaceJson);
+	domigrate(appJson);
+	domigrate(workspaceJson);
 	createEmptyFolders();
 	moveUnncessaryFiles();
 	createGitIgnore();
 }
 
 
-function upgradeMultiAppWorkspace() {
+function migrateMultiAppWorkspace() {
 	workspaceJsonObject = getJson(workspaceJson);
 	appNames = workspaceJsonObject.apps;
 	console.log("Upgrading multi app workspace " + workspaceDir);
 	console.log(appNames);
 	for (appName in appNames) {
-		// changing directory to the app directory within workspace and running upgrade
+		// changing directory to the app directory within workspace and running migrate
 		// inside the context of the app directory
 		process.chdir(path.join(workspaceDir, appNames[appName]));
 		console.log("Upgrading app " + appNames[appName]);
@@ -378,21 +380,21 @@ function upgradeMultiAppWorkspace() {
 		populateValues();
 		createPackageJson();
 		createWebPackConfig();
-		doUpgrade(appJson);
+		domigrate(appJson);
 		createEmptyFolders();
 		moveUnncessaryFiles();
 		createGitIgnore();
-		console.log("Upgraded app " + appNames[appName] + " successfully");
+		console.log("migrated app " + appNames[appName] + " successfully");
 	}
 	// switching back to workspace directory
 	process.chdir(workspaceDir);
 	// is this needed?
-	doUpgrade(workspaceJson);
+	domigrate(workspaceJson);
 }
 
 function createGitIgnore() {
 	if (doesBackupExist(gitIgnore)) {
-		console.log("The upgrade is already done. If need to upgrade again Please move files from  " + backupFolder + "/" + gitIgnore +
+		console.log("The migrate is already done. If need to migrate again Please move files from  " + backupFolder + "/" + gitIgnore +
 			" to " + gitIgnore);
 		return;
 	}
@@ -486,8 +488,8 @@ function buildToolKitAndThemeDetails() {
     else {
       universal = true
     }
-    console.log('universal')
-    console.log(universal)
+    // console.log('universal')
+    // console.log(universal)
 		for (profile in appJsonObject.builds) {
 			if (profile === classicProfile) {
 				classic = true;
