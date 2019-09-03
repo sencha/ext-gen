@@ -34,18 +34,19 @@ if (global.isCommunity) {
   classic = ``
 }
 else {
-  classic = `ext-gen app --classictheme theme-graphite -n ClassicApp
-ext-gen app --template universalclassicmodern --classictheme theme-graphite --moderntheme theme-material --name CoolUniversalApp
-ext-gen app --template classicdesktop --classictheme theme-graphite --name CoolDesktopApp\n`  
+  classic = `ext-gen app --template classicdesktop --classictheme theme-material -n ClassicApp
+ext-gen app --template universalclassicmodern --classictheme theme-material --moderntheme theme-material --name CoolUniversalApp
+ext-gen app --template classicdesktop --classictheme theme-gray --name GrayDesktopApp
+ext-gen app --template classicdesktop --classictheme theme-material --name CoolDesktopApp\n`
 }
 var welcome = boldGreen(`Welcome to Sencha ExtGen v${version} ${edition} Edition - The Ext JS code generator`)
 console.log (`${welcome}
 
-${boldGreen('Quick Start:')} 
+${boldGreen('Quick Start:')}
 ext-gen app MyAppName
 ext-gen app -i
- 
-${boldGreen('Examples:')} 
+
+${boldGreen('Examples:')}
 ext-gen app --template universalmodern --moderntheme theme-material --name CoolUniversalApp
 ext-gen app --interactive
 ext-gen app -t moderndesktop -n ModernApp

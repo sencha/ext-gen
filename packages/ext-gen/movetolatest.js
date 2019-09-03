@@ -29,16 +29,17 @@ var modernTheme;
 var values;
 var appJsonObject;
 
-exports.upgradeApp = function upgradeApp() {
+exports.movetolatestfunction = function movetolatestfunction() {
   if (doesFileExist(workspaceJson)) {
     // could be parent directory of a workspace
     workspaceDir = process.cwd();
     if (doesFileExist(appJson)) {
-      upgradeSingleAppWorkspace();
+      moveFromSingleAppWorkspace();
     } else {
-      console.log('upgrading multi-application workspaces is not yet supported')
+      //console.log('upgrading multi-application workspaces is not yet supported')
+      console.log('moving from non Ext JS application or multi-application workspace is not yet supported')
       return
-      upgradeMultiAppWorkspace();
+      moveFromMultiAppWorkspace();
     }
   } else {
     console.log("Missing workspace.json");
@@ -54,7 +55,7 @@ exports.upgradeApp = function upgradeApp() {
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -r wsApp01 wsApp01
 //sencha -sdk ~/aaExt/ext-6.6.0 generate app -r wsApp02 wsApp02
 
-function processApp(appJsonPath) {
+function zzzprocessApp(appJsonPath) {
   appJsonObject = getJson(appJsonPath)
   if (appJsonObject.hasOwnProperty('name')) {
     if (allResults.multiApp == false) {
@@ -350,7 +351,7 @@ function getJson(filename) {
 
 
 
-function upgradeSingleAppWorkspace() {
+function moveFromSingleAppWorkspace() {
 	appJsonObject = getJson(appJson);
 	populateValues();
 	createPackageJson();
@@ -363,7 +364,7 @@ function upgradeSingleAppWorkspace() {
 }
 
 
-function upgradeMultiAppWorkspace() {
+function moveFromMultiAppWorkspace() {
 	workspaceJsonObject = getJson(workspaceJson);
 	appNames = workspaceJsonObject.apps;
 	console.log("Upgrading multi app workspace " + workspaceDir);

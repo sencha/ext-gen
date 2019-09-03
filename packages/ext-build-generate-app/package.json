@@ -1,10 +1,10 @@
 {
   "name": "@sencha/ext-build-generate-app",
-  "version": "6.7.1",
+  "version": "7.0.0",
   "description": "ext-build-generate-app - app generator for ext-gen and ext-build",
   "main": "generateApp.js",
   "dependencies": {
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.1.0",
     "uuid": "^3.3.2"
   },
   "repository": {

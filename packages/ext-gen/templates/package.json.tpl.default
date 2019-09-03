@@ -3,64 +3,6 @@
   "product": "ext",
   "version": "{version}",
   "description": "{description}",
-<tpl if="universal == true">
-  "scripts": {
-    "clean": "rimraf build",
-    "start": "cross-env-shell npm run dev",
-    "dev": "webpack-dev-server --env.verbose='no'",
-    "prod": "webpack-dev-server --env.environment=production",
-    "build": "npm run clean && cross-env webpack --env.environment=production",
-    "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development",
-    "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development",
-    "build-desktop-testing": "npx sencha app build desktop testing",
-    "build-desktop-production": "npx sencha app build desktop production",
-    "phone": "webpack-dev-server --env.profile=phone --env.environment=development",
-    "phone-v": "webpack-dev-server --env.profile=phone --env.environment=development",
-    "all": "webpack-dev-server --env.profile=all --env.environment=development",
-    "all-v": "webpack-dev-server --env.profile=all --env.environment=development",
-    "build-phone-testing": "npx sencha app build phone testing",
-    "build-phone-production": "npx sencha app build phone production",
-    "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
-  },
-</tpl>
-<tpl if="universal == false">
-  "scripts": {
-    "clean": "rimraf build",
-    "start": "cross-env-shell npm run dev",
-    "dev": "webpack-dev-server --env.environment=development",
-    "prod": "webpack-dev-server --env.environment=production --env.treeshake=true",
-    "build": "cross-env-shell npm run clean && cross-env webpack --env.environment=production --env.treeshake=true",
-    "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development",
-    "desktop-v": "webpack-dev-server --env.profile=desktop --env.environment=development",
-    "build-desktop-testing": "npx sencha app build desktop testing",
-    "build-desktop-production": "npx sencha app build desktop production",
-    "createview": "cross-env-shell npx sencha generate viewpackage $npm_package_extbuild_defaultprofile $VIEW"
-  },
-</tpl>
-  "extbuild": {
-    "defaultprofile": "desktop",
-    "defaultenvironment": "development",
-    "defaultverbose": "no"
-  },
-  "dependencies": {
-    <tpl if="modern == true">
-    "@sencha/ext-modern": "~6.7.0",
-    "@sencha/ext-modern-{modernTheme}": "~6.7.0",</tpl><tpl if="classic == true">
-    "@sencha/ext-classic": "~6.7.0",
-    "@sencha/ext-classic-{classicTheme}": "~6.7.0",</tpl>
-    "@sencha/ext": "~6.7.0"
-  },
-  "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~7.0.0",
-
-   "html-webpack-plugin": "^3.2.0",
-    "cross-env": "^5.2.0",
-    "portfinder": "^1.0.20",
-
-    "webpack": "^4.29.1",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
-  },
   "repository": {
     "type": "git",
     "url": "{repositoryURL}"
@@ -71,5 +13,48 @@
   "bugs": {
     "url": "{bugsURL}"
   },
-  "homepage": "{homepageURL}"
+  "homepage": "{homepageURL}",
+<tpl if="universal == true">
+  "scripts": {
+    "start": "npm run dev",
+    "clean": "rimraf build",
+    "dev": "webpack-dev-server --env.browser=yes --env.verbose=no",
+    "build": "npm run clean && cross-env webpack --env.profile=desktop --env.environment=production --env.treeshake=yes"
+  },
+</tpl>
+<tpl if="universal == false">
+  "scripts": {
+    "start": "npm run dev:desktop",
+    "clean": "rimraf build",
+    "dev:desktop": "webpack-dev-server --env.profile=desktop --env.browser=yes --env.verbose=no",
+    "build:desktop": "npm run clean && cross-env webpack --env.profile=desktop --env.environment=production --env.treeshake=yes"
+  },
+</tpl>
+  "dependencies": {
+    <tpl if="modern == true">
+    "@sencha/ext-modern": "~7.0.0",
+    "@sencha/ext-modern-{modernTheme}": "~7.0.0",</tpl><tpl if="classic == true">
+    "@sencha/ext-classic": "~7.0.0",
+    "@sencha/ext-classic-{classicTheme}": "~7.0.0",</tpl>
+    "@sencha/ext": "~7.0.0"
+  },
+  "devDependencies": {
+    "@sencha/ext-webpack-plugin": "~7.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "base-href-webpack-plugin": "~2.0.0",
+    "cross-env": "^5.2.0",
+    "portfinder": "^1.0.21",
+    "webpack": "~4.39.2",
+    "webpack-cli": "~3.3.6",
+    "webpack-dev-server": "~3.8.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-regenerator": "^7.4.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-loader": "^8.0.6",
+    "lodash.find": "^4.6.0"
+  }
 }
