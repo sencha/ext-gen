@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf build",
     "start": "cross-env-shell npm run dev",
-    "dev": "webpack-dev-server --env.environment=development",
+    "dev": "webpack-dev-server --env.verbose='no'",
     "prod": "webpack-dev-server --env.environment=production",
     "build": "npm run clean && cross-env webpack --env.environment=production",
     "desktop": "webpack-dev-server --env.profile=desktop --env.environment=development",
@@ -44,16 +44,16 @@
   },
   "dependencies": {
     <tpl if="modern == true">
-    "@sencha/ext-modern": "~6.7.0",
-    "@sencha/ext-modern-{modernTheme}": "~6.7.0",</tpl><tpl if="classic == true">
-    "@sencha/ext-classic": "~6.7.0",
-    "@sencha/ext-classic-{classicTheme}": "~6.7.0",</tpl>
-    "@sencha/ext": "~6.7.0"
+    "@sencha/ext-modern": "~7.0.0",
+    "@sencha/ext-modern-{modernTheme}": "~7.0.0",</tpl><tpl if="classic == true">
+    "@sencha/ext-classic": "~7.0.0",
+    "@sencha/ext-classic-{classicTheme}": "~7.0.0",</tpl>
+    "@sencha/ext": "~7.0.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~6.7.0",
+    "@sencha/ext-webpack-plugin": "~7.0.0",
 
-    "html-webpack-plugin": "^3.2.0",
+   "html-webpack-plugin": "^3.2.0",
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.20",
 

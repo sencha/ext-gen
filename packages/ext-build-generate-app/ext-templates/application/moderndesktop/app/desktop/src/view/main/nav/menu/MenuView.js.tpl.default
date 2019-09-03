@@ -1,15 +1,16 @@
 Ext.define('{appName}.view.nav.menu.MenuView', {
-	extend: 'Ext.list.Tree',
-	xtype: 'menuview',
-	ui: 'nav',
-	requires: [
-		'Ext.data.TreeStore',
-	],
-	scrollable: true,
-	bind: { 
-		store: '\u007Bmenu}', 
-		micro: '\u007BnavCollapsed}' 
-	},
-	expanderFirst: false,
-	expanderOnly: false
+    extend: 'Ext.list.Tree',
+    xtype: 'menuview',
+    viewModel: {},
+    ui: 'nav',
+    requires: [
+        'Ext.data.TreeStore',
+    ],
+    scrollable: true,
+    bind: { 
+        store: '\u007Bmenu}', 
+        micro: '\u007BnavCollapsed}' 
+    },
+    expanderFirst: false,
+    expanderOnly: false
 });
