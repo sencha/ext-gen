@@ -10,7 +10,7 @@
     "loglevel": "silent"
   },
   "dependencies": {
-    "@sencha/ext-build-generate-app": "~7.0.0",
+    "@sencha/ext-build-generate-app": "~7.0.1",
     "@sencha/cmd": "~7.0.0",
     "node-find-folder": "^0.1.32",
     "chalk": "^2.4.2",
