@@ -120,7 +120,7 @@
   },
   "bootstrap": {
     "base": "$\u007bapp.dir}",
-<tpl if="universal == true">    "manifest": "generatedFiles/$\u007bbuild.id}.json",</tpl>
+<tpl if="universal == true">"manifest": "generatedFiles/$\u007bbuild.id}.json",</tpl>
     "microloader": "generatedFiles/bootstrap.js",
     "css": "generatedFiles/bootstrap.css"
   },
