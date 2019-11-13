@@ -95,8 +95,5 @@
             <target name="-after-build"/>
     -->
     <target name="-before-build">
-      <echo file="temp.txt" append="true">
-        ${app.output.base}
-      </echo>
-    </target>
+      <echo file="temp.txt" append="true" message="${app.output.base}"/>
 </project>
