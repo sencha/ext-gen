@@ -63,10 +63,6 @@ module.exports = async function (env) {
       devtool: (environment === 'development') ? 'inline-source-map' : false,
       context: path.join(__dirname, contextFolder),
       entry: entryFile,
-      output: {
-        path: path.join(__dirname, outputFolder),
-        filename: "[name].js"
-      },
       plugins: plugins,
       module: {
         rules: rules
