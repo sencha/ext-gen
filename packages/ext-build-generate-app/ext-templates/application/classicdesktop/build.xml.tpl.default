@@ -94,5 +94,9 @@
             <target name="-before-build"/>
             <target name="-after-build"/>
     -->
-
+    <target name="-before-build">
+      <echo file="temp.txt" append="true">
+        ${app.output.base}
+      </echo>
+    </target>
 </project>
