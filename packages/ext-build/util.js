@@ -133,14 +133,14 @@ function getAppJson(CurrWorkingDir) {
 		var dir = ''
 		for (var i = 0; i < j; i++) {
 			if (myStringArray[i]!='') {
-				dir = dir + '/' + myStringArray[i]
+				dir = i ===0  ? dir + myStringArray[i]: dir + '/' + myStringArray[i]
 			}
 		}
 		// var workspaceJson = dir + '/' + 'workspace.json'
 		// if (fs.existsSync(workspaceJson)) {
 		// 	console.log('yes ' + workspaceJson)
 		// }
-		var appJson = dir + '/' + 'app.json'
+		var appJson = dir + '\\' + 'app.json'
 //		console.log(appJson)
 		if (fs.existsSync(appJson)) {
 //			console.log('here')

@@ -94,9 +94,9 @@ try {
 			var item = chalk.yellow(newMenu + ',')
 			var itemphone = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`)
 
-      var menuFile = `${CurrWorkingDirRoot}/resources/desktop/menu.json`
+      var menuFile = `${CurrWorkingDirRoot}/resources/shared/data/menu.json`
       var menuJson = (fs.existsSync(menuFile) && JSON.parse(fs.readFileSync(menuFile, 'utf-8')) || {})
-      menuJson.children.push(JSON.parse(newMenu))
+      menuJson.root.children.push(JSON.parse(newMenu))
       fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
 
 			console.log(help.menuText(menuFile, item, itemphone))
