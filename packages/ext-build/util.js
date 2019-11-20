@@ -140,7 +140,7 @@ function getAppJson(CurrWorkingDir) {
 		// if (fs.existsSync(workspaceJson)) {
 		// 	console.log('yes ' + workspaceJson)
 		// }
-		var appJson = dir + '/' + 'app.json'
+		var appJson = dir + '\\' + 'app.json'
 //		console.log(appJson)
 		if (fs.existsSync(appJson)) {
 //			console.log('here')
