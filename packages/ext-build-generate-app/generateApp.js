@@ -120,6 +120,7 @@ module.exports = generateApp
 	//https://gist.github.com/kethinov/6658166
 	//const walkSync = (d) => fs.statSync(d).isDirectory() ? fs.readdirSync(d).map(f => walkSync(path.join(d, f)+'\n')) : d;
 	function walkSync(dir, len, ApplicationDir, ApplicationName, Template,  modernTheme, classicTheme, SdkVal, Packages) {
+    
 		var path = path || require('path');
 		var fs = fs || require('fs');
 		var files = fs.readdirSync(dir);
@@ -173,6 +174,10 @@ module.exports = generateApp
         //console.log('all: ' + all)
 				var content = fs.readFileSync(all).toString()
 				if (file.substr(file.length - 11) == 'tpl.default') { 
+
+
+          
+
 					var tpl = new Ext.XTemplate(content)
           var t = tpl.apply(values)
           tpl = null

@@ -55,4 +55,7 @@
   }
 ]]>
     </script>
+    <target name="-before-build">
+      <echo file="temp.txt" append="true" message="$&#123;app.output.base&#125;"/>
+    </target>
 </project>
