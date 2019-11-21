@@ -81,25 +81,26 @@ try {
 			filenames.forEach(function(filename) {
 				var content = fs.readFileSync(NodeAppViewPackageTemplatesDir + '/' + filename).toString()
 				if (filename.substr(filename.length - 8) == 'json.tpl') { return }
-					var filetemplate = _.template(filename);
-					var f = filetemplate(values).slice(0, -4);
-					var folderAndFile = NodeAppViewPackageTemplatesDir + '/' + filename
-					var tpl = new Ext.XTemplate(content)
-					var t = tpl.apply(values)
-					delete tpl
-					fs.writeFileSync(dir + '/' + f, t);
-					util.infLog('Generated file ' + dir + '/' + f)
-      });
-      newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
+				var filetemplate = _.template(filename);
+				var f = filetemplate(values).slice(0, -4);
+				var folderAndFile = NodeAppViewPackageTemplatesDir + '/' + filename
+				var tpl = new Ext.XTemplate(content)
+				var t = tpl.apply(values)
+				delete tpl
+				fs.writeFileSync(dir + '/' + f, t);
+				util.infLog('Generated file ' + dir + '/' + f)
+			});
+			newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
 			var item = chalk.yellow(newMenu + ',')
 			var itemphone = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`)
 
-      var menuFile = `${CurrWorkingDirRoot}/resources/desktop/menu.json`
-      var menuJson = (fs.existsSync(menuFile) && JSON.parse(fs.readFileSync(menuFile, 'utf-8')) || {})
-      menuJson.children.push(JSON.parse(newMenu))
-      fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
-
-			console.log(help.menuText(menuFile, item, itemphone))
+			var menuFile = `${CurrWorkingDirRoot}/resources/${profile}/menu.json`
+			var menuJson = fs.existsSync(menuFile) && JSON.parse(fs.readFileSync(menuFile, 'utf-8'))
+			if(menuJson) {
+				menuJson.children.push(JSON.parse(newMenu))
+				fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
+			}
+			console.log(help.menuText(menuFile, item, itemphone));
 		});
 	}
 

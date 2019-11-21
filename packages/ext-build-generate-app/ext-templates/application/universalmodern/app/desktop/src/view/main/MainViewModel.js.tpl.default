@@ -26,16 +26,14 @@ Ext.define('{appName}.view.main.MainViewModel', {
 	},
 	stores: {
 		menu: {
-			"type": "tree",
-			"root": {
-				"expanded": true,
-				"children": [
-          { "text": "Home", "iconCls": "x-fa fa-home", "xtype": "homeview", "leaf": true },
-					{ "text": "Personnel", "iconCls": "x-fa fa-table", "xtype": "personnelview","leaf": true },
-					//add new items on the next line (from sencha-node generate viewpackage)
-
-				]
-			}
+			type: "tree",
+			proxy: {
+				type: 'ajax',
+				reader: 'json',
+				url: 'resources/desktop/menu.json'
+			},
+			autoLoad: true
 		}
 	}
+
 });
