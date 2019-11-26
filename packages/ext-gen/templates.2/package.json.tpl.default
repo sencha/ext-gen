@@ -44,11 +44,11 @@
   },
   "dependencies": {
     <tpl if="modern == true">
-    "@sencha/ext-modern": "~7.0.0",
-    "@sencha/ext-modern-{modernTheme}": "~7.0.0",</tpl><tpl if="classic == true">
-    "@sencha/ext-classic": "~7.0.0",
-    "@sencha/ext-classic-{classicTheme}": "~7.0.0",</tpl>
-    "@sencha/ext": "~7.0.0"
+    "@sencha/ext-modern": "~7.1.0",
+    "@sencha/ext-modern-{modernTheme}": "~7.1.0",</tpl><tpl if="classic == true">
+    "@sencha/ext-classic": "~7.1.0",
+    "@sencha/ext-classic-{classicTheme}": "~7.1.0",</tpl>
+    "@sencha/ext": "~7.1.0"
   },
   "devDependencies": {
     "@sencha/ext-webpack-plugin": "~7.1.0",
