@@ -624,6 +624,9 @@ async function stepCreate() {
   } catch(err) {
     console.log(boldRed('Error in npm install: ' + err));
   }
+  
+  // Fix: install necessary sencha packages to prevent error before requiring frameworkPath/cmdPath
+  await util.spawnPromise(command,['install','@sencha/ext','@sencha/cmd'], options,[]);
 
   var frameworkPath = path.join(destDir, 'node_modules', npmScope, 'ext', 'package.json');
   var cmdPath = path.join(destDir, 'node_modules', npmScope, 'cmd', 'package.json');
