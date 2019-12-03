@@ -132,7 +132,7 @@ function getAppJson(CurrWorkingDir) {
 		var dir = ''
 		for (var i = 0; i < j; i++) {
 			if (myStringArray[i]!='') {
-				dir = dir + '/' + myStringArray[i]
+				dir = i ===0  ? dir + myStringArray[i]: dir + '/' + myStringArray[i]
 			}
 		}
 		// var workspaceJson = dir + '/' + 'workspace.json'
