@@ -16,9 +16,9 @@ npm install -g @sencha/ext-build
 * eb
 
 ## Examples
-* ext-build generate app --sdk 'Ext/ext-7.0.0' --template 'universalmodern' MyApp ./MyApp
-* ext-build gen app -s 'Ext/ext-7.0.0' -t 'universalmodern' MyApp ./MyApp
-* eb g a -s 'Ext/ext-7.0.0' -t 'universalmodern' MyApp ./MyApp
+* ext-build generate app --sdk 'Ext/ext-7.1.0' --template 'universalmodern' MyApp ./MyApp
+* ext-build gen app -s 'Ext/ext-7.1.0' -t 'universalmodern' MyApp ./MyApp
+* eb g a -s 'Ext/ext-7.1.0' -t 'universalmodern' MyApp ./MyApp
 * ext-build generate viewpackage settings
 
 ## Commands Available
@@ -38,4 +38,4 @@ npm install -g @sencha/ext-build
 * --template -t (name of app template to use - only one currently - universalmodern)
 
 ## Comments
-* Tested with Ext JS Version 7.0.0
+* Tested with Ext JS Version 7.1.0
