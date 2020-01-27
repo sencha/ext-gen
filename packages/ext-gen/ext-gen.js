@@ -650,7 +650,7 @@ async function stepCreate() {
   if (answers['universal'] == true) {
     runPhone = `or "npm run phone"`
   }
-  console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" or "npm run desktop" ${runPhone}\nto run the development build and open your new application in a web browser\n`))
+  console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" to run the development build and open your new application in a web browser or checkout package.json to view additional build scripts.\n`))
  }
 
  function setDefaults() {
