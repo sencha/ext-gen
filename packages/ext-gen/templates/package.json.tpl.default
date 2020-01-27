@@ -41,7 +41,7 @@
     "@sencha/ext": "~7.1.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~7.1.0",
+    "@sencha/ext-webpack-plugin": "~7.1.1",
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.21",
     "webpack": "~4.39.2",
