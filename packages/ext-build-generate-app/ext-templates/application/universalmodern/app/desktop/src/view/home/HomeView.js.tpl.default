@@ -7,7 +7,7 @@ Ext.define('{appName}.view.home.HomeView',{
 	extend: 'Ext.Container',
   scrollable: true,
   html: `<div style="user-select: text !important;">
-Welcome to the Ext JS 7.0 Modern Desktop Template Application!
+Welcome to the Ext JS 7.1 Modern Desktop Template Application!
 <br><br>
 To build a new ViewPackage, type the following in a command window:
 <br>

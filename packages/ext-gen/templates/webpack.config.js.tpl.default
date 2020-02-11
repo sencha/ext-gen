@@ -1,8 +1,7 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 const portfinder = require('portfinder');
+const replace = require("replace");
 
 module.exports = async function (env) {
   function get(it, val) {if(env == undefined) {return val} else if(env[it] == undefined) {return val} else {return env[it]}}
@@ -31,16 +30,13 @@ module.exports = async function (env) {
   var browser       = get('browser',       'yes')
   var watch         = get('watch',         'yes')
   var verbose       = get('verbose',       'no')
-  var basehref      = get('basehref',      '/')
   var isProd        = false;
   
   if (environment === 'production') { isProd = true; }
-  
+
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
-      new HtmlWebpackPlugin({ template: "index.html", hash: true, inject: "body" }),
-      new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
         framework: framework,
         toolkit: toolkit,

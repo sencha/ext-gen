@@ -29,6 +29,10 @@ Ext.define('{appName}.view.main.MainViewController', {
 			console.log(xtype + ' does not exist');
 			return;
 		}
+		if(!menuview.getStore()) {
+			console.log('Store not yet available from viewModel binding');
+			return;
+		}
 
 		node = menuview.getStore().findNode('xtype', xtype);
 
