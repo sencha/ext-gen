@@ -15,6 +15,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sencha, Inc.",
-  "license": "MIT",
+  "license" : "SEE LICENSE IN license.txt",
   "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-build-generate-app"
 }

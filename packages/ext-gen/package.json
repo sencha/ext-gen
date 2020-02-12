@@ -37,7 +37,7 @@
     "url": "git+https://github.com/sencha/ext-gen.git"
   },
   "author": "Sencha, Inc.",
-  "license": "MIT",
+  "license" : "SEE LICENSE IN license.txt",
   "bugs": {
     "url": "https://github.com/"
   },
