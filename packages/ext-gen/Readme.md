@@ -1,41 +1,59 @@
 # ext-gen
-A generator for Ext JS applications.
+Sencha ExtGen - Open Tools for Ext JS
 
-## Installation
+## 1. Install the App Generator CLI
 
-Install [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+Install the Ext JS app generator CLI command tool ext-gen which will be used to generate the application.
 
-```bash
+```
 npm install -g @sencha/ext-gen
 ```
 
-## Creating a new ext-gen App
+## 2. Generate the Application
 
-If you haven't already, log into Sencha's private registry using the credentials you received in your ExtReact trial or subscription activation email. If you don't have credentials, you can get them by [signing up for a trial of ExtReact](https://www.sencha.com/products/extreact/evaluate/).
+Generate the Ext JS application using the interactive walkthrough. Use `ext-gen app -a` to skip the interactive walkthrough.
 
-```bash
-npm login --registry=http://npm.sencha.com --scope=@sencha
+```
+ext-gen app -a
 ```
 
-Then, to create a new ext-gen app, run:
+## Interactive Walkthrough
 
-```bash
-ext-gen
+```
+ext-gen app -a
 ```
 
-## Development
+Would you like to see the defaults for package.json? (y/N)
 
-To make changes to the generator, run:
+  If you select `yes`, ext-gen shows all defaults for package.json
+Would you like to create a package.json file with defaults? (Y/n)
 
-```bash
-git clone git@github.com:sencha/ext-gen.git
-cd ext-gen
-npm install
-cd packages/ext-gen
-npm link
+  This creates a package.json with the defaults
+What would you like to name your Ext JS app? (MyApp)
+
+  Type name of your app
+What type of Ext JS template do you want? (Use arrow keys)
+
+  ❯ make a selection from a list
+    type a folder name
+What Ext JS template would you like to use?
+
+    classicdesktop
+    classicdesktoplogin
+    moderndesktop
+    moderndesktopminimal
+    universalclassicmodern
+  ❯ universalmodern
+Would you like to generate the Ext JS npm project with above config now? (Y/n)
+
+## 3. Run the New Application
+
+Start up the newly created application in the default browser with these commands.
+
 ```
-
-Now `ext-gen` will use your local copy of the generator.
+cd ./<your-app-name>
+npm start
+```
 
 ## License
 
