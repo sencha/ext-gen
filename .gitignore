@@ -1,3 +1,5 @@
 community
 package-lock.json
 misc2
+node_modules
+.sencha
