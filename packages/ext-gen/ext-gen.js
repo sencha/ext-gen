@@ -115,6 +115,8 @@ function stepStart() {
       edition = `Community`
     }
   }
+  
+  edition = `GPL`
 
   var data = fs.readFileSync(nodeDir + '/config.json')
   config = JSON.parse(data)
