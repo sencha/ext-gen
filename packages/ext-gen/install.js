@@ -29,6 +29,8 @@ else {
   edition = `Community`
 }
 
+edition = `GPL`
+
 var classic = ``
 if (global.isCommunity) {
   classic = ``
