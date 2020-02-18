@@ -1,5 +1,10 @@
 # Release Notes
 
+## v7.2
+
+* Support for Ext JS v7.2
+* Version numbering in line with other products
+
 ## v7.1
 
 * Support for Ext JS v7.1
