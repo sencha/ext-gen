@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-webpack-plugin",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "switchit":"^1.0.8",
     "@babel/generator": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@sencha/cmd": "~7.1.0",
+    "@sencha/cmd": "~7.2.0",
     "lodash.uniq": "^4.5.0",
     "schema-utils": "^1.0.0",
     "babylon": "^6.18.0",

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@sencha/ext-build-generate-app": "~7.2.0",
-    "@sencha/cmd": "~7.1.0",
+    "@sencha/cmd": "~7.2.0",
     "node-find-folder": "^0.1.32",
     "chalk": "^2.4.2",
     "child-process-promise": "^2.2.1",
