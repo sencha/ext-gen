@@ -54,8 +54,28 @@
     importTask.execute();
   }
 ]]>
-    </script>
-    <target name="-before-build">
-      <echo file="temp.txt" append="true" message="$&#123;app.output.base&#125;"/>
-    </target>
+  </script>
+  <fileset dir="./" id="regexp.bundle">
+    <filename regex="(main[A-Z0-9.])\w*(\w.)?js" />
+    <exclude name="node_modules/**" />
+    <exclude name="node_modules" />
+    <exclude name="app" />
+    <exclude name="build/production" />
+    <exclude name="build/**" />
+    <exclude name=".sencha" />
+    <exclude name="packages" />
+    <exclude name="generatedFiles" />
+    <exclude name="resources" />
+  </fileset>
+
+  <target name="-before-build">
+    <pathconvert pathsep="${line.separator}" property="app.webpack.bundle.file" refid="regexp.bundle" />
+    <basename property="app.webpack.bundle" file="${app.webpack.bundle.file}"/>
+  </target>
+
+  <target name="-after-build">
+    <delete failonerror="true" includeemptydirs="false" verbose="true">
+      <fileset refid="regexp.bundle" />
+    </delete>
+  </target>
 </project>
