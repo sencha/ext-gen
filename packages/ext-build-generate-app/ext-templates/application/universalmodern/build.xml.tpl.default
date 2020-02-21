@@ -69,8 +69,8 @@
   </fileset>
 
   <target name="-before-build">
-    <pathconvert pathsep="${line.separator}" property="app.webpack.bundle.file" refid="regexp.bundle" />
-    <basename property="app.webpack.bundle" file="${app.webpack.bundle.file}"/>
+    <pathconvert pathsep="$&#123;line.separator&#123;" property="app.webpack.bundle.file" refid="regexp.bundle" />
+    <basename property="app.webpack.bundle" file="$&#123;app.webpack.bundle.file&#125;"/>
   </target>
 
   <target name="-after-build">
