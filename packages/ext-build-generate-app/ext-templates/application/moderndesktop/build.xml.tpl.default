@@ -69,7 +69,7 @@
   </fileset>
 
   <target name="-before-build">
-    <pathconvert pathsep="$&#123;line.separator&#123;" property="app.webpack.bundle.file" refid="regexp.bundle" />
+    <pathconvert pathsep="$&#123;line.separator&#125;" property="app.webpack.bundle.file" refid="regexp.bundle" />
     <basename property="app.webpack.bundle" file="$&#123;app.webpack.bundle.file&#125;"/>
   </target>
 
