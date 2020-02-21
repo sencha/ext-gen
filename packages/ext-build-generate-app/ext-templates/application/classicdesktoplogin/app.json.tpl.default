@@ -74,11 +74,7 @@
   "js": [<tpl if="universal == false">
     {
       "path": "$\u007Bframework.dir}/build/ext-<tpl if="toolkit == 'modern'">modern-all<tpl else>all-rtl</tpl>-debug.js"
-    },</tpl>
-    {
-      "path": "app.js",
-      "bundle": true
-    }
+    }</tpl>
   ],
 <tpl if="universal == true">
   "classic": {"js": []},
@@ -96,6 +92,10 @@
     "cacheParam": "_dc"
   },
   "production": {
+    "js": [
+      {"path": "app.js", "bundle": true},
+      {"path": "${app.webpack.bundle}"}
+    ],
     "output": {
       "appCache": {
         "enable": false,
@@ -114,6 +114,10 @@
   },
   "testing": {},
   "development": {
+    "js": [
+      {"path": "app.js", "bundle": true},
+      {"path": "main.js"}
+    ],
     "watch": {
       "delay": 250
     }
