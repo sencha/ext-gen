@@ -104,7 +104,7 @@
   "production": {
     "js": [
       {"path": "app.js", "bundle": true},
-      {"path": "$&#123;app.webpack.bundle&#123;"}
+      {"path": "$\u007bapp.webpack.bundle}"}
     ],
     "output": {
       "appCache": {
