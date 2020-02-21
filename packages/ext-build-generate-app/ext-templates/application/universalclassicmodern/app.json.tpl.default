@@ -86,11 +86,7 @@
   "js": [<tpl if="universal == false">
     {
       "path": "$\u007Bframework.dir}/build/ext-<tpl if="toolkit == 'modern'">modern-all<tpl else>all-rtl</tpl>-debug.js"
-    },</tpl>
-    {
-      "path": "app.js",
-      "bundle": true
-    }
+    }</tpl>
   ],
   "css": [
     {
@@ -106,6 +102,10 @@
   },
 
   "production": {
+    "js": [
+      {"path": "app.js", "bundle": true},
+      {"path": "$\u007bapp.webpack.bundle}"}
+    ],
     "output": {
       "appCache": {
         "enable": false,
@@ -122,10 +122,12 @@
       "type": "yui"
     }
   },
-
   "testing": {},
-
   "development": {
+    "js": [
+      {"path": "app.js", "bundle": true},
+      {"path": "main.js"}
+    ],
     "watch": {
       "delay": 250
     }

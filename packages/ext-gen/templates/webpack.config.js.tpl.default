@@ -12,8 +12,8 @@ module.exports = async function (env) {
   var entryFile     = get('entryFile',     './index.js')
   var outputFolder  = get('outputFolder',  './')
   const rules =[
-    //{ test: /\.(js|jsx)$/, exclude: /node_modules/ }
-    { test: /\.(js)$/, use: ['babel-loader'] }
+    //{ test: /.(js|jsx)$/, exclude: /node_modules/ }
+    { test: /.(js)$/, use: ['babel-loader'] }
   ]
   const resolve = {
   }
@@ -33,6 +33,8 @@ module.exports = async function (env) {
   var isProd        = false;
   
   if (environment === 'production') { isProd = true; }
+
+  const bundleFormat = isProd ? "[name].[hash].js" : "[name].js";
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -61,7 +63,7 @@ module.exports = async function (env) {
       entry: entryFile,
       output: {
         path: path.join(__dirname, outputFolder),
-        filename: "[name].js"
+        filename: bundleFormat
       },
       plugins: plugins,
       module: {
@@ -86,3 +88,4 @@ module.exports = async function (env) {
     }
   })
 }
+
