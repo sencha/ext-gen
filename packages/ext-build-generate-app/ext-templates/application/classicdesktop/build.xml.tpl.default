@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="appModern" default=".help">
+
+<fileset dir="./" id="regexp.bundle">
+    <filename regex="^main.*([A-Z0-9.])w*(w.)?js" />
+    <exclude name="node_modules/" />
+    <exclude name="app/" />
+    <exclude name="build/" />
+    <exclude name=".sencha/" />
+    <exclude name="packages/" />
+    <exclude name="generatedFiles/" />
+    <exclude name="resources/" />
+  </fileset>
+
     <script language="javascript">
 <![CDATA[
   var dir = project.getProperty("basedir"),
@@ -55,18 +67,6 @@
   }
 ]]>
   </script>
-  <fileset dir="./" id="regexp.bundle">
-    <filename regex="(main[A-Z0-9.])\w*(\w.)?js" />
-    <exclude name="node_modules/**" />
-    <exclude name="node_modules" />
-    <exclude name="app" />
-    <exclude name="build/production" />
-    <exclude name="build/**" />
-    <exclude name=".sencha" />
-    <exclude name="packages" />
-    <exclude name="generatedFiles" />
-    <exclude name="resources" />
-  </fileset>
 
   <target name="-before-build">
     <pathconvert pathsep="$&#123;line.separator&#125;" property="app.webpack.bundle.file" refid="regexp.bundle" />
