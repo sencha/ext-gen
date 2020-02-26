@@ -82,7 +82,6 @@ module.exports = async function (env) {
         watchOptions: {
           ignored: ignoreFolders
         },
-        writeToDisk: !isProd,
         contentBase: [path.resolve(__dirname, outputFolder)],
         watchContentBase: !isProd,
         liveReload: !isProd,
