@@ -236,11 +236,14 @@ async function callmovetolatest()
 
 async function migrate()
 {
- console.log('Migration to Open Tools started...');
+  console.log('Migration to Open Tools started...');
   await appMigrate.migrateApp();
-  //console.log('Upgrade done . Please run npm install and then npm run all');
-  console.log('Migration to Open Tools ended');
-
+  console.log(boldGreen('\nMigration to Open Tools ended'));
+  console.log(boldGreen('\nrun `npm install` to install the necessary Open Tooling dependencies'));
+  console.log('\nNote: your build profiles in app.json may be different than those pre-configured in your new package.json.');
+  console.log('If you are not using desktop or phone build profiles, such as in a universal application where the profiles generated for you are modern and classic,');
+  console.log('update the different build scripts in the scripts section fo package.json. The --env.profile=<your_build_profile> should be updated to match a valid profile in your app.json.');
+  console.log(boldGreen('\nPlease review documentation at https://docs.sencha.com'));
 }
 
 function stepCheckCmdLine() {
@@ -650,7 +653,7 @@ async function stepCreate() {
   if (answers['universal'] == true) {
     runPhone = `or "npm run phone"`
   }
-  console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" or "npm run desktop" ${runPhone}\nto run the development build and open your new application in a web browser\n`))
+  console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" to run the development build and open your new application in a web browser or checkout package.json to view additional build scripts.\n`))
  }
 
  function setDefaults() {
