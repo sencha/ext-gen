@@ -93,8 +93,8 @@
   },
   "production": {
     "js": [
-      {"path": "app.js", "bundle": true},
-      {"path": "$\u007bapp.webpack.bundle}"}
+      {"path": "$\u007bapp.webpack.bundle}"},
+      {"path": "app.js", "bundle": true}
     ],
     "output": {
       "appCache": {
@@ -115,8 +115,8 @@
   "testing": {},
   "development": {
     "js": [
-      {"path": "app.js", "bundle": true},
-      {"path": "main.js"}
+      {"path": "main.js", "includeInBundle": true},
+      {"path": "app.js", "bundle": true}
     ],
     "watch": {
       "delay": 250
