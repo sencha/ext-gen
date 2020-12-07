@@ -1,5 +1,11 @@
 # Release Notes
 
+## v7.4
+
+* Support for Ext JS v7.4
+* Version numbering in line with other products
+* OTOOLS-61 - Added support to pass Sencha CMD options on npm scripts
+
 ## v7.2
 
 * Support for Ext JS v7.2
