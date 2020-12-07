@@ -1,10 +1,9 @@
 # Release Notes
 
-## v7.4
+## v7.4.0
 
-* Support for Ext JS v7.4
-* Version numbering in line with other products
-* OTOOLS-61 - Added support to pass Sencha CMD options on npm scripts
+* OTOOLS-76 - Open Tooling Support for Ext JS 7.4
+* OTOOLS-61 - ext-webpack-plugin does not support for building using dynamic packages by passing --uses to npm scripts
 
 ## v7.2
 
