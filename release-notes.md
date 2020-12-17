@@ -1,5 +1,10 @@
 # Release Notes
 
+## v7.4.0
+
+* OTOOLS-76 - Open Tooling Support for Ext JS 7.4
+* OTOOLS-61 - ext-webpack-plugin does not support for building using dynamic packages by passing --uses to npm scripts
+
 ## v7.2
 
 * Support for Ext JS v7.2
