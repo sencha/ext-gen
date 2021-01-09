@@ -12,7 +12,7 @@ module.exports = function (env) {
   var browser     = get('browser',     'yes')
   var watch       = get('watch',       'yes')
   var verbose     = get('verbose',     'no')
-  var cmdopts     = get('cmdopts',     '')
+  var cmdopts     = get('cmdopts',     [])
   if (environment == 'production') {
     browser = 'no'
     watch = 'no'
