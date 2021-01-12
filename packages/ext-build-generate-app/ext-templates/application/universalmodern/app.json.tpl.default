@@ -122,7 +122,12 @@
       "type": "yui"
     }
   },
-  "testing": {},
+  "testing": {
+      "js": [
+        {"path": "app.js", "bundle": true},
+        {"path": "$\u007bapp.webpack.bundle}", "compress": false }
+      ]
+  },
   "development": {
     "js": [
       {"path": "app.js", "bundle": true},
