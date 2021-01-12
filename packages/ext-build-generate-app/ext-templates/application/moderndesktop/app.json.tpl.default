@@ -122,7 +122,7 @@
   "testing": {
     "js": [
       {"path": "app.js", "bundle": true},
-      {"path": "main.js"}
+      {"path": "$\u007bapp.webpack.bundle}", "compress": false }
     ]
   },
   "development": {
