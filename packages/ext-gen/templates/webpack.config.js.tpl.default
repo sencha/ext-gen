@@ -32,7 +32,9 @@ module.exports = async function (env) {
   var isProd        = false;
   var cmdopts     = get('cmdopts',     [])
   
-  if (environment === 'production') { isProd = true; }
+  if (environment === 'production' || (cmdopts.includes('--production') || cmdopts.includes('--environment=production'))) {
+      isProd = true;
+  }
 
   // The build.xml Sencha Cmd plugin uses a regex to locate the webpack bundle for use in app.json to be included in 
   // the different build environments. For development builds, the file is served in memory.
@@ -53,7 +55,7 @@ module.exports = async function (env) {
         script: script,
         emit: emit,
         port: port,
-        profile: profile, 
+        profile: profile,
         environment: environment,
         treeshake: treeshake,
         browser: browser,

@@ -13,11 +13,12 @@ module.exports = function (env) {
   var watch       = get('watch',       'yes')
   var verbose     = get('verbose',     'no')
   var cmdopts     = get('cmdopts',     [])
-  if (environment == 'production') {
+  var isProd      = false
+  if (environment === 'production' || (cmdopts.includes('--production') || cmdopts.includes('--environment=production'))) {
     browser = 'no'
     watch = 'no'
+    isProd = true
   }
-  const isProd = environment === 'production'
   const outputFolder = './'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
