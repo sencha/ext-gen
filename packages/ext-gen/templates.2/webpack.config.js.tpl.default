@@ -15,11 +15,17 @@ module.exports = function (env) {
   var cmdopts     = get('cmdopts',     [])
   var isProd      = false
   if (environment === 'production' ||
-  (cmdopts.includes('--production') || cmdopts.includes('-pr') || cmdopts.includes('--environment=production') || cmdopts.includes('-e=production'))) {
+        (cmdopts.includes('--production') ||
+         cmdopts.includes('--environment=production') ||
+         cmdopts.includes('-e=production') ||
+         cmdopts.includes('-pr'))
+      ) 
+  {
     browser = 'no'
     watch = 'no'
     isProd = true
   }
+  
   const outputFolder = './'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
