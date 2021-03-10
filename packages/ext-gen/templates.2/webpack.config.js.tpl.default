@@ -14,7 +14,8 @@ module.exports = function (env) {
   var verbose     = get('verbose',     'no')
   var cmdopts     = get('cmdopts',     [])
   var isProd      = false
-  if (environment === 'production' || (cmdopts.includes('--production') || cmdopts.includes('--environment=production'))) {
+  if (environment === 'production' ||
+  (cmdopts.includes('--production') || cmdopts.includes('-pr') || cmdopts.includes('--environment=production') || cmdopts.includes('-e=production'))) {
     browser = 'no'
     watch = 'no'
     isProd = true

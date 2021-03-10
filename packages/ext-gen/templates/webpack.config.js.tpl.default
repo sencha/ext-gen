@@ -32,7 +32,9 @@ module.exports = async function (env) {
   var isProd        = false;
   var cmdopts     = get('cmdopts',     [])
   
-  if (environment === 'production' || (cmdopts.includes('--production') || cmdopts.includes('--environment=production'))) {
+  if (environment === 'production' ||
+  (cmdopts.includes('--production') || cmdopts.includes('-pr') || cmdopts.includes('--environment=production') || cmdopts.includes('-e=production'))
+  ) {
       isProd = true;
   }
 
