@@ -17,6 +17,7 @@ module.exports = function (env) {
   if (environment === 'production' ||
         (cmdopts.includes('--production') ||
          cmdopts.includes('--environment=production') ||
+         cmdopts.includes('-e=production') ||
          cmdopts.includes('-pr'))
       ) 
   {
