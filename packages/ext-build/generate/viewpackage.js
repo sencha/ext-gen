@@ -90,7 +90,7 @@ try {
 				fs.writeFileSync(dir + '/' + f, t);
 				util.infLog('Generated file ' + dir + '/' + f)
 			});
-			newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
+			/* newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
 			var item = chalk.yellow(newMenu + ',')
 			var itemphone = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`)
 
@@ -100,7 +100,20 @@ try {
 				menuJson.children.push(JSON.parse(newMenu))
 				fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
 			}
-			console.log(help.menuText(menuFile, item, itemphone));
+			console.log(help.menuText(menuFile, item, itemphone)); */
+			var item,
+				menuFile;
+
+			if (profile === 'desktop') {
+				newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`;
+				item = chalk.yellow(newMenu + ',');
+				menuFile = `${CurrWorkingDirRoot}/resources/${profile}/menu.json`;
+			} else {
+				item = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`);
+				menuFile = `${CurrWorkingDirRoot}/${profile}/src/view/main/MenuView.js`;
+			}
+
+			console.log(help.menuText(menuFile, item, profile));
 		});
 	}
 

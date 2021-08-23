@@ -49,22 +49,13 @@ ${chalk.green('********************************************')}
 }
 
 //${menuFile}menu.json:
-exports.menuText = function menuText(menuFile, item, itemphone) { 
+exports.menuText = function menuText(menuFile, item, profile) { 
 	return`
 ${chalk.green('********************************************')}
 
-For Desktop:
+For ${profile}, add to ${menuFile}
 
 ${item}
-
-is added to
-
-${menuFile}
-
-
-For Phone, add to src/view/main/MenuView.js
-
-${itemphone}
 
 ${chalk.green('********************************************')}
 `
