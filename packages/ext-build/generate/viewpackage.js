@@ -20,18 +20,26 @@ try {
 	};
 	
 	exports.init = function init(CurrWorkingDir, pathSenchaCmd, options, NodeAppTemplatesDir) { 
-    var parms = options.parms
+	var profile;
+	var ViewName;
 
-    console.log(parms[3])
+	if (options.hasOwnProperty('viewname')) {
+		ViewName = options.viewname;
+		profile = options.profile || 'shared';
+	} else {
+		var parms = options.parms
+
+		console.log(parms[3])
 		if(parms[3] == undefined) {
-      util.errLog('3 parameters needed')
-      //throw util.err('Only 1 parameter is allowed')
-    }
-    var profile = parms[2];
-    var ViewName = parms[3];
+		  util.errLog('3 parameters needed')
+		  //throw util.err('Only 1 parameter is allowed')
+		}
+		var profile = parms[2];
+		var ViewName = parms[3];
+	}
 //    console.log(ViewName)
 //    util.infLog('ViewName: ' + ViewName)
-		if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
+	if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
     var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage');
 //    util.infLog('NodeAppViewPackageTemplatesDir: ' + NodeAppViewPackageTemplatesDir)
 
@@ -101,19 +109,8 @@ try {
 				fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
 			}
 			console.log(help.menuText(menuFile, item, itemphone)); */
-			var item,
-				menuFile;
 
-			if (profile === 'desktop') {
-				newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`;
-				item = chalk.yellow(newMenu + ',');
-				menuFile = `${CurrWorkingDirRoot}/resources/${profile}/menu.json`;
-			} else {
-				item = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`);
-				menuFile = `${CurrWorkingDirRoot}/${profile}/src/view/main/MenuView.js`;
-			}
-
-			console.log(help.menuText(menuFile, item, profile));
+			console.log(help.menuText(ViewName, dir));
 		});
 	}
 

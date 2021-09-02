@@ -25,6 +25,8 @@ const optionDefinitions = [
   { name: 'force', type: Boolean },
   { name: 'sdk', alias: 's', type: String },
   { name: 'template', alias: 't', type: String },
+  { name: 'profile', alias: 'p', type: String },
+  { name: 'viewname', alias: 'v', type: String },
   { name: 'parms', type: String, multiple: true, defaultOption: true },
 ]
 
