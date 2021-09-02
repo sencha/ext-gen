@@ -10,8 +10,8 @@ ${chalk.green('*')} ext-build generate app --template 'classicdesktop' --sdk '/S
 ${chalk.green('*')} ext-build generate app --template 'universalmodernclassic' --sdk '/Sencha/ext-6.x.x' UMC ./UMC
 ${chalk.green('*')} ext-build gen app -s '/Sencha/ext-6.x.x' -t 'universalmodern' MyApp ./MyApp
 ${chalk.green('*')} ext-build g a -s '/Sencha/ext-6.x.x' -t 'universalmodern' MyApp ./MyApp
-${chalk.green('*')} ext-build generate viewpackage --profile desktop --viewname settings
-${chalk.green('*')} ext-build g vp -p desktop -v settings
+${chalk.green('*')} ext-build generate viewpackage --profile desktop --viewname settings --include-scss
+${chalk.green('*')} ext-build g vp -p desktop -v settings -i
 ${chalk.green('*')} ext-build generate viewpackage --viewname settings
 ${chalk.green('*')} ext-build g vp -v settings
 ${chalk.green('*')} ext-build generate storepackage employee
@@ -33,7 +33,8 @@ ${chalk.green('*')} --debug -d (shows debug messages)
 ${chalk.green('*')} --sdk -s (path to Ext JS sdk - currently required for gen app, no running from sdk folder...)
 ${chalk.green('*')} --template -t (name of app template to use - only one currently - universalmodern)
 ${chalk.green('*')} --viewname -v (name of view package to use, required for gen viewpackage)
-${chalk.green('*')} --profile -v (name of profile to use, required for gen viewpackage. Optional - if not specified view created in shared directory)
+${chalk.green('*')} --profile -p (name of profile to use, required for gen viewpackage. Optional - if not specified view created in shared directory)
+${chalk.green('*')} --include-scss -i (when provided this param, view.scss will be generated otherwise not)
 `
 //${chalk.green('*')} --force (deletes application, if present, before generate app (BE CAREFUL WITH THIS!))
 //${chalk.green('*')} --builds -b (--builds "desktop:modern,theme-material;phone:modern,theme-material;" is default)

@@ -19,7 +19,7 @@ try {
 		evaluate: /\<\<=(.+?)\>\>/g
 	};
 	
-	exports.init = function init(CurrWorkingDir, pathSenchaCmd, options, NodeAppTemplatesDir) { 
+	exports.init = function init(CurrWorkingDir, pathSenchaCmd, options, NodeAppTemplatesDir) {
 	var profile;
 	var ViewName;
 
@@ -39,11 +39,12 @@ try {
 	}
 //    console.log(ViewName)
 //    util.infLog('ViewName: ' + ViewName)
-	if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
+	if (ViewName == undefined) {throw util.err('View Name parameter is empty')}
+	var generateScss = options.hasOwnProperty('include-scss') ? true : false;
     var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage');
 //    util.infLog('NodeAppViewPackageTemplatesDir: ' + NodeAppViewPackageTemplatesDir)
 
-    var CurrWorkingDirRoot = CurrWorkingDir
+    //var CurrWorkingDirRoot = CurrWorkingDir
     var appName = util.getAppName(CurrWorkingDir);
 //    util.infLog('appName: ' + appName)
     var toFolder = getFolder(CurrWorkingDir);
@@ -73,7 +74,7 @@ try {
     //util.infLog('viewFileName: ' + viewFileName)
     var viewNameSmall = iSmall + 'view';
     //util.infLog('viewNameSmall: ' + viewNameSmall)
-    var menuPath = `resources/shared/data/`;
+    //var menuPath = `resources/shared/data/`;
     //util.infLog('menuPath: ' + menuPath)
 		var values = {
 			appName: appName,
@@ -87,6 +88,7 @@ try {
     //util.infLog(dir + ' created')
 		fs.readdir(NodeAppViewPackageTemplatesDir, function(err, filenames) {
 			filenames.forEach(function(filename) {
+				if (filename.match(/scss\.tpl/) && !generateScss) return;
 				var content = fs.readFileSync(NodeAppViewPackageTemplatesDir + '/' + filename).toString()
 				if (filename.substr(filename.length - 8) == 'json.tpl') { return }
 				var filetemplate = _.template(filename);

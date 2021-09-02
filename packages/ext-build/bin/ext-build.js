@@ -27,6 +27,7 @@ const optionDefinitions = [
   { name: 'template', alias: 't', type: String },
   { name: 'profile', alias: 'p', type: String },
   { name: 'viewname', alias: 'v', type: String },
+  { name: 'include-scss', alias: 'i', type: String },
   { name: 'parms', type: String, multiple: true, defaultOption: true },
 ]
 
