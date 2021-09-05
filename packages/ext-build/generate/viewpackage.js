@@ -49,11 +49,11 @@ try {
 //    util.infLog('appName: ' + appName)
     var toFolder = getFolder(CurrWorkingDir);
     //util.infLog('toFolder: ' + toFolder)
-		if (toFolder != 'view') {
+	if (toFolder != 'view') {
       var ff, ff_desktop, ff_view;
       ff = require('node-find-folder');
       //console.log(process.cwd())
-      process.chdir(`app/${profile}`)
+      process.chdir(fs.existsSync(`${CurrWorkingDir}/app/${profile}`) ? `app/${profile}` : 'app')
       //console.log(process.cwd())
       ff_view = new ff('view');
       //util.infLog('ff_view: ' + ff_view)
@@ -65,7 +65,7 @@ try {
     }
     var dir = CurrWorkingDir + '/' + ViewName;
     //util.infLog('folder: ' + dir)
-		if (fs.existsSync(dir)){throw dir + ' folder exists.  Delete the folder to re-create.'}
+	if (fs.existsSync(dir)){throw dir + ' folder exists.  Delete the folder to re-create.'}
     var iSmall = ViewName.toLowerCase();
     //util.infLog('iSmall: ' + iSmall)
     var iCaps = iSmall[0].toUpperCase() + iSmall.substring(1);
