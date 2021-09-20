@@ -1,7 +1,10 @@
 {
   "apps": [],
   "frameworks": {
-    "ext": "{sdkval}"
+    "ext": {
+      "path": "{sdkval}",
+      "version": "{frameworkVersion}"
+    }
   },
   "build": {
     "dir": "$\u007Bworkspace.dir}/build"
