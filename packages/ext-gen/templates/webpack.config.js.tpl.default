@@ -88,7 +88,7 @@ module.exports = async function (env) {
       resolve: resolve,
       performance: { hints: false },
       stats: 'none',
-      optimization: { noEmitOnErrors: true},
+      optimization: { emitOnErrors: false },
       node: false,
       devServer: {
         liveReload: !isProd,

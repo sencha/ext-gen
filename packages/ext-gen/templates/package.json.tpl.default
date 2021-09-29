@@ -48,7 +48,7 @@
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.21",
     "rimraf": "^3.0.2",
-    "webpack": "~4.39.2",
+    "webpack": "^5.55.1",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1",
     "@babel/cli": "^7.5.5",
