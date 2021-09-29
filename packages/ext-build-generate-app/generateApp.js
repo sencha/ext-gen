@@ -95,7 +95,7 @@ class generateApp {
       Packages = '$\u007Bworkspace.dir}/packages'
 		}
 
-		walkSync(TemplateDir, TemplateDir.length+1, ApplicationDir, ApplicationName, Template, modernTheme, classicTheme, SdkVal, Packages)
+		walkSync(TemplateDir, TemplateDir.length+1, ApplicationDir, ApplicationName, Template, modernTheme, classicTheme, SdkVal, Packages, options.frameworkVersion)
 
     // var f='/.sencha';fs.copySync(CurrJSFilePath + '/' + TemplatesDir + '/application' + '/sencha', ApplicationDir + f)
     // var cmdVersion = options.cmdVersion
@@ -119,7 +119,7 @@ module.exports = generateApp
 	// List all files in a directory in Node.js recursively in a synchronous fashion
 	//https://gist.github.com/kethinov/6658166
 	//const walkSync = (d) => fs.statSync(d).isDirectory() ? fs.readdirSync(d).map(f => walkSync(path.join(d, f)+'\n')) : d;
-	function walkSync(dir, len, ApplicationDir, ApplicationName, Template,  modernTheme, classicTheme, SdkVal, Packages) {
+	function walkSync(dir, len, ApplicationDir, ApplicationName, Template,  modernTheme, classicTheme, SdkVal, Packages, FrameworkVersion) {
     
 		var path = path || require('path');
 		var fs = fs || require('fs');
@@ -137,7 +137,7 @@ module.exports = generateApp
         //   chalk.red('App already exists')
         //   return
         // }
-				walkSync(path.join(dir, file), len, ApplicationDir, ApplicationName, Template,  modernTheme, classicTheme, SdkVal, Packages);
+				walkSync(path.join(dir, file), len, ApplicationDir, ApplicationName, Template,  modernTheme, classicTheme, SdkVal, Packages, FrameworkVersion);
 			}
 			else {
 //				console.log('file (file): ' + file)
@@ -161,6 +161,7 @@ module.exports = generateApp
 					appName: ApplicationName,
 					name: ApplicationName,
           frameworkKey: 'ext',
+          frameworkVersion: FrameworkVersion, 
           sdkval: SdkVal,
           packages: Packages,
 					uniqueId: uuidv4(),

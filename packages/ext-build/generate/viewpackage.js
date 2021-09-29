@@ -19,32 +19,41 @@ try {
 		evaluate: /\<\<=(.+?)\>\>/g
 	};
 	
-	exports.init = function init(CurrWorkingDir, pathSenchaCmd, options, NodeAppTemplatesDir) { 
-    var parms = options.parms
+	exports.init = function init(CurrWorkingDir, pathSenchaCmd, options, NodeAppTemplatesDir) {
+	var profile;
+	var ViewName;
 
-    console.log(parms[3])
+	if (options.hasOwnProperty('viewname')) {
+		ViewName = options.viewname;
+		profile = options.profile || 'shared';
+	} else {
+		var parms = options.parms
+
+		console.log(parms[3])
 		if(parms[3] == undefined) {
-      util.errLog('3 parameters needed')
-      //throw util.err('Only 1 parameter is allowed')
-    }
-    var profile = parms[2];
-    var ViewName = parms[3];
+		  util.errLog('3 parameters needed')
+		  //throw util.err('Only 1 parameter is allowed')
+		}
+		var profile = parms[2];
+		var ViewName = parms[3];
+	}
 //    console.log(ViewName)
 //    util.infLog('ViewName: ' + ViewName)
-		if(ViewName == undefined) {throw util.err('View Name parameter is empty')}
+	if (ViewName == undefined) {throw util.err('View Name parameter is empty')}
+	var generateScss = options.hasOwnProperty('include-scss') ? true : false;
     var NodeAppViewPackageTemplatesDir = path.join(NodeAppTemplatesDir + '/ViewPackage');
 //    util.infLog('NodeAppViewPackageTemplatesDir: ' + NodeAppViewPackageTemplatesDir)
 
-    var CurrWorkingDirRoot = CurrWorkingDir
+    //var CurrWorkingDirRoot = CurrWorkingDir
     var appName = util.getAppName(CurrWorkingDir);
 //    util.infLog('appName: ' + appName)
     var toFolder = getFolder(CurrWorkingDir);
     //util.infLog('toFolder: ' + toFolder)
-		if (toFolder != 'view') {
+	if (toFolder != 'view') {
       var ff, ff_desktop, ff_view;
       ff = require('node-find-folder');
       //console.log(process.cwd())
-      process.chdir(`app/${profile}`)
+      process.chdir(fs.existsSync(`${CurrWorkingDir}/app/${profile}`) ? `app/${profile}` : 'app')
       //console.log(process.cwd())
       ff_view = new ff('view');
       //util.infLog('ff_view: ' + ff_view)
@@ -56,7 +65,7 @@ try {
     }
     var dir = CurrWorkingDir + '/' + ViewName;
     //util.infLog('folder: ' + dir)
-		if (fs.existsSync(dir)){throw dir + ' folder exists.  Delete the folder to re-create.'}
+	if (fs.existsSync(dir)){throw dir + ' folder exists.  Delete the folder to re-create.'}
     var iSmall = ViewName.toLowerCase();
     //util.infLog('iSmall: ' + iSmall)
     var iCaps = iSmall[0].toUpperCase() + iSmall.substring(1);
@@ -65,7 +74,7 @@ try {
     //util.infLog('viewFileName: ' + viewFileName)
     var viewNameSmall = iSmall + 'view';
     //util.infLog('viewNameSmall: ' + viewNameSmall)
-    var menuPath = `resources/shared/data/`;
+    //var menuPath = `resources/shared/data/`;
     //util.infLog('menuPath: ' + menuPath)
 		var values = {
 			appName: appName,
@@ -79,6 +88,7 @@ try {
     //util.infLog(dir + ' created')
 		fs.readdir(NodeAppViewPackageTemplatesDir, function(err, filenames) {
 			filenames.forEach(function(filename) {
+				if (filename.match(/scss\.tpl/) && !generateScss) return;
 				var content = fs.readFileSync(NodeAppViewPackageTemplatesDir + '/' + filename).toString()
 				if (filename.substr(filename.length - 8) == 'json.tpl') { return }
 				var filetemplate = _.template(filename);
@@ -90,7 +100,7 @@ try {
 				fs.writeFileSync(dir + '/' + f, t);
 				util.infLog('Generated file ' + dir + '/' + f)
 			});
-			newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
+			/* newMenu = `{ "text": "${iCaps}", "iconCls": "x-fa fa-cog", "xtype": "${viewNameSmall}", "leaf": true }`
 			var item = chalk.yellow(newMenu + ',')
 			var itemphone = chalk.yellow(`{ "text": "${iCaps}", "tag": "${viewNameSmall}" },`)
 
@@ -100,7 +110,9 @@ try {
 				menuJson.children.push(JSON.parse(newMenu))
 				fs.writeFileSync(menuFile, JSON.stringify(menuJson), 'utf8')
 			}
-			console.log(help.menuText(menuFile, item, itemphone));
+			console.log(help.menuText(menuFile, item, itemphone)); */
+
+			console.log(help.menuText(ViewName, dir));
 		});
 	}
 
