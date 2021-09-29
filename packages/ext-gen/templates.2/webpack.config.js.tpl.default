@@ -51,33 +51,36 @@ module.exports = function (env) {
     return {
       mode: environment,
       devtool: (environment === 'development') ? 'inline-source-map' : false,
-      context: path.join(__dirname, './'),
-      entry: './app.js',
+      context: path.join(__dirname, contextFolder),
+      entry: entryFile,
       output: {
         path: path.join(__dirname, outputFolder),
-        filename: "[name].js"
-        //filename: "[name].[chunkhash:20].js"
+        filename: bundleFormat
       },
       plugins: plugins,
       module: {
-        rules: [
-          { test: /\.(js)$/, exclude: /node_modules/ }
-        ]
+        rules: rules
       },
+      resolve: resolve,
       performance: { hints: false },
       stats: 'none',
-      optimization: { noEmitOnErrors: true },
+      optimization: { noEmitOnErrors: true},
       node: false,
       devServer: {
-        contentBase: outputFolder,
-        hot: !isProd,
-        historyApiFallback: true,
-        host: '0.0.0.0',
+        liveReload: !isProd,
+        historyApiFallback: !isProd,
+        host: host,
         port: port,
-        disableHostCheck: false,
+        allowedHosts: 'all',
         compress: isProd,
-        inline:!isProd,
-        stats: 'none'
+        static: {
+          directory: path.resolve(__dirname, outputFolder),
+          watch: isProd ? false : { ignored: ignoreFolders }
+        },        
+        devMiddleware: {
+          stats: stats
+        },
+        // inline: !isProd, // this was removed without replacement - https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md
       }
     }
   })
