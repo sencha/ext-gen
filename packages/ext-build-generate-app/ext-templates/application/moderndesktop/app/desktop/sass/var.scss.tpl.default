@@ -2,3 +2,8 @@
 //$base-color:#EF5350; //red-ish
 //$base-color:#8D6E63; //brown-ish
 //$base-color:#26A69A; //green-ish
+$base-foreground-color: dynamic($base-color);
+$reverse-background-color: dynamic(#FF00FF);
+$accent-color: dynamic(#FFFF00);
+$accent-light-color: dynamic(#00FF00);
+$accent-dark-color: dynamic(#101010);
