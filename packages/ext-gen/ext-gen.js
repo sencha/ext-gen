@@ -5,6 +5,8 @@ const semver = require("semver")
 const npmScope = '@sencha'
 const appMigrate = require('./appMigrate.js')
 const movetolatest = require('./movetolatest.js')
+const os = require('os');
+const { spawn } = require("child_process")
 require('./XTemplate/js')
 
 const util = require('./util.js')
@@ -17,17 +19,17 @@ const Input = require('prompt-input')
 const Confirm = require('prompt-confirm')
 global.isCommunity = true
 
-function boldGreen (s) {
+function boldGreen(s) {
   var boldgreencolor = `\x1b[32m\x1b[1m`
   var endMarker = `\x1b[0m`
   return (`${boldgreencolor}${s}${endMarker}`)
 }
-function boldRed (s) {
+function boldRed(s) {
   var boldredcolor = `\x1b[31m\x1b[1m`
   var endMarker = `\x1b[0m`
   return (`${boldredcolor}${s}${endMarker}`)
 }
-function getPrefix () {
+function getPrefix() {
   var prefix
   if (require('os').platform() == 'darwin') {
     prefix = `ℹ ｢ext｣:`
@@ -38,7 +40,7 @@ function getPrefix () {
   return prefix
 }
 
-var app =(`${boldGreen(getPrefix())} ext-gen:`)
+var app = (`${boldGreen(getPrefix())} ext-gen:`)
 
 var answers = {
   'seeDefaults': null,
@@ -75,6 +77,8 @@ const optionDefinitions = [
   { name: 'template', alias: 't', type: String },
   { name: 'moderntheme', alias: 'm', type: String },
   { name: 'classictheme', alias: 'c', type: String },
+  { name: 'repo', alias: 'r', type: String },
+  { name: 'branch', alias: 'b', type: String }
 ]
 
 var version = ''
@@ -88,9 +92,9 @@ var globalError = 0
 main()
 async function main() {
   try {
-  //await run (`npm view @sencha/ext version`)
-  //await run (`npm --registry https://npm.sencha.com whoami`)
-  stepStart()
+    //await run (`npm view @sencha/ext version`)
+    //await run (`npm --registry https://npm.sencha.com whoami`)
+    stepStart()
   }
   catch (e) {
     console.log(e)
@@ -124,14 +128,14 @@ function stepStart() {
 
   let mainDefinitions = [{ name: 'command', defaultOption: true }]
   const mainCommandArgs = commandLineArgs(mainDefinitions, { stopAtFirstUnknown: true })
-//  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
+  //  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
   var mainCommand = mainCommandArgs.command
-//  console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
-  switch(mainCommand) {
+  //  console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
+  switch (mainCommand) {
     case undefined:
       let argv = mainCommandArgs._unknown || []
-      if (argv.length == 0 ){
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nShortHelp`)
+      if (argv.length == 0) {
+        //        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nShortHelp`)
         stepShortHelp()
         break;
       }
@@ -140,26 +144,26 @@ function stepStart() {
       }
       else {
         cmdLine = commandLineArgs(optionDefinitions, { argv: argv, stopAtFirstUnknown: true })
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nstep00`)
+        //        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nstep00`)
         stepCheckCmdLine()
       }
       break;
     case 'app':
       cmdLine.command = mainCommand
       let appArgs = mainCommandArgs._unknown || []
-//      console.log(`appArgs: ${JSON.stringify(appArgs)}`)
+      //      console.log(`appArgs: ${JSON.stringify(appArgs)}`)
       let appDefinitions = [{ name: 'appName', defaultOption: true }]
       const appCommandArgs = commandLineArgs(appDefinitions, { argv: appArgs, stopAtFirstUnknown: true })
-//      console.log(`appCommandArgs: ${JSON.stringify(appCommandArgs)}`)
+      //      console.log(`appCommandArgs: ${JSON.stringify(appCommandArgs)}`)
       var appName = appCommandArgs.appName
-//      console.log(`appName: ${JSON.stringify(appName)}`)
+      //      console.log(`appName: ${JSON.stringify(appName)}`)
       if (appName != undefined) {
         cmdLine.name = appName
       }
       let appSubArgs = appCommandArgs._unknown || []
-//      console.log(`appSubArgs: ${JSON.stringify(appSubArgs)}`)
+      //      console.log(`appSubArgs: ${JSON.stringify(appSubArgs)}`)
       if (appSubArgs.length == 0) {
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nstep00`)
+        //        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`);console.log(`\n\nstep00`)
         stepCheckCmdLine()
       }
       else {
@@ -168,7 +172,7 @@ function stepStart() {
         if (cmdLine.name != undefined) {
           name = cmdLine.name
         }
-        try{
+        try {
           cmdLine = commandLineArgs(optionDefinitions, { argv: appSubArgs, stopAtFirstUnknown: false })
         }
         catch (e) {
@@ -179,8 +183,8 @@ function stepStart() {
         if (name != '') {
           cmdLine.name = name
         }
-//        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`)
-//        console.log(`\n\nstep00`)
+        //        console.log(`cmdLine: ${JSON.stringify(cmdLine)}`)
+        //        console.log(`\n\nstep00`)
         stepCheckCmdLine()
       }
       break;
@@ -188,7 +192,7 @@ function stepStart() {
     case 'vp':
       //cmdLine.command = mainCommand
       let viewArgs = mainCommandArgs._unknown || []
-      let viewDefinitions = [{ name: 'name', defaultOption: true },{ name: 'template', alias: 't', type: String}]
+      let viewDefinitions = [{ name: 'name', defaultOption: true }, { name: 'template', alias: 't', type: String }]
       const viewCommandArgs = commandLineArgs(viewDefinitions, { argv: viewArgs, stopAtFirstUnknown: true })
       var template = ''
       var name = viewCommandArgs.name
@@ -205,7 +209,7 @@ function stepStart() {
       //let argv2 = mainCommandArgs._unknown || []
       //cmdLine = commandLineArgs(optionDefinitions, { argv: argv2, stopAtFirstUnknown: true })
       cmdLine = {}
-      cmdLine.parms = ['a','b','desktop',name, template]
+      cmdLine.parms = ['a', 'b', 'desktop', name, template]
       var CurrWorkingDir = process.cwd()
       //var NodeAppBinDir = path.resolve(__dirname)
       //var TemplatesDir = '/ext-templates'
@@ -213,29 +217,27 @@ function stepStart() {
       require('./generate/viewpackage.js').init(CurrWorkingDir, cmdLine)
       //return
       break;
-      case 'movetolatest':
-        callmovetolatest();
-        break;
-      case 'migrate':
-          migrate();
-          break;
+    case 'movetolatest':
+      callmovetolatest();
+      break;
+    case 'migrate':
+      migrate();
+      break;
     default:
       console.log(`${app} ${boldRed('[ERR]')} command not available: '${mainCommand}'`)
   }
 }
 
 
-async function callmovetolatest()
-{
- console.log('movetolatest started');
+async function callmovetolatest() {
+  console.log('movetolatest started');
   await movetolatest.movetolatestfunction();
   //console.log('Upgrade done . Please run npm install and then npm run all');
   console.log('movetolatest ended');
 
 }
 
-async function migrate()
-{
+async function migrate() {
   console.log('Migration to Open Tools started...');
   await appMigrate.migrateApp();
   console.log(boldGreen('\nMigration to Open Tools ended'));
@@ -247,8 +249,8 @@ async function migrate()
 }
 
 function stepCheckCmdLine() {
-//  console.log('step00')
-//  console.log(`cmdLine: ${JSON.stringify(cmdLine)}, length: ${Object.keys(cmdLine).length}, process.argv.length: ${process.argv.length}`)
+  //  console.log('step00')
+  //  console.log(`cmdLine: ${JSON.stringify(cmdLine)}, length: ${Object.keys(cmdLine).length}, process.argv.length: ${process.argv.length}`)
 
   setDefaults()
   if (cmdLine.verbose == true) {
@@ -295,11 +297,11 @@ function stepCheckCmdLine() {
 function stepSeeDefaults() {
   new Confirm({
     message:
-    `would you like to see the defaults for package.json?`,
+      `would you like to see the defaults for package.json?`,
     default: config.seeDefaults
   }).run().then(answer => {
     answers['seeDefaults'] = answer
-    if(answers['seeDefaults'] == true) {
+    if (answers['seeDefaults'] == true) {
       displayDefaults()
       stepCreateWithDefaults()
     }
@@ -315,7 +317,7 @@ function stepCreateWithDefaults() {
     default: config.useDefaults
   }).run().then(answer => {
     answers['useDefaults'] = answer
-    if(answers['useDefaults'] == true) {
+    if (answers['useDefaults'] == true) {
       setDefaults()
       stepNameYourApp()
     }
@@ -328,11 +330,11 @@ function stepCreateWithDefaults() {
 function stepNameYourApp() {
   new Input({
     message: 'What would you like to name your Ext JS app?',
-    default:  config.appName
+    default: config.appName
   }).run().then(answer => {
     answers['appName'] = answer
     answers['packageName'] = kebabCase(answers['appName'])
-    config.description =  `${answers['packageName']} description for Ext JS app ${answers['appName']}`
+    config.description = `${answers['packageName']} description for Ext JS app ${answers['appName']}`
     step03()
   })
 }
@@ -340,11 +342,11 @@ function stepNameYourApp() {
 function step03() {
   new List({
     message: 'What type of Ext JS template do you want?',
-    choices: ['make a selection from a list','type a folder name'],
+    choices: ['make a selection from a list', 'type a folder name'],
     default: 'make a selection from a list'
   }).run().then(answer => {
     answers['templateType'] = answer
-    if(answers['templateType'] == 'make a selection from a list') {
+    if (answers['templateType'] == 'make a selection from a list') {
       step04()
     }
     else {
@@ -380,7 +382,7 @@ function step04() {
       answers['universal'] = true
     }
     answers['template'] = answer
-    if(answers['useDefaults'] == true) {
+    if (answers['useDefaults'] == true) {
       stepGo()
     }
     else {
@@ -392,10 +394,10 @@ function step04() {
 function step05() {
   new Input({
     message: 'What is the Template folder name?',
-    default:  config.templateFolderName
+    default: config.templateFolderName
   }).run().then(answer => {
     answers['templateFolderName'] = answer
-    if(answers['useDefaults'] == true) {
+    if (answers['useDefaults'] == true) {
       stepGo()
     }
     else {
@@ -407,10 +409,10 @@ function step05() {
 function stepPackageName() {
   new Input({
     message: 'What would you like to name the npm Package?',
-    default:  kebabCase(answers['appName'])
+    default: kebabCase(answers['appName'])
   }).run().then(answer => {
     answers['packageName'] = kebabCase(answer)
-    config.description =  `${answers['packageName']} description for Ext JS app ${answers['appName']}`
+    config.description = `${answers['packageName']} description for Ext JS app ${answers['appName']}`
     stepVersion()
   })
 }
@@ -460,8 +462,8 @@ function stepKeywords() {
 
     var theKeywords = "";
     var keywordArray = answer.split(" ");
-     for (var i = 0; i < keywordArray.length; i++) {
-        theKeywords += '"' + keywordArray[i] + '",'
+    for (var i = 0; i < keywordArray.length; i++) {
+      theKeywords += '"' + keywordArray[i] + '",'
     }
     answers['keywords'] = theKeywords.slice(0, -1);
     //answers['keywords'] = processKeywords(answer)
@@ -511,10 +513,43 @@ function stepHomepageURL() {
   })
 }
 
-function stepGo() {
+async function gitClone(repoUrl, branch = false) {
+  const repoPath = `${os.tmpdir}/${new Date().getTime()}`;
+  return new Promise((resolve, reject) => {
+    let args = [
+      'clone',
+      repoUrl.trim(),
+      repoPath
+    ];
 
-  displayDefaults()
+    if (branch) {
+      args = [...args, "--branch", branch]
+    }
+    const appGen = spawn("git", args, {
+      stdio: ['pipe', 'pipe', 'inherit'],
+      shell: true
+    });
 
+    appGen.on("close", code => {
+      return resolve(repoPath);
+    })
+      .on("error", err => {
+        return reject(err);
+      });
+  })
+}
+
+async function stepGo() {
+
+  displayDefaults();
+  let repo;
+  if (cmdLine.repo) {
+    repo = await gitClone(cmdLine.repo, cmdLine.branch);
+    answers["templateFolderName"] = repo;
+    answers['useDefaults'] = true
+    answers["templateType"] = "type a folder name"
+    answers["template"] = "folder"
+  }
   if (answers['template'] == null) {
     if (!fs.existsSync(answers['templateFolderName'])) {
       answers['template'] = 'folder'
@@ -562,7 +597,7 @@ async function stepCreate() {
   var currDir = process.cwd()
   var destDir = currDir + '/' + answers['packageName']
 
-  if (fs.existsSync(destDir)){
+  if (fs.existsSync(destDir)) {
     console.log(`${boldRed('Error: folder ' + destDir + ' exists')}`)
     //fs.removeSync(destDir) //danger!  if you want to enable this, warn the user
     return
@@ -613,18 +648,18 @@ async function stepCreate() {
     else {
       if (require('os').platform() == 'win32') {
         //args = ['install','-s','>','NUL']
-        args = ['install','-s']
+        args = ['install', '-s']
       }
       else {
         //args = ['install','-s','>','/dev/null']
-        args = ['install','-s']
+        args = ['install', '-s']
       }
     }
-    let options = {stdio: 'inherit', encoding: 'utf-8'}
+    let options = { stdio: 'inherit', encoding: 'utf-8' }
     console.log(`${app} npm ${args.toString().replace(/,/g, " ")} started for ${answers['packageName']}`)
     await util.spawnPromise(command, args, options, substrings);
     console.log(`${app} npm ${args.toString().replace(/,/g, " ")} completed for ${answers['packageName']}`)
-  } catch(err) {
+  } catch (err) {
     console.log(boldRed('Error in npm install: ' + err));
   }
 
@@ -637,7 +672,7 @@ async function stepCreate() {
 
   var generateApp = require(`${npmScope}/ext-build-generate-app/generateApp.js`)
   var options = {
-    parms: [ 'generate', 'app', answers['appName'], './' ],
+    parms: ['generate', 'app', answers['appName'], './'],
     sdk: `node_modules/${npmScope}/ext`,
     template: answers['template'],
     classicTheme: answers['classicTheme'],
@@ -654,9 +689,9 @@ async function stepCreate() {
     runPhone = `or "npm run phone"`
   }
   console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" to run the development build and open your new application in a web browser or checkout package.json to view additional build scripts.\n`))
- }
+}
 
- function setDefaults() {
+function setDefaults() {
   if (cmdLine.name != undefined) {
     answers['appName'] = cmdLine.name
     answers['packageName'] = kebabCase(answers['appName'])
@@ -723,10 +758,10 @@ function displayDefaults() {
   console.log(boldGreen(`Defaults for Ext JS app:`))
   console.log(`appName:\t${answers['appName']}`)
   console.log(`template:\t${answers['template']}`)
-  if(answers['classic'] == true) {
+  if (answers['classic'] == true) {
     console.log(`classicTheme:\t${answers['classicTheme']}`)
   }
-  if(answers['modern'] == true) {
+  if (answers['modern'] == true) {
     console.log(`modernTheme:\t${answers['modernTheme']}`)
   }
   console.log('')
@@ -748,7 +783,7 @@ function stepHelpGeneral() {
 }
 
 function stepHelpApp() {
-   var classic = ``
+  var classic = ``
   var parms = ``
   if (global.isCommunity) {
     classic = ``
@@ -840,9 +875,9 @@ Run ${boldGreen('ext-gen --help')} to see all options
 
 function processKeywords(answer) {
   var theKeywords = "";
-    var keywordArray = answer.split(" ");
-     for (var i = 0; i < keywordArray.length; i++) {
-        theKeywords += '"' + keywordArray[i] + '",'
-    }
-    return theKeywords.slice(0, -1);
+  var keywordArray = answer.split(" ");
+  for (var i = 0; i < keywordArray.length; i++) {
+    theKeywords += '"' + keywordArray[i] + '",'
+  }
+  return theKeywords.slice(0, -1);
 }
