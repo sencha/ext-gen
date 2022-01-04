@@ -670,7 +670,7 @@ async function stepCreate() {
   var cmdVersion = cmdPkg.version_full
   var frameworkVersion = frameworkPkg.sencha.version
 
-  var generateApp = require(`${npmScope}/ext-build-generate-app/generateApp.js`)
+  var generateApp = require(`../ext-build-generate-app/generateApp.js`)
   var options = {
     parms: ['generate', 'app', answers['appName'], './'],
     sdk: `node_modules/${npmScope}/ext`,
