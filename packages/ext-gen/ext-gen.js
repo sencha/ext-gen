@@ -663,12 +663,12 @@ async function stepCreate() {
     console.log(boldRed('Error in npm install: ' + err));
   }
 
-  var frameworkPath = path.join(destDir, 'node_modules', npmScope, 'ext', 'package.json');
-  var cmdPath = path.join(destDir, 'node_modules', npmScope, 'cmd', 'package.json');
+  var frameworkPath = path.join(destDir, 'package.json');
+  var cmdPath = path.join(destDir, 'package.json');
   var frameworkPkg = require(frameworkPath);
   var cmdPkg = require(cmdPath);
   var cmdVersion = cmdPkg.version_full
-  var frameworkVersion = frameworkPkg.sencha.version
+  var frameworkVersion = frameworkPkg?.sencha?.version
 
   var generateApp = require(`../ext-build-generate-app/generateApp.js`)
   var options = {
