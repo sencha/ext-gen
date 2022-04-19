@@ -1,0 +1,17 @@
+function google() { open /Applications/Google\ Chrome.app/ "http://www.google.com/search?q= $1"; }
+
+const opn = require('opn');
+opn('http://siteurl.com/', {app: ['google chrome']});
+
+npm login
+npm version patch
+npm publish --access public
+
+
+npm install -g sencha-node@0.0.449
+
+
+ps -ej | grep sencha
+7292 7292 4224 pts/18 00:00:00 sencha
+
+sudo kill -9 7292
