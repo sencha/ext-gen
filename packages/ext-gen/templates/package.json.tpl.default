@@ -37,14 +37,14 @@
 </tpl>
   "dependencies": {
     <tpl if="modern == true">
-    "@sencha/ext-modern": "~7.5.1",
-    "@sencha/ext-modern-{modernTheme}": "~7.5.1",</tpl><tpl if="classic == true">
-    "@sencha/ext-classic": "~7.5.1",
-    "@sencha/ext-classic-{classicTheme}": "~7.5.1",</tpl>
-    "@sencha/ext": "~7.5.1"
+    "@sencha/ext-modern": "~7.6.0",
+    "@sencha/ext-modern-{modernTheme}": "~7.6.0",</tpl><tpl if="classic == true">
+    "@sencha/ext-classic": "~7.6.0",
+    "@sencha/ext-classic-{classicTheme}": "~7.6.0",</tpl>
+    "@sencha/ext": "~7.6.0"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~7.5.1",
+    "@sencha/ext-webpack-plugin": "~7.6.0",
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.21",
     "rimraf": "^3.0.2",

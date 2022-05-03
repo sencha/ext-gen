@@ -1,6 +1,6 @@
 # Release Notes
 
-## v7.5.1
+## v7.6.0
 
 * OTOOLS-79 - Open Tooling Support for Ext JS 7.5
 * OTOOLS-68 - parameterized support for ext-build generate viewpackage
