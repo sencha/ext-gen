@@ -5,6 +5,8 @@ const semver = require("semver")
 const npmScope = '@sencha'
 const appMigrate = require('./appMigrate.js')
 const movetolatest = require('./movetolatest.js')
+const os = require('os');
+const { spawn } = require("child_process")
 require('./XTemplate/js')
 
 const util = require('./util.js')
@@ -75,6 +77,8 @@ const optionDefinitions = [
   { name: 'template', alias: 't', type: String },
   { name: 'moderntheme', alias: 'm', type: String },
   { name: 'classictheme', alias: 'c', type: String },
+  { name: 'repo', alias: 'r', type: String },
+  { name: 'branch', alias: 'b', type: String }
 ]
 
 var version = ''
@@ -511,9 +515,43 @@ function stepHomepageURL() {
   })
 }
 
-function stepGo() {
+async function gitClone(repoUrl, branch = false) {
+  const repoPath = `${os.tmpdir}/${new Date().getTime()}`;
+  return new Promise((resolve, reject) => {
+    let args = [
+      'clone',
+      repoUrl.trim(),
+      repoPath
+    ];
 
-  displayDefaults()
+    if (branch) {
+      args = [...args, "--branch", branch]
+    }
+    const appGen = spawn("git", args, {
+      stdio: ['pipe', 'pipe', 'inherit'],
+      shell: true
+    });
+
+    appGen.on("close", code => {
+      return resolve(repoPath);
+    })
+      .on("error", err => {
+        return reject(err);
+      });
+  })
+}
+
+async function stepGo() {
+
+  displayDefaults();
+  let repo;
+  if (cmdLine.repo) {
+    repo = await gitClone(cmdLine.repo, cmdLine.branch);
+    answers["templateFolderName"] = repo;
+    answers['useDefaults'] = true
+    answers["templateType"] = "type a folder name"
+    answers["template"] = "folder"
+  }
 
   if (answers['template'] == null) {
     if (!fs.existsSync(answers['templateFolderName'])) {
@@ -628,8 +666,8 @@ async function stepCreate() {
     console.log(boldRed('Error in npm install: ' + err));
   }
 
-  var frameworkPath = path.join(destDir, 'node_modules', npmScope, 'ext', 'package.json');
-  var cmdPath = path.join(destDir, 'node_modules', npmScope, 'cmd', 'package.json');
+  var frameworkPath = path.join(destDir, 'package.json');
+  var cmdPath = path.join(destDir, 'package.json');
   var frameworkPkg = require(frameworkPath);
   var cmdPkg = require(cmdPath);
   var cmdVersion = cmdPkg.version_full
