@@ -666,8 +666,8 @@ async function stepCreate() {
     console.log(boldRed('Error in npm install: ' + err));
   }
 
-  var frameworkPath = path.join(destDir, 'package.json');
-  var cmdPath = path.join(destDir, 'package.json');
+  var frameworkPath = path.join(destDir, 'node_modules', npmScope, 'ext', 'package.json');
+  var cmdPath = path.join(destDir, 'node_modules', npmScope, 'cmd', 'package.json');
   var frameworkPkg = require(frameworkPath);
   var cmdPkg = require(cmdPath);
   var cmdVersion = cmdPkg.version_full
