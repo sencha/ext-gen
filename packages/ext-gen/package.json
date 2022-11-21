@@ -19,6 +19,7 @@
   "preferGlobal": true,
   "dependencies": {
     "@sencha/ext-build-generate-app": "~7.6.0",
+    "jszip": "^3.10.1",
     "command-line-args": "^5.1.1",
     "comment-json": "^2.1.0",
     "cross-spawn": "^6.0.5",

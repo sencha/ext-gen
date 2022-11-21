@@ -12,6 +12,8 @@ require('./XTemplate/js')
 const util = require('./util.js')
 const path = require('path');
 const fs = require('fs-extra');
+const https = require("https");
+const JSZip = require("jszip");
 const { kebabCase } = require('lodash')
 const commandLineArgs = require('command-line-args')
 const List = require('prompt-list')
@@ -77,6 +79,7 @@ const optionDefinitions = [
   { name: 'template', alias: 't', type: String },
   { name: 'moderntheme', alias: 'm', type: String },
   { name: 'classictheme', alias: 'c', type: String },
+  { name: 'zip', alias: 'z', type: String },
   { name: 'repo', alias: 'r', type: String },
   { name: 'branch', alias: 'b', type: String }
 ]
@@ -541,10 +544,69 @@ async function gitClone(repoUrl, branch = false) {
   })
 }
 
+async function JSZipExtra(source, output) {
+  try {
+    var fileContent = fs.readFileSync(source),
+        jszipInstance = new JSZip(),
+        result = await jszipInstance.loadAsync(fileContent),
+        keys = Object.keys(result.files),
+        item;
+
+    for (let key of keys) {
+        item = result.files[key];
+
+        if (item.dir) {
+            fs.mkdirSync(path.join(output, item.name), { recursive: true });
+        } else {
+            if (!item.name.match(/__MACOSX/i)) {
+                fs.writeFileSync(path.join(output, item.name), Buffer.from(await item.async('arraybuffer')));
+            }
+        }
+    }
+  } catch (err) {
+      console.log('error', err);
+  }
+}
+
+async function zipClone(cdnUrl) {
+  const repoPath = `${os.tmpdir}/${new Date().getTime()}`;
+  const fileName = path.basename(cdnUrl).replace('.zip', '');
+  return new Promise((resolve, reject) => {
+    if (cdnUrl.match(/https?/)) {
+      let file = fs.createWriteStream(repoPath + '.zip');
+
+      https.get(cdnUrl, res => {
+        res.pipe(file);
+
+        file.on('finish', function() {
+          file.close((() => {
+            console.log(`${app} template has been downloaded`);
+            JSZipExtra(repoPath + '.zip', repoPath);
+            fs.removeSync(repoPath + '.zip')
+            return resolve(repoPath + path.sep + fileName);
+          })());
+        });
+      });
+    } else {
+      JSZipExtra(repoPath + '.zip', repoPath);
+      return resolve(repoPath + path.sep + fileName);
+    }
+  })
+}
+
 async function stepGo() {
 
   displayDefaults();
-  let repo;
+  let repo, zip;
+
+  if (cmdLine.zip) {
+    zip = await zipClone(cmdLine.zip);
+    answers["templateFolderName"] = zip;
+    answers['useDefaults'] = true
+    answers["templateType"] = "type a folder name"
+    answers["template"] = "folder"
+  }
+
   if (cmdLine.repo) {
     repo = await gitClone(cmdLine.repo, cmdLine.branch);
     answers["templateFolderName"] = repo;
