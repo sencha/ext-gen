@@ -588,7 +588,8 @@ async function zipClone(cdnUrl) {
         });
       });
     } else {
-      JSZipExtra(repoPath + '.zip', repoPath);
+      console.log(`${app} template has been loaded`);
+      JSZipExtra(cdnUrl, repoPath);
       return resolve(repoPath + path.sep + fileName);
     }
   })
