@@ -62,3 +62,4 @@ $header-color: white;
 
 $footer-background-color: $base-color;
 $footer-color: white;
+$base-light-color: #bfdeff;
