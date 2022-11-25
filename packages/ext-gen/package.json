@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-gen",
-  "version": "7.6.0",
+  "version": "7.6.2",
   "description": "An Ext JS code generator",
   "bin": {
     "ext": "ext-gen.js",
@@ -18,7 +18,7 @@
   },
   "preferGlobal": true,
   "dependencies": {
-    "@sencha/ext-build-generate-app": "~7.6.0",
+    "@sencha/ext-build-generate-app": "~7.6.2",
     "jszip": "^3.10.1",
     "command-line-args": "^5.1.1",
     "comment-json": "^2.1.0",
