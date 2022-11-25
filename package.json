@@ -1,6 +1,6 @@
 {
   "name": "ext-gen",
-  "version": "7.6.0",
+  "version": "7.6.1",
   "description": "ext-gen root",
   "main": "index.js",
   "scripts": {
