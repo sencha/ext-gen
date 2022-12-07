@@ -54,3 +54,4 @@
 // $font-size: 14px;
 // $color: $white_chocolate;
 
+$base-light-color: lighten($base-color, 25%);
