@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-gen",
-  "version": "7.7.0",
+  "version": "7.7.1",
   "description": "An Ext JS code generator",
   "bin": {
     "ext": "ext-gen.js",
