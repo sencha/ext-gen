@@ -34,7 +34,7 @@ ext-gen --help
 ``` 
 
 ### Next Steps
-[Explore the Getting Started with NPM Guide](https://docs.sencha.com/extjs/7.7.0/guides/getting_started/getting_started_with_npm.html)
+[Explore the Getting Started with NPM Guide](https://docs.sencha.com/extjs/7.8.0/guides/getting_started/getting_started_with_npm.html)
 
 ## Ext JS Data Grid Benchmarks
 Ext JS Data Grid is over `300x faster` than most leading Grid vendors. [Take a look at the benchmark metrics and results](https://www.sencha.com/blog/ext-js-performance-benchmarks/) to see how Ext JS Grid outperforms ag-grid, KendoUI, Grapecity and Syncfusion data grids.  
@@ -43,17 +43,17 @@ Ext JS Data Grid is over `300x faster` than most leading Grid vendors. [Take a l
 Ext JS has extensive documentation and getting started guides. 
 
 ### [Documentation](https://docs.sencha.com/extjs/)
-* [Introduction to App Architecture](https://docs.sencha.com/extjs/7.7.0/guides/application_architecture/application_architecture.html)
+* [Introduction to App Architecture](https://docs.sencha.com/extjs/7.8.0/guides/application_architecture/application_architecture.html)
 * [Adding Components to the Ext JS Grid
-Resources](https://docs.sencha.com/extjs/7.7.0/guides/components/widgets_widgets_columns.html)
+Resources](https://docs.sencha.com/extjs/7.8.0/guides/components/widgets_widgets_columns.html)
 
 Check out our [resources](https://www.sencha.com/resources/) page to get quick access to videos, tutorials, webinars and more.
 
 * [Ext JS Data Grid - Features & Examples](https://www.sencha.com/grid)
 * [Ext JS Grid Benchmark Study](https://www.sencha.com/blog/ext-js-performance-benchmarks/)
-* [Ext JS Sample Applications](https://examples.sencha.com/extjs/7.7.0/)
-* [Ext JS Component Examples - Classic Toolkit](https://examples.sencha.com/extjs/7.7.0/examples/kitchensink/?classic#all)
-* [Ext JS Component Examples - Modern Toolkit](https://examples.sencha.com/extjs/7.7.0/examples/kitchensink/?modern#all)
+* [Ext JS Sample Applications](https://examples.sencha.com/extjs/7.8.0/)
+* [Ext JS Component Examples - Classic Toolkit](https://examples.sencha.com/extjs/7.8.0/examples/kitchensink/?classic#all)
+* [Ext JS Component Examples - Modern Toolkit](https://examples.sencha.com/extjs/7.8.0/examples/kitchensink/?modern#all)
 
 ## Additional Resources
 * Official Website: https://www.sencha.com/products/extjs/
@@ -89,7 +89,7 @@ The Ext JS Trial version is valid for 30-days. If you need any help with the pro
 
 ## Licensing
 Sencha Ext JS - JavaScript Library
-Copyright (c) 2006-2020, Sencha Inc.
+Copyright (c) 2006-2023, Sencha Inc.
 All rights reserved.
 licensing@sencha.com
  

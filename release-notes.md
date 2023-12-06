@@ -1,5 +1,9 @@
 # Release Notes
 
+## v7.8.0
+
+* OTOOLS-102 - Open Tooling Support for Ext JS 7.8
+
 ## v7.7.0
 
 * OTOOLS-90 - Open Tooling Support for Ext JS 7.7
