@@ -57,7 +57,7 @@ async function smartFlowPing(packageJsonPath, appJsonPath) {
               let licensedFeature = '';
               if(username!=null){
                 additionalLicenseInfo = 'This version of Sencha Ext-gen is licensed commercially'
-                licensedFeature = ' LEGAL'
+                licensedFeature = 'LEGAL'
               }else{
                 additionalLicenseInfo = 'This version of Sencha Ext-gen is not licensed commercially'
                 licensedFeature  = 'UNLICENSED'
