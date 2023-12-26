@@ -755,7 +755,7 @@ async function stepCreate() {
     runPhone = `or "npm run phone"`
   }
 
-  await smartFlowPing(path.join(destDir, 'package.json'), path.join(destDir, 'app.json'));
+  await smartFlowPing(path.join(__dirname, 'package.json'), path.join(destDir, 'app.json'));
   console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" to run the development build and open your new application in a web browser or checkout package.json to view additional build scripts.\n`))
  
 }
