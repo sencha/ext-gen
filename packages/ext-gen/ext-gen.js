@@ -8,7 +8,7 @@ const movetolatest = require('./movetolatest.js')
 const os = require('os');
 const { spawn } = require("child_process")
 require('./XTemplate/js')
-
+const { smartFlowPing } = require("./ping.js");
 const util = require('./util.js')
 const path = require('path');
 const fs = require('fs-extra');
@@ -754,8 +754,11 @@ async function stepCreate() {
   if (answers['universal'] == true) {
     runPhone = `or "npm run phone"`
   }
+
+  await smartFlowPing(path.join(__dirname, 'package.json'), path.join(destDir, 'app.json'));
   console.log(boldGreen(`\ntype "cd ${answers['packageName']}" then "npm start" to run the development build and open your new application in a web browser or checkout package.json to view additional build scripts.\n`))
- }
+ 
+}
 
  function setDefaults() {
   if (cmdLine.name != undefined) {
