@@ -46,5 +46,8 @@
   "homepage": "http://www.sencha.com",
   "resolutions": {
     "glob": "11.0.0"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.3"
   }
 }

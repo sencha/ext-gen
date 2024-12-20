@@ -38,5 +38,8 @@
   "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-build",
   "resolutions": {
     "glob": "11.0.0"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.3"
   }
 }
