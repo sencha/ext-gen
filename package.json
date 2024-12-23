@@ -18,7 +18,8 @@
   "author": "Sencha, Inc.",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^6.1.0"
+    "lerna": "^6.1.0",
+    "npm-force-resolutions": "^0.0.3"
   },
   "repository": {
     "type": "git",
