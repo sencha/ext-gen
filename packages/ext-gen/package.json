@@ -25,6 +25,7 @@
     "cross-spawn": "^6.0.5",
     "chalk": "~2.4.2",
     "fs-extra": "^8.1.0",
+    "glob": "^8.1.0",
     "lodash": "^4.17.15",
     "underscore": "^1.9.1",
     "node-find-folder": "^0.1.32",
