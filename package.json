@@ -4,8 +4,7 @@
   "description": "ext-gen root",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
-    "postinstall": "npx lerna bootstrap --loglevel warn",
+    "postinstall": "npx lerna exec -- 'npm install' --loglevel warn",
     "increment": "npx lerna publish --skip-git --skip-npm --force-publish",
     "clean": "npx lerna clean",
     "install:clean": "npm cache clear --force && npx lerna clean && npm install"
@@ -18,18 +17,13 @@
   "author": "Sencha, Inc.",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^6.1.0",
-    "npm-force-resolutions": "^0.0.3"
+    "lerna": "^7.4.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sencha/ext-allshared"
   },
-  "resolutions": {
-    "semver": "7.6.3",
-    "tar": "7.4.3"
-  },
-  "dependencies": {
-    "@isaacs/fs-minipass": "^4.0.1"
+  "overrides": {
+    "tar": "6.2.1"
   }
 }

@@ -30,16 +30,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sencha, Inc.",
   "license": "MIT",
-  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-build",
-  "resolutions": {
-    "glob": "11.0.0"
-  },
-  "devDependencies": {
-    "npm-force-resolutions": "^0.0.3"
-  }
+  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-build"
 }
