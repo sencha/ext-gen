@@ -7,6 +7,7 @@
     "ext-gen": "ext-gen.js"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "install": "node ./install.js"
   },
   "keywords": [
@@ -22,7 +23,7 @@
     "jszip": "^3.10.1",
     "command-line-args": "^5.1.1",
     "comment-json": "^2.1.0",
-    "cross-spawn": "^6.0.5",
+    "cross-spawn": "^6.0.6",
     "chalk": "~2.4.2",
     "fs-extra": "^8.1.0",
     "glob": "^8.1.0",
@@ -43,5 +44,11 @@
   "bugs": {
     "url": "https://github.com/"
   },
-  "homepage": "http://www.sencha.com"
+  "homepage": "http://www.sencha.com",
+  "resolutions": {
+    "glob": "11.0.0"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.3"
+  }
 }
