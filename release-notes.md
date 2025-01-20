@@ -1,4 +1,8 @@
 # Release Notes
+## v7.9.0
+
+* OTOOLS-113 - Open Tooling Support for Ext JS 7.9
+* OTOOLS-112 - Unable to Install Packages from npm using node v20.13.1
 
 ## v7.8.0
 
