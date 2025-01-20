@@ -89,7 +89,7 @@ The Ext JS Trial version is valid for 30-days. If you need any help with the pro
 
 ## Licensing
 Sencha Ext JS - JavaScript Library
-Copyright (c) 2006-2023, Sencha Inc.
+Copyright (c) 2006-2025, Sencha Inc.
 All rights reserved.
 licensing@sencha.com
  
