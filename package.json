@@ -1,10 +1,10 @@
 {
   "name": "ext-gen",
-  "version": "7.8.0",
+  "version": "7.9.0",
   "description": "ext-gen root",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npx lerna exec -- 'npm install' --loglevel warn",
+    "postinstall": "npx lerna exec -- \"npm install\" --loglevel warn",
     "increment": "npx lerna publish --skip-git --skip-npm --force-publish",
     "clean": "npx lerna clean",
     "install:clean": "npm cache clear --force && npx lerna clean && npm install"
