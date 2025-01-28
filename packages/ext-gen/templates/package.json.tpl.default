@@ -41,7 +41,8 @@
     "@sencha/ext-modern-{modernTheme}": "~7.9.0",</tpl><tpl if="classic == true">
     "@sencha/ext-classic": "~7.9.0",
     "@sencha/ext-classic-{classicTheme}": "~7.9.0",</tpl>
-    "@sencha/ext": "~7.9.0"
+    "@sencha/ext": "~7.9.0",
+    "cross-spawn-with-kill": "^1.0.0"
   },
   "devDependencies": {
     "@sencha/ext-webpack-plugin": "~7.9.0",
