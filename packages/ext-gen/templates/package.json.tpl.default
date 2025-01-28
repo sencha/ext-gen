@@ -16,7 +16,7 @@
   "homepage": "{homepageURL}",
 <tpl if="universal == true">
   "scripts": {
-    "start": "npm run dev:desktop",
+    "start": "npm prune && npm run dev:desktop",
     "clean": "rimraf build",
     "dev:desktop": "webpack-dev-server --env profile=desktop --env browser=yes --env verbose=no",
     "dev:phone": "webpack-dev-server --env profile=phone --env browser=yes --env verbose=no",
@@ -28,7 +28,7 @@
 </tpl>
 <tpl if="universal == false">
   "scripts": {
-    "start": "npm run dev",
+    "start": "npm prune && npm run dev",
     "clean": "rimraf build",
     "dev": "webpack-dev-server --env profile=desktop --env browser=yes --env verbose=no",
     "build": "npm run clean && cross-env webpack --env profile=desktop --env environment=production --env treeshake=yes",
@@ -41,8 +41,7 @@
     "@sencha/ext-modern-{modernTheme}": "~7.9.0",</tpl><tpl if="classic == true">
     "@sencha/ext-classic": "~7.9.0",
     "@sencha/ext-classic-{classicTheme}": "~7.9.0",</tpl>
-    "@sencha/ext": "~7.9.0",
-    "cross-spawn-with-kill": "^1.0.0"
+    "@sencha/ext": "~7.9.0"
   },
   "devDependencies": {
     "@sencha/ext-webpack-plugin": "~7.9.0",
