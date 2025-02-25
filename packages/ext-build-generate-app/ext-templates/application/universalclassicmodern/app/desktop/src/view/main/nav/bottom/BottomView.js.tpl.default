@@ -3,7 +3,6 @@ Ext.define('{appName}.view.main.nav.bottom.BottomView', {
 	xtype: 'bottomview',
 	cls: 'bottomview',
   defaults: {
-    // ui:'toolbutton-toolbar', 
     handler:'onToolButtonClicked'
   },
 	items: [

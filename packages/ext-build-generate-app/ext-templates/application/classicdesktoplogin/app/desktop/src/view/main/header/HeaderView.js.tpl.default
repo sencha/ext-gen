@@ -28,7 +28,6 @@ Ext.define('{appName}.view.main.header.HeaderView', {
       reference: 'detailtoggle',
       iconCls:'x-fa fa-arrow-left',
       tooltip: 'show and hide detail view',
-      // ui: 'headerviewbutton-toolbar',
       handler: 'onHeaderViewDetailToggle'
     }
   ]
