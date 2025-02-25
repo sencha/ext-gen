@@ -4,13 +4,13 @@ Ext.define('{appName}.view.main.header.HeaderView', {
   xtype: 'headerview',
   cls: 'headerview',
   defaults: {
-    ui:'toolbutton-toolbar', 
+    // ui:'toolbutton-toolbar', 
     handler:'onToolButtonClicked'
   },
   items: [
     {
       xtype: 'button',
-      ui: 'toolbutton-toolbar',
+      // ui: 'toolbutton-toolbar',
       reference: 'navtoggle',
       handler: 'onHeaderViewNavToggle',
       iconCls: 'x-fa fa-navicon'
@@ -28,7 +28,7 @@ Ext.define('{appName}.view.main.header.HeaderView', {
       reference: 'detailtoggle',
       iconCls:'x-fa fa-arrow-left',
       tooltip: 'show and hide detail view',
-      ui: 'headerviewbutton-toolbar',
+      // ui: 'headerviewbutton-toolbar',
       handler: 'onHeaderViewDetailToggle'
     }
   ]

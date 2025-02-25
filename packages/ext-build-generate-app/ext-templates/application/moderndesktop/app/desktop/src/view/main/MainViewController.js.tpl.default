@@ -12,6 +12,7 @@ Ext.define('{appName}.view.main.MainViewController', {
 			single: true,
 			scope: this
 		});
+		vm.set('heading', null);
 	},
 
 	onMenuDataLoad: function(store){
