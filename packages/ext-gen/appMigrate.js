@@ -339,8 +339,29 @@ function removeDebugJsPath(jsonLocation) {
 }
 
 function handleWorkspaceJsonmigrate() {
-	var workspaceJsonObject = getJson(workspaceJson);
+	var workspaceJsonObject = getJson(workspaceJson),
+		themes = ['theme-base', 'theme-ios', 'theme-material',
+			'theme-aria', 'theme-neutral', 'theme-classic', 'theme-gray',
+			'theme-crisp', 'theme-crisp-touch', 'theme-neptune', 'theme-neptune-touch',
+			'theme-triton', 'theme-graphite'],
+		packageNames = ['treegrid', 'calendar', 'charts', 'froala-editor', 'amf', 'd3',
+			'exporter', 'pivot', 'pivot-d3', 'pivot-locale', 'ux', 'font-ios'],
+		basePath = '$\u007Bworkspace.dir}/node_modules/@sencha/ext-',
+		toolkitNamePath = basePath + '$\u007Btoolkit.name}',
+		dirString = '';
+		
 	workspaceJsonObject.frameworks.ext = extFrameworkPath;
+
+	// on migrate packages are not getting included in workspace.json so adding it here
+	themes.forEach(function(value) {
+		dirString = dirString + toolkitNamePath + '-' + value +',';
+	});
+
+	packageNames.forEach(function(value, index) {
+		dirString = dirString + basePath + value + (index < (packageNames.length - 1) ? ',' : '');
+	});
+
+	workspaceJsonObject.packages.dir = workspaceJsonObject.packages.dir + ','+ dirString;
 	createFileFromJson(workspaceJson, workspaceJsonObject);
 	return true;
 }
@@ -469,8 +490,13 @@ function populateValues() {
 	//var data = fs.readFileSync(nodeDirectory + '/config.json');
 	//var config = JSON.parse(data);
 	buildToolKitAndThemeDetails();
+	var uses = appJsonObject.uses  || [],
+		requires = appJsonObject.requires || []; 
+	
+	requires = uses.concat(requires);
+
 	values = {
-    universal: universal,
+    	universal: universal,
 		npmScope: npmScope,
 		classic: classic,
 		modern: modern,
@@ -478,7 +504,8 @@ function populateValues() {
 		modernTheme: modernTheme,
 		appName: appJsonObject.name,
 		packageName: appJsonObject.name,
-		version: toSemVer(appJsonObject.version)
+		version: toSemVer(appJsonObject.version),
+		requirePackages: requires.length ? requires : []
 	}
 }
 
