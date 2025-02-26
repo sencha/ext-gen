@@ -14,7 +14,7 @@ Ext.define('{appName}.view.main.MainViewModel', {
 		detailview_width:      10,
 		detailview_max_width: 300,
 		detailview_min_width:   0,
-
+		heading: null
 	},
 	formulas: {
 		navview_width: function(get) {
