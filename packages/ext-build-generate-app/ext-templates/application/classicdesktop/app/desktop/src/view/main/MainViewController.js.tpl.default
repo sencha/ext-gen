@@ -53,7 +53,7 @@ Ext.define('{appName}.view.main.MainViewController', {
 			return;
 		}
 		
-		node = (menuview.getStore() || this.getStore('menu')).findNode('xtype', xtype);
+		node = this.getStore('menu').findNode('xtype', xtype);
 
 		if (node == null) {
 			console.log('unmatchedRoute: ' + xtype);
