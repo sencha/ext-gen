@@ -4,18 +4,6 @@ Ext.define('{appName}.view.nav.menu.MenuView', {
 		'Ext.data.TreeStore',
 	],
 	xtype: 'menuview',
-	store: {
-        type: 'tree',
-        proxy: {
-            type: 'ajax',
-            url: 'resources/desktop/menu.json',
-            reader: {
-                type: 'json',
-                rootProperty: 'children' // Adjust based on your JSON structure
-            }
-        },
-        autoLoad: true,
-    },
 	ui: 'nav',
 	scrollable: true,
 	bind: { micro: '\u007BnavCollapsed}' },
