@@ -2,3 +2,9 @@
 	color: white; 
 	background-color: darken($base-color, 20%);
 }
+
+.bottomview .x-btn-icon-left > .x-btn-icon-el-default-toolbar-small,
+.x-btn-icon-right > .x-btn-icon-el-default-toolbar-small {
+    width: 16px;
+    color: #fff;
+}
