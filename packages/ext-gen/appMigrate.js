@@ -558,5 +558,5 @@ function verifyAndUpdateTheme(appTheme) {
 			break;
 		}
 	}
-	return matchedTheme ? matchedTheme : appTheme;
+	return matchedTheme || appTheme;
 }
