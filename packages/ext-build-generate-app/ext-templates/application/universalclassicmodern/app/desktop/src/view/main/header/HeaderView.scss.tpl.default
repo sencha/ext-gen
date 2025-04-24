@@ -5,3 +5,9 @@
   background-color:$base-color;
   box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.4);
 }
+
+.headerview .x-btn-icon-left > .x-btn-icon-el-default-toolbar-small,
+.x-btn-icon-right > .x-btn-icon-el-default-toolbar-small {
+    width: 16px;
+    color: #fff;
+}

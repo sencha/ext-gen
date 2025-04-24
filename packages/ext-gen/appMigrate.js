@@ -22,6 +22,10 @@ var gitIgnore = '.gitIgnore';
 var gitIgnoreAppend = '/generatedFiles ' + os.EOL + '/cordova ' + os.EOL + '/node_modules' + os.EOL;
 var gitIgnoreData = '/build ' + os.EOL + gitIgnoreAppend;
 var extFrameworkPath = 'node_modules/@sencha/ext';
+var themes = ['theme-base', 'theme-ios', 'theme-material',
+	'theme-aria', 'theme-neutral', 'theme-classic', 'theme-gray',
+	'theme-crisp', 'theme-crisp-touch', 'theme-neptune', 'theme-neptune-touch',
+	'theme-triton', 'theme-graphite'];
 var classic = false;
 var modern = false;
 var universal = false;
@@ -339,8 +343,25 @@ function removeDebugJsPath(jsonLocation) {
 }
 
 function handleWorkspaceJsonmigrate() {
-	var workspaceJsonObject = getJson(workspaceJson);
+	var workspaceJsonObject = getJson(workspaceJson),
+		packageNames = ['treegrid', 'calendar', 'charts', 'froala-editor', 'amf', 'd3',
+			'exporter', 'pivot', 'pivot-d3', 'pivot-locale', 'ux', 'font-ios'],
+		basePath = '$\u007Bworkspace.dir}/node_modules/@sencha/ext-',
+		toolkitNamePath = basePath + '$\u007Btoolkit.name}',
+		dirString = '';
+		
 	workspaceJsonObject.frameworks.ext = extFrameworkPath;
+
+	// on migrate packages are not getting included in workspace.json so adding it here
+	themes.forEach(function(value) {
+		dirString = dirString + toolkitNamePath + '-' + value +',';
+	});
+
+	packageNames.forEach(function(value, index) {
+		dirString = dirString + basePath + value + (index < (packageNames.length - 1) ? ',' : '');
+	});
+
+	workspaceJsonObject.packages.dir = workspaceJsonObject.packages.dir + ','+ dirString;
 	createFileFromJson(workspaceJson, workspaceJsonObject);
 	return true;
 }
@@ -469,8 +490,13 @@ function populateValues() {
 	//var data = fs.readFileSync(nodeDirectory + '/config.json');
 	//var config = JSON.parse(data);
 	buildToolKitAndThemeDetails();
+	var uses = appJsonObject.uses  || [],
+		requires = appJsonObject.requires || []; 
+	
+	requires = uses.concat(requires);
+
 	values = {
-    universal: universal,
+    	universal: universal,
 		npmScope: npmScope,
 		classic: classic,
 		modern: modern,
@@ -478,7 +504,8 @@ function populateValues() {
 		modernTheme: modernTheme,
 		appName: appJsonObject.name,
 		packageName: appJsonObject.name,
-		version: toSemVer(appJsonObject.version)
+		version: toSemVer(appJsonObject.version),
+		requirePackages: requires.length ? requires : []
 	}
 }
 
@@ -486,11 +513,11 @@ function buildToolKitAndThemeDetails() {
 	if (appJsonObject.hasOwnProperty('toolkit')) {
 		if (appJsonObject.toolkit == classicProfile) {
 			classic = true;
-			classicTheme = appJsonObject.theme;
+			classicTheme = appJsonObject.theme = verifyAndUpdateTheme(appJsonObject.theme);
 		}
 		else {
 			modern = true;
-			modernTheme = appJsonObject.theme;
+			modernTheme = appJsonObject.theme = verifyAndUpdateTheme(appJsonObject.theme);
 		}
 	}
 	else {
@@ -505,12 +532,31 @@ function buildToolKitAndThemeDetails() {
 		for (profile in appJsonObject.builds) {
 			if (profile === classicProfile) {
 				classic = true;
-				classicTheme = appJsonObject.builds[profile].theme;
+				classicTheme = appJsonObject.builds[profile].theme = verifyAndUpdateTheme(appJsonObject.builds[profile].theme);
 			}
 			if (profile == modernProfile) {
 				modern = true;
-				modernTheme = appJsonObject.builds[profile].theme;
+				modernTheme = appJsonObject.builds[profile].theme = verifyAndUpdateTheme(appJsonObject.builds[profile].theme);
 			}
 		}
 	}
+}
+
+function verifyAndUpdateTheme(appTheme) {
+	var themeStr = appTheme.replace(/[^a-z-]/g, ''),
+		       matchedTheme;
+
+	// once special chars are removed check if it is one of the existing themes 
+	if (themes.indexOf(themeStr) >= 0) {
+		return themeStr;
+	}
+	
+	// if doesn't exists return the appropriate theme from built-in theme list
+	for (var i = 0; i < themes.length; i++) {
+		if (themeStr.includes(themes[i])) {
+			matchedTheme = themes[i];
+			break;
+		}
+	}
+	return matchedTheme || appTheme;
 }

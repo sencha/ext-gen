@@ -18,7 +18,7 @@ Ext.define('{appName}.view.main.MainViewController', {
 		this.mainRoute(Ext.util.History.getHash());
 	},
 
-	mainRoute:function(xtype) {
+	mainRoute: function (xtype) {
 		var navview = this.lookup('navview'),
 			menuview = navview.lookup('menuview'),
 			centerview = this.lookup('centerview'),
@@ -29,26 +29,22 @@ Ext.define('{appName}.view.main.MainViewController', {
 			console.log(xtype + ' does not exist');
 			return;
 		}
-		if(!menuview.getStore()) {
-			console.log('Store not yet available from viewModel binding');
-			return;
-		}
 
-		node = menuview.getStore().findNode('xtype', xtype);
+		node = this.getStore('menu').findNode('xtype', xtype);
 
 		if (node == null) {
 			console.log('unmatchedRoute: ' + xtype);
 			return;
 		}
 		if (!centerview.getComponent(xtype)) {
-			centerview.add({ xtype: xtype,  itemId: xtype, heading: node.get('text') });
+			centerview.add({ xtype: xtype, itemId: xtype, heading: node.get('text') });
 		}
 
 		centerview.setActiveItem(xtype);
 		menuview.setSelection(node);
-		vm = this.getViewModel(); 
+		vm = this.getViewModel();
 		vm.set('heading', node.get('text'));
-	},
+  },
 
 	onMenuViewSelectionChange: function (tree, node) {
 		if (node == null) { return }
