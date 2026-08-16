@@ -6,9 +6,7 @@
     "ext": "ext-gen.js",
     "ext-gen": "ext-gen.js"
   },
-  "scripts": {
-    "install": "node ./install.js"
-  },
+  "scripts": {},
   "keywords": [
     "Ext JS",
     "ext-gen"
