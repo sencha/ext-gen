@@ -147,7 +147,15 @@ module.exports = generateApp
 				var iCaps = iSmall[0].toUpperCase() + iSmall.substring(1)
 				var viewFileName = iCaps + 'View'
 				var viewNameSmall = iSmall + 'view'
-				const uuidv4 = require('uuid/v4');
+				// RFC 4122 v4 UUID from crypto.randomBytes (works on all Node versions,
+				// unlike crypto.randomUUID which needs Node >= 14.17)
+				const uuidv4 = function () {
+					var b = require('crypto').randomBytes(16)
+					b[6] = (b[6] & 0x0f) | 0x40
+					b[8] = (b[8] & 0x3f) | 0x80
+					var h = b.toString('hex')
+					return h.slice(0, 8) + '-' + h.slice(8, 12) + '-' + h.slice(12, 16) + '-' + h.slice(16, 20) + '-' + h.slice(20)
+				};
 				var values = {
 					universal: true,
 					toolkit: 'modern',

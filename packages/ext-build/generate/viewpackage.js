@@ -50,14 +50,14 @@ try {
     var toFolder = getFolder(CurrWorkingDir);
     //util.infLog('toFolder: ' + toFolder)
 	if (toFolder != 'view') {
-      var ff, ff_desktop, ff_view;
-      ff = require('node-find-folder');
+      var ff_view;
       //console.log(process.cwd())
       process.chdir(fs.existsSync(`${CurrWorkingDir}/app/${profile}`) ? `app/${profile}` : 'app')
       //console.log(process.cwd())
-      ff_view = new ff('view');
+      ff_view = findFolder(process.cwd(), 'view');
+      if (ff_view == null) {throw 'view folder not found under ' + process.cwd()}
       //util.infLog('ff_view: ' + ff_view)
-      process.chdir(ff_view.toString())
+      process.chdir(ff_view)
       var viewFolder = process.cwd()
       //console.log(d)
       CurrWorkingDir = viewFolder
@@ -116,12 +116,27 @@ try {
 		});
 	}
 
-	function getFolder(val) { 
+	function getFolder(val) {
 		if (val == undefined) {return ''}
-		var fullPath = val; 
-		var path = fullPath.split('/'); 
-		var cwd = path[path.length-1]; 
-		return cwd; 
+		var fullPath = val;
+		var path = fullPath.split('/');
+		var cwd = path[path.length-1];
+		return cwd;
+	}
+
+	function findFolder(base, name) {
+		var entries = fs.readdirSync(base, { withFileTypes: true })
+		var subdirs = []
+		for (var i = 0; i < entries.length; i++) {
+			if (!entries[i].isDirectory()) { continue }
+			if (entries[i].name == name) { return path.join(base, entries[i].name) }
+			subdirs.push(path.join(base, entries[i].name))
+		}
+		for (var j = 0; j < subdirs.length; j++) {
+			var found = findFolder(subdirs[j], name)
+			if (found) { return found }
+		}
+		return null
 	}
 
 }

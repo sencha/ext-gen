@@ -16,9 +16,7 @@ const https = require("https");
 const JSZip = require("jszip");
 const { kebabCase } = require('lodash')
 const commandLineArgs = require('command-line-args')
-const List = require('prompt-list')
-const Input = require('prompt-input')
-const Confirm = require('prompt-confirm')
+const { List, Input, Confirm } = require('./prompt.js')
 global.isCommunity = true
 
 function boldGreen (s) {
