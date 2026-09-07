@@ -53,3 +53,6 @@ ext-gen app -t moderndesktop -n ModernApp
 ${classic}
 Run ${boldGreen('ext-gen --help')} to see all options
 `)
+
+// Self-delete so this runs only once (npm 12 compatibility — triggered lazily from ext-gen.js)
+fs.unlinkSync(__filename);

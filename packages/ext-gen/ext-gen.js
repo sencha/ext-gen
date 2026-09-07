@@ -1,6 +1,11 @@
 #! /usr/bin/env node
 //let run = require('./util').run
 
+// npm 12 compatibility: run install.js lazily on first CLI invocation instead of
+// as an npm lifecycle script. install.js self-deletes after running.
+{ const _f = require('fs'), _p = require('path');
+  if (_f.existsSync(_p.join(__dirname, 'install.js'))) { require('./install.js'); } }
+
 const semver = require("semver")
 const npmScope = '@sencha'
 const appMigrate = require('./appMigrate.js')
