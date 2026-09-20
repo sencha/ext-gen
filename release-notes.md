@@ -1,4 +1,9 @@
 # Release Notes
+## v8.1.0
+
+* OTOOLS-122 - ExtGen Support for NPM 12
+* OTOOLS-115 - Sencha ExtGen and Cmd uses library with known vulnerabilities
+
 ## v8.0.0
 
 * OTOOLS-118 - Open Tooling Support for Ext JS 8.0
