@@ -53,7 +53,7 @@
     "rimraf": "^3.0.2",
     "webpack": "^5.101.0",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^6.0.0",
+    "webpack-dev-server": "^5.2.2",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
@@ -71,7 +71,8 @@
     "replace": {
       "minimatch": "^3.1.5"
     },
-    "braces": "$braces"
+    "braces": "$braces",
+    "uuid": "^11.1.1"
   },
   "allowScripts": {
     "core-js": false,
