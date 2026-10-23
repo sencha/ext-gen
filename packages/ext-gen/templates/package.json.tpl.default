@@ -51,9 +51,9 @@
     "cross-env": "^5.2.0",
     "portfinder": "^1.0.21",
     "rimraf": "^3.0.2",
-    "webpack": "^5.101.0",
+    "webpack": "^5.112.1",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2",
+    "webpack-dev-server": "^5.2.7",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
@@ -67,7 +67,7 @@
     "braces": "npm:@sencha/braces@3.0.4"
   },
   "overrides": {
-    "cross-spawn": "^6.0.6",
+    "cross-spawn": "^7.0.6",
     "replace": {
       "minimatch": "^3.1.5"
     },
