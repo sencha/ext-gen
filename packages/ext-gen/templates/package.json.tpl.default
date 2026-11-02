@@ -63,15 +63,13 @@
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-loader": "^8.0.6",
     "lodash.find": "^4.6.0",
-    "replace": "^1.1.1",
-    "braces": "npm:@sencha/braces@3.0.4"
+    "replace": "^1.1.1"
   },
   "overrides": {
     "cross-spawn": "^7.0.6",
     "replace": {
       "minimatch": "^3.1.5"
     },
-    "braces": "$braces",
     "uuid": "^11.1.1"
   },
   "allowScripts": {
